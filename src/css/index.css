@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Josefin+Sans:wght@100&family=Saira:wght@100&family=Space+Mono&display=swap');
+:root{
+  --color-pink-prim : #F95A61;
+  --color-dasborad : #E4F4FB;
+  --sucess-color : #93C54B;
+  /* --alert-color : #D9534F;
+  --boring-color : #797770;
+  --dark-color : #3E3F3A;
+  --light-color : #EFEFEF;
+  --warning-color : #F47C3C;
+  --light-blue: rgba(41, 171, 224, 0.08);*/
+
+  --font-Dongle : 'Dongle';
+  --font-Saira : 'Saira', sans-serif;
+  --font-SpaceM : 'Space Mono', monospace;
+
+  --principal-font-size : 3.6rem;
+  --secondarey-font-size : 1.8rem; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+
+}
+
+#root{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+}
