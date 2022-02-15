@@ -36,13 +36,16 @@ const AddButton = styled.button`
   display: flex;
   border-radius: 0.8rem;
   gap: 1rem;
+  width: 100%;
+  max-width: 35rem;
+  justify-content: center;
   cursor: pointer;
   :hover {
     background: var(--hover-dasb);
   }
 `
 
-const About = () => {
+const Proyects = () => {
   return (
     <Container>
       <ContainerProyects>
@@ -81,4 +84,4 @@ const About = () => {
   )
 }
 
-export default About
+export default Proyects

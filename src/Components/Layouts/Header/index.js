@@ -11,6 +11,7 @@ const Container = styled.header`
   padding: 1.5rem 2rem 1.5rem 2rem;
   background: #ffffff;
   box-shadow: 0px 2px 16px rgba(0, 9, 128, 0.25);
+  position: fixed;
 `
 const Figure = styled.figure`
   width: 10rem;

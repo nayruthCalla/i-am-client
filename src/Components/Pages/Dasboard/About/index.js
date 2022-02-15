@@ -51,6 +51,10 @@ const Form = styled.form`
     margin-top: 10px;
     justify-content: center;
   }
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+  }
 `
 
 const AddImage = styled.p`
