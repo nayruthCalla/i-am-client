@@ -11,19 +11,21 @@ const Container = styled.div`
 `
 // huwhsuwdhwu hshshshswudwu
 const TextArea = styled('textarea')(
-  () => css`
+  ({ size }) => css`
     background: #ffffff;
     border: 2px solid rgba(67, 75, 87, 0.31);
     box-sizing: border-box;
-    border-radius: 20px;
+    border-radius: 0.8rem;
     font-family: var(--font-Dongle);
     font-style: normal;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 25px;
     padding: 0 1rem;
     text-align: center;
-    min-height: 5rem;
+    padding: 1.5rem;
+    height: ${size === 'big' ? '20rem' : '8rem'};
+    resize: none;
     ::placeholder {
       color: rgba(67, 75, 87, 0.45);
     }
@@ -44,11 +46,11 @@ const Label = styled.label`
   text-align: left;
 `
 
-const TextareaDashboard = ({ placeholder, textLabel }) => {
+const TextareaDashboard = ({ placeholder, textLabel, size }) => {
   return (
     <Container>
       <Label>{textLabel}</Label>
-      <TextArea placeholder={placeholder} />
+      <TextArea placeholder={placeholder} size={size} />
     </Container>
   )
 }

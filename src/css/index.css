@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Josefin+Sans:wght@100&family=Saira:wght@100&family=Space+Mono&display=swap');
-:root{
-  --color-pink-prim : #F95A61;
-  --color-dasborad : #E4F4FB;
-  --sucess-color : #93C54B;
+:root {
+  --color-pink-prim: #f95a61;
+  --color-dasborad: #e4f4fb;
+  --sucess-color: #93c54b;
+  --color-prtfolio: #29abe0;
+  --hover-dasb: #ff5e5b;
   /* --alert-color : #D9534F;
   --boring-color : #797770;
   --dark-color : #3E3F3A;
@@ -10,12 +12,12 @@
   --warning-color : #F47C3C;
   --light-blue: rgba(41, 171, 224, 0.08);*/
 
-  --font-Dongle : 'Dongle';
-  --font-Saira : 'Saira', sans-serif;
-  --font-SpaceM : 'Space Mono', monospace;
+  --font-Dongle: 'Dongle';
+  --font-Saira: 'Saira', sans-serif;
+  --font-SpaceM: 'Space Mono', monospace;
 
-  --principal-font-size : 3.6rem;
-  --secondarey-font-size : 1.8rem; 
+  --principal-font-size: 3.6rem;
+  --secondarey-font-size: 1.8rem;
 }
 
 body {
@@ -46,10 +48,9 @@ html {
   min-height: 100vh;
   flex-direction: column;
   margin: 0;
-
 }
 
-#root{
+#root {
   display: flex;
   min-height: 100vh;
   flex-direction: column;

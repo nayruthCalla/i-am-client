@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 // import PropTypes from 'prop-types';
 
 // Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
@@ -6,8 +6,6 @@ import { BiImageAdd } from 'react-icons/bi'
 import { FaUserAlt, FaPlus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
-// import { IconContext } from 'react-icons'TextareaDashboard
-// import Line from '../../Layouts/LineStyle'
 
 const Container = styled.div`
   display: flex;
@@ -71,21 +69,21 @@ const AddImage = styled.p`
   }
 `
 const ContSelect = styled.div`
-width: 100%;
-display: flex;
-flex-direction: column;
-margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
 `
 const ContSocialNetwork = styled.div`
-width: 100%;
-display: flex;
-gap: 1.3rem;
+  width: 100%;
+  display: flex;
+  gap: 1.3rem;
 `
 const Select = styled.select`
-background: #FFFFFF;
-border: 2px solid rgba(67, 75, 87, 0.31);
-box-sizing: border-box;
-border-radius: 8px;
+  background: #ffffff;
+  border: 2px solid rgba(67, 75, 87, 0.31);
+  box-sizing: border-box;
+  border-radius: 8px;
 `
 const Option = styled.option``
 const Label = styled.label`
@@ -100,21 +98,25 @@ const Label = styled.label`
 
 // const Image = styled.img``
 const AddButton = styled.button`
-  background: #C54646;
+  background: #c54646;
   border-radius: 50%;
   border: none;
   padding: 1rem;
-  color: #F6F6F9;
+  color: #f6f6f9;
   font-size: 1.8rem;
   align-items: center;
   display: flex;
+  cursor: pointer;
+  :hover {
+    background: var(--hover-dasb);
+  }
 `
 const InputLink = styled('input')(
   () => css`
     background: #ffffff;
     border: 2px solid rgba(67, 75, 87, 0.31);
     box-sizing: border-box;
-    border-radius: 20px;
+    border-radius: 8px;
     font-family: var(--font-Dongle);
     font-style: normal;
     font-weight: bold;
@@ -132,7 +134,25 @@ const InputLink = styled('input')(
     }
   `
 )
-const ContentMenu = () => {
+const SaveButton = styled.button`
+  background: #c54646;
+  border: none;
+  padding: 1rem;
+  color: #f6f6f9;
+  font-size: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 0.8rem;
+  gap: 1rem;
+  width: 100%;
+  margin: 4rem 0 0 0;
+  cursor: pointer;
+  :hover {
+    background: var(--hover-dasb);
+  }
+`
+const About = () => {
   return (
     <Container>
       <Form>
@@ -175,36 +195,25 @@ const ContentMenu = () => {
           textLabel="Comparte tus intereses"
         />
         <ContSelect>
-        <Label>Agrega el link de tus redes sociales</Label>
-        <ContSocialNetwork>
-        <Select>
-          <Option>           
-            Eligir
-            </Option>
-            <Option>           
-            LinkedIn
-            </Option>
-            <Option>
-              GitHub
-            </Option>
-            <Option>
-              Instagram
-            </Option>
-            <Option>
-              Facebook
-            </Option>
-          </Select>
-          <InputLink placeholder='Link https://...' />
-          <AddButton>
-            <FaPlus />
-          </AddButton>
-        </ContSocialNetwork> 
-
+          <Label>Agrega el link de tus redes sociales</Label>
+          <ContSocialNetwork>
+            <Select>
+              <Option>Eligir</Option>
+              <Option>LinkedIn</Option>
+              <Option>GitHub</Option>
+              <Option>Instagram</Option>
+              <Option>Facebook</Option>
+            </Select>
+            <InputLink placeholder="Link https://..." />
+            <AddButton>
+              <FaPlus />
+            </AddButton>
+          </ContSocialNetwork>
         </ContSelect>
-
+        <SaveButton>Guardar</SaveButton>
       </Form>
     </Container>
   )
 }
 
-export default ContentMenu
+export default About

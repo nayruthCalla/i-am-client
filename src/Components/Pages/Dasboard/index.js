@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import ButtonDashborad from '../../Layouts/ButtonDashborad'
 import Line from '../../Layouts/LineStyle'
-import ContentMenu from './ContentMenu'
+import About from './About'
+import Proyects from './Proyects'
 
 const Container = styled.div`
   display: flex;
@@ -17,11 +18,13 @@ const DasBoard = () => {
       <ContMenuButton>
         <ButtonDashborad text="Acerca de Mí" screen="mobile" />
         <Line />
-        <ContentMenu />
+        <About />
+        <Line />
       </ContMenuButton>
       <ContMenuButton>
         <ButtonDashborad text="Mis Proyectos" screen="mobile" />
         <Line />
+        <Proyects />
       </ContMenuButton>
       <ContMenuButton>
         <ButtonDashborad text="Mis Skills" screen="mobile" />
