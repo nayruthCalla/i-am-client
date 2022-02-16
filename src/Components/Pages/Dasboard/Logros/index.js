@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
   padding: 4rem 0;
 `
-const ContainerSkills = styled.div`
+const ContainerLogros = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,14 +48,14 @@ const AddButton = styled.button`
 const Logros = () => {
   return (
     <Container>
-      <ContainerSkills>
+      <ContainerLogros>
         <CardLogros
           colorBtn="dasboard"
           title="Front-end developer en Laboratoria"
           description="Bootcamp intensivo en el desarrollo de hábilidades blandas y técnicas para desarrollo web, bajo metodología ágil. Lenguajes: Javascript, HTML5, CSS3."
         />
         <CardLogros colorBtn="dasboard" text="Javascript" />
-      </ContainerSkills>
+      </ContainerLogros>
       <AddButton>
         <FaPlus />
         Añadir Skill

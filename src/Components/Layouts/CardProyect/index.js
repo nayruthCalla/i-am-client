@@ -20,7 +20,7 @@ const Container = styled('article')(
     /* background: #ffffff; */
     border: ${colorBtn === 'dasboard'
       ? '1px solid rgba(143, 3, 3, 0.35)'
-      : 'border: 2px solid rgba(43, 184, 218, 0.5)'};
+      : '2px solid rgba(43, 184, 218, 0.5)'};
     box-sizing: border-box;
     border-radius: 8px;
     @media screen and (min-width: 768px) {
@@ -74,7 +74,7 @@ const BodyCard = styled('div')(
     width: 100%;
     padding: 2rem;
     background-color: transparent;
-    color: ${colorBtn === 'dasboard' ? '#c54646' : '#EFEFEF'};
+    color: ${colorBtn === 'dasboard' ? '#c54646' : '#A3A8C3'};
     border-radius: 8px;
     font-family: var(--font-Saira);
     @media screen and (min-width: 768px) {
@@ -89,7 +89,6 @@ const Title = styled.h2`
   font-size: 3rem;
   line-height: 47px;
   text-align: justify;
-  color: #444444;
 `
 const Description = styled.p`
   font-style: normal;
@@ -97,7 +96,6 @@ const Description = styled.p`
   font-size: 1.7rem;
   line-height: 24px;
   text-align: justify;
-  color: #444444;
 `
 const FooterCard = styled('div')(
   ({ colorBtn }) => css`
@@ -107,6 +105,7 @@ const FooterCard = styled('div')(
     justify-content: space-between;
     font-size: 1.5rem;
     font-family: var(--font-SpaceM);
+    color: ${colorBtn === 'dasboard' ? '#000' : '#E6E6E6'};
     .card-icon {
       color: ${colorBtn === 'dasboard' ? '#c54646' : '#EFEFEF'};
       font-size: 2.5rem;

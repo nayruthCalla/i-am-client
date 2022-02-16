@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-import Header from './Layouts/Header'
+
+// import Header from './Layouts/Header'
 // import Landing from './Pages/Landing'
-import Dasboard from './Pages/Dasboard'
-import Footer from './Layouts/Footer'
+// import Dasboard from './Pages/Dasboard'
+// import Footer from './Layouts/Footer'
+import FirstTemplateWeb from './Pages/FirstTemplateWeb'
 
 const Container = styled.div`
   display: flex;
@@ -13,11 +15,12 @@ const Container = styled.div`
 const App = () => {
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
       {/* <Landing />
        */}
-      <Dasboard />
-      <Footer />
+      {/* <Dasboard /> */}
+      {/* <Footer /> */}
+      <FirstTemplateWeb />
     </Container>
   )
 }

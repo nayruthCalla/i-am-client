@@ -183,12 +183,13 @@ const About = () => {
           textLabel=" Nombre y Apellido para tu portada"
         />
         <TextareaDashboard
-          placeholder="Apasionado en Desarrollo Android Java / Kotlin & JS Web Apps y Automatización con NodeJS"
+          placeholder="Apasionada en Desarrollo Javascript React / Web Apps y Automatización con NodeJS"
           textLabel="¿ A qué te dedicas ?"
         />
         <TextareaDashboard
-          placeholder="Hola, soy Roger 😄, un desarrollador 👨🏻‍💻 de Perú 🇵🇪. Soy un desarrollador móvil [Android] y todo lo relacionado con aplicaciones en tiempo real. Me gusta el cine y los deportes 🏃.
-          Aficionada por el autoaprendizaje y el gran impacto que tiene programar.          
+          placeholder="Hola, soy Nayruth 😄, una desarrolladora 💻 de Perú 🇵🇪. Soy una programodora web [Javascript] me apasiona todo lo relacionado con aplicaciones en tiempo real. Me gusta el cine y los deportes 🏃.
+          Aficionada por el autoaprendizaje y el gran impacto que tiene programar.
+          
           ¡Hagamos historia!"
           textLabel="Habla sobre tí"
           size="big"
@@ -199,10 +200,11 @@ const About = () => {
           textLabel="Comparte tus intereses"
         />
         <ContSelect>
-          <Label>Agrega el link de tus redes sociales</Label>
+          <Label>Agrega el link de tus Contactos</Label>
           <ContSocialNetwork>
             <Select>
               <Option>Eligir</Option>
+              <Option>Gmail</Option>
               <Option>LinkedIn</Option>
               <Option>GitHub</Option>
               <Option>Instagram</Option>

@@ -8,7 +8,7 @@ const Container = styled('article')(
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: ${colorBtn === 'dasboard' ? '20rem' : '40rem'};
+    max-width: ${colorBtn === 'dasboard' ? '20rem' : '20rem'};
     background-color: transparent;
     font-family: var(--font-SpaceM);
     font-style: normal;
