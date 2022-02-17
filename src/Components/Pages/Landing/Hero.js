@@ -28,10 +28,11 @@ const Figure = styled.figure`
   }
 `
 const FigureMobile = styled.figure`
-    width: 90%;
-    margin-top: 60px;
+  width: 90%;
+  margin-top: 60px;
   @media screen and (min-width: 768px) {
     width: auto;
+  }
   @media screen and (min-width: 1024px) {
   }
 `
@@ -71,7 +72,7 @@ const Title = styled.h1`
 const Button = styled.button`
   padding: 0 1rem 0 1rem;
   border-radius: 2rem;
-  width: 70%%;
+  width: 70%;
   background: var(--color-pink-prim);
   font-family: var(--font-Dongle);
   font-size: 2.5rem;

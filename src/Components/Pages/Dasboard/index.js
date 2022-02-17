@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Header from '../../Layouts/Header'
 import ButtonDashborad from '../../Layouts/ButtonDashborad'
 import Line from '../../Layouts/LineStyle'
 import About from './About'
@@ -15,12 +16,18 @@ const Container = styled.div`
   width: 100%;
   margin-top: 10rem;
   @media screen and (min-width: 768px) {
+    min-height: 100vh;
   }
   @media screen and (min-width: 1024px) {
     flex-direction: row;
   }
 `
-const ContMenuButton = styled.div``
+const ContMenuButton = styled.div`
+  @media screen and (min-width: 768px) {
+    /* height: 100vh; */
+    /* padding: 2rem 8rem; */
+  }
+`
 
 const ContainerCont = styled.div`
   display: flex;
@@ -28,6 +35,7 @@ const ContainerCont = styled.div`
   flex: 1;
   justify-content: center;
   @media screen and (min-width: 768px) {
+    /* min-height: 100vh; */
   }
   @media screen and (min-width: 1024px) {
     margin-left: 25rem;
@@ -36,40 +44,43 @@ const ContainerCont = styled.div`
 
 const DasBoard = () => {
   return (
-    <Container>
-      <Menu />
-      <ContainerCont>
-        <ContMenuButton id="about">
-          <ButtonDashborad text="Acerca de Mí" screen="mobile" />
-          <Line />
-          <About />
-          <Line />
-        </ContMenuButton>
-        <ContMenuButton id="proyects">
-          <ButtonDashborad text="Mis Proyectos" screen="mobile" />
-          <Line />
-          <Proyects />
-        </ContMenuButton>
-        <ContMenuButton id="skills">
-          <ButtonDashborad text="Mis Skills" screen="mobile" />
-          <Line />
-          <Skills />
-          <Line />
-        </ContMenuButton>
-        <ContMenuButton id="logros">
-          <ButtonDashborad text="Mis Logros" screen="mobile" />
-          <Line />
-          <Logros />
-        </ContMenuButton>
-        <ContMenuButton id="cv">
-          <ButtonDashborad text="Mi Contacto" screen="mobile" />
-          <Line />
-        </ContMenuButton>
-        <ContMenuButton>
-          <ButtonDashborad text="Mi CV" screen="mobile" />
-        </ContMenuButton>
-      </ContainerCont>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Menu />
+        <ContainerCont>
+          <ContMenuButton id="about">
+            <ButtonDashborad text="Acerca de Mí" screen="mobile" />
+            <Line />
+            <About />
+            <Line />
+          </ContMenuButton>
+          <ContMenuButton id="proyects">
+            <ButtonDashborad text="Mis Proyectos" screen="mobile" />
+            <Line />
+            <Proyects />
+          </ContMenuButton>
+          <ContMenuButton id="skills">
+            <ButtonDashborad text="Mis Skills" screen="mobile" />
+            <Line />
+            <Skills />
+            <Line />
+          </ContMenuButton>
+          <ContMenuButton id="logros">
+            <ButtonDashborad text="Mis Logros" screen="mobile" />
+            <Line />
+            <Logros />
+          </ContMenuButton>
+          <ContMenuButton id="cv">
+            <ButtonDashborad text="Mi Contacto" screen="mobile" />
+            <Line />
+          </ContMenuButton>
+          <ContMenuButton>
+            <ButtonDashborad text="Mi CV" screen="mobile" />
+          </ContMenuButton>
+        </ContainerCont>
+      </Container>
+    </>
   )
 }
 

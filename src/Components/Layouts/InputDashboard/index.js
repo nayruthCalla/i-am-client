@@ -42,11 +42,17 @@ const Label = styled.label`
   text-align: left;
 `
 
-const InputDashboard = ({ placeholder, textLabel }) => {
+const InputDashboard = ({ placeholder, textLabel, value, onChange, id }) => {
   return (
     <Container>
-      <Label>{textLabel}</Label>
-      <Input placeholder={placeholder} />
+      <Label htmlFor={value}>{textLabel}</Label>
+      <Input
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        id={id}
+      />
     </Container>
   )
 }

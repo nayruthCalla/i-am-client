@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 // import PropTypes from 'prop-types';
+import { useFormik } from 'formik'
 
 // Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
 import { BiImageAdd } from 'react-icons/bi'
@@ -12,6 +13,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (min-width: 768px) {
+    min-height: 100vh;
+    /* padding: 2rem 8rem; */
+  }
 `
 const ContentAddImage = styled.div`
   display: flex;
@@ -157,9 +162,21 @@ const SaveButton = styled.button`
   }
 `
 const About = () => {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      occupation: '',
+      about: '',
+      interests: '',
+    },
+    onSubmit: (values) => {
+      // alert(JSON.stringify(values, null, 2));
+      console.log('envi', values)
+    },
+  })
   return (
     <Container>
-      <Form>
+      <Form onSubmit={formik.handlleSubmit}>
         <ContentAddImage>
           <Figure>
             <FaUserAlt />
@@ -181,6 +198,9 @@ const About = () => {
         <InputDashboard
           placeholder="Un nombre y un Apellido NayruthCalla"
           textLabel=" Nombre y Apellido para tu portada"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          id={formik.values.name}
         />
         <TextareaDashboard
           placeholder="Apasionada en Desarrollo Javascript React / Web Apps y Automatización con NodeJS"

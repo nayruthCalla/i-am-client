@@ -10,6 +10,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4rem 0;
+  @media screen and (min-width: 768px) {
+    min-height: 100vh;
+    justify-content: flex-start;
+    /* padding: 2rem 8rem; */
+  }
 `
 const ContainerProyects = styled.div`
   display: flex;

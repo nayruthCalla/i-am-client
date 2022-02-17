@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useAuth0 } from '@auth0/auth0-react'
 import { useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -10,14 +11,14 @@ import {
   FaFileAlt,
 } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
-import user from '../../../assets/user.gif'
+// import userdefault from '../../../assets/user.gif'
 
 const MenuBar = styled.nav`
   background: rgba(196, 196, 196, 0.1);
   width: 25rem;
   box-shadow: 6px 4px 10px 0px rgb(0 9 128 / 25%);
   padding: 3rem 0;
-  height: 100vh;
+  min-height: 100vh;
   position: fixed;
   left: 0;
 `
@@ -38,6 +39,7 @@ const UserPhoto = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
 const Photo = styled.img`
   width: 7rem;
@@ -59,46 +61,61 @@ const Link = styled.a`
   text-decoration: none;
   color: rgba(67, 75, 87, 0.78);
 `
+const UserName = styled.p`
+  font-family: var(--font-Dongle);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: rgba(67, 75, 87, 0.78);
+`
+
 const DasBoard = () => {
+  const { user, isAuthenticated, isLoading } = useAuth0()
   const value = useMemo(() => ({ className: 'icon-button' }))
+  if (isLoading) {
+    return <div>Loading ...</div>
+  }
   return (
-    <MenuBar>
-      <UserPhoto>
-        <Photo src={user} />
-      </UserPhoto>
-      <Ul>
-        <Li>
-          <IconContext.Provider value={value}>
-            <FaUserAlt />
-          </IconContext.Provider>
-          <Link href="#about">Acerca de mí</Link>
-        </Li>
-        <Li>
-          <IconContext.Provider value={value}>
-            <FaElementor />
-          </IconContext.Provider>
-          <Link href="#proyects">Mis Proyectos</Link>
-        </Li>
-        <Li>
-          <IconContext.Provider value={value}>
-            <FaMedal />
-          </IconContext.Provider>
-          <Link href="#skills">Mis Skills</Link>
-        </Li>
-        <Li>
-          <IconContext.Provider value={value}>
-            <FaChild />
-          </IconContext.Provider>
-          <Link href="#logros">Mis Logros</Link>
-        </Li>
-        <Li>
-          <IconContext.Provider value={value}>
-            <FaFileAlt />
-          </IconContext.Provider>
-          <Link href="#cv">Mi CV</Link>
-        </Li>
-      </Ul>
-    </MenuBar>
+    isAuthenticated && (
+      <MenuBar>
+        <UserPhoto>
+          <Photo src={user.picture} />
+          <UserName>{user.name}</UserName>
+        </UserPhoto>
+        <Ul>
+          <Li>
+            <IconContext.Provider value={value}>
+              <FaUserAlt />
+            </IconContext.Provider>
+            <Link href="#about">Acerca de mí</Link>
+          </Li>
+          <Li>
+            <IconContext.Provider value={value}>
+              <FaElementor />
+            </IconContext.Provider>
+            <Link href="#proyects">Mis Proyectos</Link>
+          </Li>
+          <Li>
+            <IconContext.Provider value={value}>
+              <FaMedal />
+            </IconContext.Provider>
+            <Link href="#skills">Mis Skills</Link>
+          </Li>
+          <Li>
+            <IconContext.Provider value={value}>
+              <FaChild />
+            </IconContext.Provider>
+            <Link href="#logros">Mis Logros</Link>
+          </Li>
+          <Li>
+            <IconContext.Provider value={value}>
+              <FaFileAlt />
+            </IconContext.Provider>
+            <Link href="#cv">Mi CV</Link>
+          </Li>
+        </Ul>
+      </MenuBar>
+    )
   )
 }
 
