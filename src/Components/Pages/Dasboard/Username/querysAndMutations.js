@@ -1,42 +1,18 @@
 import { gql } from '@apollo/client'
 
-// QUERIES
-export const ADD_PROYECT = gql`
-  mutation AddArrProyects($proyects: [ArryProyects]) {
-    addArrProyects(proyects: $proyects) {
+export const GET_USER_BY_ID_ABOUT = gql`
+  query GetUserByIdAbout {
+    getUserByIdAbout {
       id
-      userId
-      proyectName
-      level
-      description
-      techFirst
-      techSecond
-      links {
-        link
-        name
-      }
+      userName
+      name
+      nickname
+      email
+      picture
     }
   }
 `
-// MUTATIONS
-// ADD
-export const GET_PROYECT_BY_USER = gql`
-  query Query($userId: String!) {
-    getProyectByUser(userId: $userId) {
-      userId
-      proyectName
-      level
-      id
-      description
-      techFirst
-      techSecond
-      links {
-        link
-        name
-      }
-    }
-  }
-`
+
 // EDIT
 export const EDIT_USER_BY_ID = gql`
   mutation UpdateUser(
@@ -58,24 +34,6 @@ export const EDIT_USER_BY_ID = gql`
       email
       roles {
         admin
-      }
-    }
-  }
-`
-// DELETE
-export const DELETE_PROPERTY_BY_ID = gql`
-  mutation DeleteProyect($deleteProyectId: String!) {
-    deleteProyect(id: $deleteProyectId) {
-      id
-      userId
-      proyectName
-      level
-      description
-      techFirst
-      techSecond
-      links {
-        link
-        name
       }
     }
   }

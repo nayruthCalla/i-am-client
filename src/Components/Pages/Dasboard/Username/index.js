@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import styled from 'styled-components'
 import Swal from 'sweetalert2'
 import { useFormik } from 'formik'
@@ -6,7 +7,7 @@ import * as Yup from 'yup'
 import { FaPlus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import Message from '../../../Layouts/MessageError'
-import { useEditUser } from './customHooks'
+import { useEditUser, useGetUserAbout } from './customHooks'
 import sad from '../../../../assets/sad.gif'
 import correct from '../../../../assets/correct.gif'
 
@@ -49,10 +50,20 @@ const AddButton = styled.button`
     background: var(--hover-dasb);
   }
 `
+const P = styled.p`
+  font-family: var(--font-Dongle);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 43px;
+  color: rgb(67 75 87 / 68%);
+  text-align: center;
+`
 
 const Username = () => {
   const [updateUser] = useEditUser()
   const { user } = useAuth0()
+  const { data } = useGetUserAbout()
 
   const formik = useFormik({
     initialValues: {
@@ -100,24 +111,39 @@ const Username = () => {
   //   console.log(data, loading, error)
   return (
     <Container onSubmit={formik.handleSubmit}>
-      <ContainerUsername>
-        <InputDashboard
-          placeholder="Este nombre se verá en la url de portafolio"
-          textLabel="Nombre de usuario"
-          value={formik.values.usernameUnique}
-          onChange={formik.handleChange}
-          id="usernameUnique"
-          name="usernameUnique"
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.usernameUnique && formik.errors.usernameUnique ? (
-          <Message text={formik.errors.usernameUnique} />
-        ) : null}
-      </ContainerUsername>
-      <AddButton type="submit">
-        <FaPlus />
-        Añadir mi nombre
-      </AddButton>
+      {data?.getUserByIdAbout.length > 0 ? (
+        <>
+          {data?.getUserByIdAbout.map((e, i) => (
+            <div key={i}>
+              {e.userName === 'undefined' ? (
+                <>
+                  <ContainerUsername>
+                    <InputDashboard
+                      placeholder="Este nombre se verá en la url de portafolio"
+                      textLabel="Agrega tu Nombre de usuario para tener tu Link"
+                      value={formik.values.usernameUnique}
+                      onChange={formik.handleChange}
+                      id="usernameUnique"
+                      name="usernameUnique"
+                      onBlur={formik.handleBlur}
+                    />
+                    {formik.touched.usernameUnique &&
+                    formik.errors.usernameUnique ? (
+                      <Message text={formik.errors.usernameUnique} />
+                    ) : null}
+                  </ContainerUsername>
+                  <AddButton type="submit">
+                    <FaPlus />
+                    Añadir mi nombre
+                  </AddButton>
+                </>
+              ) : (
+                <P>https://iAm.netlify.com/{e.userName}</P>
+              )}
+            </div>
+          ))}
+        </>
+      ) : null}
     </Container>
   )
 }

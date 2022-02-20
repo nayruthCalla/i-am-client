@@ -1,6 +1,5 @@
-// import { gql, useMutation } from '@apollo/client'
+import Swal from 'sweetalert2'
 import { useState, useEffect } from 'react'
-// import Swal from 'sweetalert2'
 import styled, { css } from 'styled-components'
 // import PropTypes from 'prop-types';
 import { useFormik } from 'formik'
@@ -12,9 +11,8 @@ import { FaUserAlt, FaPlus, FaMinus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
-// import correct from '../../../../assets/correct.gif'
-// import { getUserCurrent } from '../../User/customHooks'
-// import { useAboutByUserName } from './customHooks'
+import correct from '../../../../assets/correct.gif'
+import { useEditAbout } from './customHooks'
 // import LinkSocialNet from './SocialNetwork'
 
 const Container = styled.div`
@@ -210,32 +208,25 @@ const SaveButton = styled.button`
   :hover {
     background: var(--hover-dasb);
   }
+  @media screen and (min-width: 768px) {
+    width: 40%;
+  }
+  @media screen and (min-width: 1024px) {
+  }
 `
 
-const About = ({ showCont, setShowCont, usernameData }) => {
+const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
+  console.log(dataEdited.socialNetworks)
   const [url, setLink] = useState(true)
-  const [dataAboutM, setDataAboutM] = useState({
-    firstName: '',
-    profession: '',
-    aboutMeText: '',
-    interests: '',
-    inputLink: '',
-    linktype: '',
-    resultLink: [],
-  })
-  // const dataAbout = useAboutByUserName(username.getUser.userName)
-  // const { id, firstName, profession, aboutMeText, interests, socialNetworks } =
-  //   dataAboutM.data.getAboutMeByUserName
-  const [textLink, setLinkText] = useState([])
-
-  // console.log(dataAbout.data.getAboutMeByUserName)
-  // console.log(dataAbout)
+  const [textLink, setLinkText] = useState([dataEdited.socialNetworks])
+  const [updateAboutMe] = useEditAbout()
+  // console.log(loading, error) { loading, error }
   const formik = useFormik({
     initialValues: {
-      username: dataAboutM.firstName,
-      occupation: dataAboutM.profession,
-      aboutMe: dataAboutM.aboutMeText,
-      interests: '',
+      username: dataEdited.firstName,
+      occupation: dataEdited.profession,
+      aboutMe: dataEdited.aboutMeText,
+      interests: dataEdited.interests,
       inputLink: '',
       linktype: '',
       resultLink: textLink,
@@ -256,51 +247,41 @@ const About = ({ showCont, setShowCont, usernameData }) => {
           10,
           'Si describes más a detalle de lo que quieres, te podrán conocer mejor'
         ),
-      linktype: Yup.string()
-        .oneOf(
-          ['gmail', 'linkedin', 'github', 'instagram', 'facebook'],
-          'Invalid Link Type'
-        )
-        .required(':( Debes elegir una cuenta a la que vas a asociar tu link'),
+      linktype: Yup.string().oneOf(
+        ['gmail', 'linkedin', 'github', 'instagram', 'facebook'],
+        'Invalid Link Type'
+      ),
       inputLink: Yup.string().url(),
-      // resultLink: Yup.string()
-      //   .required(
-      //     ':( Tienes que agregar como mínimo una red para que se contacten contigo!'
-      //   )
-      //   .url()
-      //   .nullable(),
     }),
     onSubmit: async (values) => {
       // alert(JSON.stringify(values, null, 2));
       try {
         // console.log(textLink)
-        // const datar = await updateAboutMe({
-        //   variables: {
-        //     // userId: '6206b58f284d4e1f15002d39',
-        //     updateAboutMeId: id,
-        //     firstName: values.username,
-        //     profession: values.occupation,
-        //     aboutMeText: values.aboutMe,
-        //     interests: values.interests,
-        //     socialNetworks: textLink,
-        //     photo: '',
-        //   },
-        // })
+        const { data } = await updateAboutMe({
+          variables: {
+            updateAboutMeId: dataEdited.id,
+            firstName: values.username,
+            profession: values.occupation,
+            aboutMeText: values.aboutMe,
+            interests: values.interests,
+            socialNetworks: textLink,
+            photo: '',
+          },
+        })
         // console.log(data.addAboutMe)
-        // if (datar.addAboutMe) {
-        //   Swal.fire({
-        //     title: 'Excelente!',
-        //     text: 'Tus datos se guardarón exitosamente!',
-        //     imageUrl: `${correct}`,
-        //     imageWidth: 300,
-        //     imageAlt: 'Custom image',
-        //   })
-        setShowCont(!showCont)
-        // }
-        console.log(values)
+        if (data.addAboutMe) {
+          Swal.fire({
+            title: 'Excelente!',
+            text: 'Tus datos se guardarón exitosamente!',
+            imageUrl: `${correct}`,
+            imageWidth: 300,
+            imageAlt: 'Custom image',
+          })
+        }
       } catch (e) {
         // console.log(e)
       }
+      setAddCardEdit(!addCardEdit)
     },
   })
   const handleClick = () => {
@@ -318,18 +299,8 @@ const About = ({ showCont, setShowCont, usernameData }) => {
     setLinkText(filterLinks)
   }
   useEffect(() => {
-    // setDataUser(data)
-    // setDataUser(data)
-    // setDataAboutM(dataAbout)
-    // if (data) {
-    //   const dataAbout = useAboutByUserName(data.getUser.userName)
-    //   setDataAboutM(dataAbout)
-    // }
-    // setDataAboutM(dataAbout)
-    setDataAboutM(usernameData)
-    console.log(usernameData)
-  }, [usernameData])
-  // console.log(dataUser)
+    setLinkText(dataEdited.socialNetworks)
+  }, [])
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
@@ -456,7 +427,7 @@ const About = ({ showCont, setShowCont, usernameData }) => {
             <Message text={formik.errors.linktype} />
           ) : null}
         </ContSelect>
-        <SaveButton type="submit">Editar</SaveButton>
+        <SaveButton type="submit">Guardar</SaveButton>
       </Form>
     </Container>
   )

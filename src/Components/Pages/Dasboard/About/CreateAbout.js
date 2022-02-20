@@ -1,6 +1,5 @@
-import { gql, useMutation } from '@apollo/client'
-import Swal from 'sweetalert2'
 import { useState } from 'react'
+import Swal from 'sweetalert2'
 import styled, { css } from 'styled-components'
 // import PropTypes from 'prop-types';
 import { useFormik } from 'formik'
@@ -13,6 +12,7 @@ import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
 import correct from '../../../../assets/correct.gif'
+import { useAddAbout } from './customHooks'
 // import LinkSocialNet from './SocialNetwork'
 
 const Container = styled.div`
@@ -216,43 +216,12 @@ const SaveButton = styled.button`
 `
 
 //--------------------------
-const ADD_ABOUT_ME = gql`
-  mutation AddAboutMe(
-    $firstName: String!
-    $profession: String!
-    $aboutMeText: String!
-    $interests: String!
-    $socialNetworks: [SocialNetworkPost]!
-    $photo: String!
-  ) {
-    addAboutMe(
-      firstName: $firstName
-      profession: $profession
-      aboutMeText: $aboutMeText
-      interests: $interests
-      socialNetworks: $socialNetworks
-      photo: $photo
-    ) {
-      id
-      userId
-      firstName
-      profession
-      aboutMeText
-      interests
-      socialNetworks {
-        name
-        link
-      }
-      photo
-    }
-  }
-`
 
 const About = ({ showCont, setShowCont }) => {
-  const [addAboutMe] = useMutation(ADD_ABOUT_ME)
+  const [addAboutMe] = useAddAbout()
   const [url, setLink] = useState(true)
   const [textLink, setLinkText] = useState([])
-  // console.log(loading, error) { loading, error }
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -286,12 +255,6 @@ const About = ({ showCont, setShowCont }) => {
         )
         .required(':( Debes elegir una cuenta a la que vas a asociar tu link'),
       inputLink: Yup.string().url(),
-      // resultLink: Yup.string()
-      //   .required(
-      //     ':( Tienes que agregar como mínimo una red para que se contacten contigo!'
-      //   )
-      //   .url()
-      //   .nullable(),
     }),
     onSubmit: async (values) => {
       // alert(JSON.stringify(values, null, 2));

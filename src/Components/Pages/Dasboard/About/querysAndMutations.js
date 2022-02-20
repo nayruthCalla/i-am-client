@@ -1,42 +1,37 @@
 import { gql } from '@apollo/client'
 
-// QUERIES
-export const ADD_PROYECT = gql`
-  mutation AddArrProyects($proyects: [ArryProyects]) {
-    addArrProyects(proyects: $proyects) {
-      id
-      userId
-      proyectName
-      level
-      description
-      techFirst
-      techSecond
-      links {
-        link
-        name
-      }
-    }
-  }
-`
-// MUTATIONS
-export const GET_PROYECT_BY_USER = gql`
-  query Query {
-    getProyectByUser {
-      userId
-      proyectName
-      level
-      id
-      description
-      techFirst
-      techSecond
-      links {
-        link
-        name
-      }
-    }
-  }
-`
 // ADD
+export const ADD_ABOUT_ME = gql`
+  mutation AddAboutMe(
+    $firstName: String!
+    $profession: String!
+    $aboutMeText: String!
+    $interests: String!
+    $socialNetworks: [SocialNetworkPost]!
+    $photo: String!
+  ) {
+    addAboutMe(
+      firstName: $firstName
+      profession: $profession
+      aboutMeText: $aboutMeText
+      interests: $interests
+      socialNetworks: $socialNetworks
+      photo: $photo
+    ) {
+      id
+      userId
+      firstName
+      profession
+      aboutMeText
+      interests
+      socialNetworks {
+        name
+        link
+      }
+      photo
+    }
+  }
+`
 export const GET_ABOUT_BY_USERNAME = gql`
   query GetAboutMeByUserName($userName: ID!) {
     getAboutMeByUserName(userName: $userName) {
@@ -81,20 +76,16 @@ export const EDIT_ABOUT_BY_ID = gql`
   mutation UpdateAboutMe(
     $updateAboutMeId: String!
     $firstName: String
-    $lastName: String
     $profession: String
-    $linkUsername: String
     $aboutMeText: String
     $interests: String
-    $socialNetworks: SocialNetworkPost
+    $socialNetworks: [SocialNetworkPost]
     $photo: String
   ) {
     updateAboutMe(
       id: $updateAboutMeId
       firstName: $firstName
-      lastName: $lastName
       profession: $profession
-      linkUsername: $linkUsername
       aboutMeText: $aboutMeText
       interests: $interests
       socialNetworks: $socialNetworks
@@ -104,9 +95,7 @@ export const EDIT_ABOUT_BY_ID = gql`
       userId
       userName
       firstName
-      lastName
       profession
-      linkUsername
       aboutMeText
       interests
       socialNetworks {
@@ -117,49 +106,23 @@ export const EDIT_ABOUT_BY_ID = gql`
     }
   }
 `
-// EDIT
-export const EDIT_USER_BY_ID = gql`
-  mutation UpdateUser(
-    $nickname: String!
-    $name: String
-    $userName: ID
-    $email: String
-    $picture: String
-  ) {
-    updateUser(
-      nickname: $nickname
-      name: $name
-      userName: $userName
-      email: $email
-      picture: $picture
-    ) {
-      id
-      userName
-      name
-      nickname
-      email
-      roles {
-        admin
-      }
-      picture
-    }
-  }
-`
+
 // DELETE
-export const DELETE_PROPERTY_BY_ID = gql`
-  mutation DeleteProyect($deleteProyectId: String!) {
-    deleteProyect(id: $deleteProyectId) {
+export const DELETE_ABOUT_BY_ID = gql`
+  mutation DeleteAboutMe($deleteAboutMeId: String!) {
+    deleteAboutMe(id: $deleteAboutMeId) {
       id
       userId
-      proyectName
-      level
-      description
-      techFirst
-      techSecond
-      links {
-        link
+      userName
+      firstName
+      profession
+      aboutMeText
+      interests
+      socialNetworks {
         name
+        link
       }
+      photo
     }
   }
 `

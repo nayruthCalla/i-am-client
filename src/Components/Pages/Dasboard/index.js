@@ -50,7 +50,7 @@ const DasBoard = () => {
       <Container>
         <Menu />
         <ContainerCont>
-          <ContMenuButton id="about">
+          <ContMenuButton id="userName">
             <ButtonDashborad text="Mi nombre de usuario" screen="mobile" />
             <Line />
             <Username />
@@ -77,10 +77,6 @@ const DasBoard = () => {
             <ButtonDashborad text="Mis Logros" screen="mobile" />
             <Line />
             <Logros />
-          </ContMenuButton>
-          <ContMenuButton id="cv">
-            <ButtonDashborad text="Mi Contacto" screen="mobile" />
-            <Line />
           </ContMenuButton>
           <ContMenuButton>
             <ButtonDashborad text="Mi CV" screen="mobile" />

@@ -7,7 +7,7 @@ import {
   FaElementor,
   FaMedal,
   FaChild,
-  // FaAddressBook,
+  FaExternalLinkAlt,
   FaFileAlt,
 } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
@@ -91,6 +91,12 @@ const DasBoard = () => {
           <UserName>{user.name}</UserName>
         </UserPhoto>
         <Ul>
+          <Li>
+            <IconContext.Provider value={value}>
+              <FaExternalLinkAlt />
+            </IconContext.Provider>
+            <Link href="#userName">Mi Link</Link>
+          </Li>
           <Li>
             <IconContext.Provider value={value}>
               <FaUserAlt />

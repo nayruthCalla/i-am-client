@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react'
+/* eslint-disable react/jsx-no-useless-fragment */
+import Swal from 'sweetalert2'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { FaEllipsisH } from 'react-icons/fa'
 import CreateAbout from './CreateAbout'
 // import Editd from './EditedAbout'
 // import { getUserCurrent } from '../../User/customHooks'
-import { useAboutMe } from './customHooks'
+import { useAboutMe, useDeleteAbout } from './customHooks'
 import AboutRead from './AboutMe'
+import EditAbout from './EditAbout'
+import alert from '../../../../assets/alert.gif'
 
 const P = styled.p`
   font-family: var(--font-Dongle);
@@ -61,7 +65,23 @@ const ContMore = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 4rem;
+  margin: 7rem 4rem 4rem 4rem;
+`
+const Preview = styled('div')`
+  /* width: 100%; */
+  display: flex;
+  gap: 1.3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: ${({ colorPrev }) => (colorPrev ? '#29abe014;' : 'transparent')};
+  @media screen and (min-width: 768px) {
+    /* flex-direction: row;
+    flex-wrap: wrap; */
+  }
+  @media screen and (min-width: 1024px) {
+  }
 `
 // const Container = styled('article')(
 //   ({ colorBtn }) => css`
@@ -89,40 +109,84 @@ const ContMore = styled.div`
 const AboutMe = () => {
   const [more, setMore] = useState(false)
   const [showCont, setShowCont] = useState(true)
-  const { data, error } = useAboutMe()
-  const [dataAboutM] = useState({
-    firstName: '',
-    profession: '',
-    aboutMeText: '',
-    interests: '',
-    resultLink: [],
-  })
+  const { data } = useAboutMe()
+  const [edited, setEdited] = useState()
+  const [addCardEdit, setAddCardEdit] = useState(false)
+  const [deleteAboutMe] = useDeleteAbout()
+  // const [dataAboutM] = useState({
+  //   firstName: '',
+  //   profession: '',
+  //   aboutMeText: '',
+  //   interests: '',
+  //   resultLink: [],
+  // })
 
   //   const [dataUser, setDataUser] = useState({ getUser: { userName: '' } })
   //   const [dataAbout, setDataAbout] = useState({})
   // const { data } = getUserCurrent()
   //   const [GetAboutMeByUserName, result] = useAboutByUserName()
-  // console.log(data)
+  console.log(edited)
   const handleMore = () => {
     setMore(!more)
     // console.log(more)
   }
   //   console.log(data)
-  useEffect(() => {
-    // setDataAboutM(data.getAboutMe)
-  }, [data])
+  // useEffect(() => {
+  //   // setDataAboutM(data.getAboutMe)
+  // }, [data])
 
-  const edited = async () => {
-    try {
-      //   const resp = await GetAboutMeByUserName({
-      //     variables: { userName: data.getUser.userName },
-      //   })
-      //   setDataAbout(resp.data.getAboutMeByUserName)
-    } catch (e) {
-      // console.log(e)
-    }
+  const handleEdit = async (items) => {
+    console.log(items)
+    setEdited(items)
+    // setAddCard(!addCard)
+    setAddCardEdit(!addCardEdit)
+    // Swal.fire({
+    //   title: 'Eliminar Proyecto',
+    //   text: 'Recuerda que podras agregar otro proyecto cuando quieras :)',
+    //   imageUrl: `${alert}`,
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#29ABE0',
+    //   cancelButtonColor: '#D9534F',
+    //   confirmButtonText: 'Sí, Eliminar',
+    //   imageWidth: 300,
+    //   imageHeight: 250,
+    //   imageAlt: 'Custom image',
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     Swal.fire('Se eliminó Proyecto', '', 'success')
+    //     deleteProyect({
+    //       variables: {
+    //         deleteProyectId: id,
+    //       },
+    //     })
+    //   }
+    // })
   }
   //   console.log(dataAbout, dataUser)
+  const handleDelete = async (id) => {
+    // console.log(id)
+    Swal.fire({
+      title: 'Eliminar ',
+      text: 'Podras otro descrpción cuanod quieras :)',
+      imageUrl: `${alert}`,
+      showCancelButton: true,
+      confirmButtonColor: '#29ABE0',
+      cancelButtonColor: '#D9534F',
+      confirmButtonText: 'Sí, Eliminar',
+      imageWidth: 300,
+      imageHeight: 250,
+      imageAlt: 'Custom image',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Se eliminó ', '', 'success')
+        deleteAboutMe({
+          variables: {
+            deleteAboutMeId: id,
+          },
+        })
+      }
+    })
+  }
   return (
     <div>
       <ContMore>
@@ -131,26 +195,49 @@ const AboutMe = () => {
         </ButtonRed>
         <P>Sobre mí</P>
       </ContMore>
-      {more ? (
-        <ContentMore>
-          <ButtonMore type="button" onClick={edited}>
-            Editar
-          </ButtonMore>
-          <ButtonMore type="button">Eliminar</ButtonMore>
-        </ContentMore>
-      ) : null}
-      {Object.keys(dataAboutM).length !== 0 ? (
-        <AboutRead
-          userName={dataAboutM.firstName}
-          profession={dataAboutM.profession}
-          about={dataAboutM.aboutMeText}
-          interests={dataAboutM.interests}
-          links={dataAboutM.links}
-        />
+
+      {data?.getAboutMe.length > 0 ? (
+        <>
+          {data?.getAboutMe.map((e, i) => (
+            <Preview key={i}>
+              {addCardEdit ? (
+                <EditAbout
+                  dataEdited={edited}
+                  ifEdit
+                  setAddCardEdit={setAddCardEdit}
+                  addCardEdit={addCardEdit}
+                />
+              ) : (
+                <>
+                  {more ? (
+                    <ContentMore>
+                      <ButtonMore type="button" onClick={() => handleEdit(e)}>
+                        Editar
+                      </ButtonMore>
+                      <ButtonMore
+                        type="button"
+                        onClick={() => handleDelete(e.id)}
+                      >
+                        Eliminar
+                      </ButtonMore>
+                    </ContentMore>
+                  ) : null}
+                  <AboutRead
+                    key={i}
+                    userName={e.firstName}
+                    profession={e.profession}
+                    about={e.aboutMeText}
+                    interests={e.interests}
+                    links={e.socialNetworks}
+                  />
+                </>
+              )}
+            </Preview>
+          ))}
+        </>
       ) : (
-        error
+        <CreateAbout showCont={showCont} setShowCont={setShowCont} />
       )}
-      <CreateAbout showCont={showCont} setShowCont={setShowCont} />
     </div>
   )
 }
