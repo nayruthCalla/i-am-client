@@ -1,245 +1,158 @@
-import styled, { css } from 'styled-components'
-// import PropTypes from 'prop-types';
-import { useFormik } from 'formik'
+import { useState, useEffect } from 'react'
+import styled from 'styled-components'
+import { FaEllipsisH } from 'react-icons/fa'
+import CreateAbout from './CreateAbout'
+// import Editd from './EditedAbout'
+// import { getUserCurrent } from '../../User/customHooks'
+import { useAboutMe } from './customHooks'
+import AboutRead from './AboutMe'
 
-// Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
-import { BiImageAdd } from 'react-icons/bi'
-import { FaUserAlt, FaPlus } from 'react-icons/fa'
-import InputDashboard from '../../../Layouts/InputDashboard'
-import TextareaDashboard from '../../../Layouts/Areashboard'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  @media screen and (min-width: 768px) {
-    min-height: 100vh;
-    /* padding: 2rem 8rem; */
-  }
-`
-const ContentAddImage = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 35px;
-`
-const Figure = styled.figure`
-  display: flex;
-  background: rgba(196, 196, 196, 0.26);
-  border-radius: 15px;
-  width: 117px;
-  height: 113px;
-  justify-content: center;
-  align-items: center;
-  color: #70777d;
-  font-size: 3rem;
-`
-const Form = styled.form`
-  width: 100%;
-  max-width: 65rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 3rem;
-  & input[id='comPhoto'] {
-    display: none;
-  }
-  & label[for='comPhoto'] {
-    min-width: 300px;
-    height: 50px;
-    display: flex;
-    padding: 6px 0px;
-    cursor: pointer;
-    margin-top: 10px;
-    justify-content: center;
-  }
-  @media screen and (min-width: 768px) {
-  }
-  @media screen and (min-width: 1024px) {
-  }
-`
-
-const AddImage = styled.p`
-  border: none;
-  font-size: 1.7rem;
-  cursor: pointer;
-  color: rgba(67, 75, 87, 0.94);
-  margin-top: 10px;
-
-  display: flex;
-  align-items: center;
-
-  svg {
-    margin-right: 10px;
-    font-size: 30px;
-  }
-`
-const ContSelect = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-`
-const ContSocialNetwork = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 1.3rem;
-`
-const Select = styled.select`
-  background: #ffffff;
-  border: 2px solid rgba(67, 75, 87, 0.31);
-  box-sizing: border-box;
-  border-radius: 8px;
-`
-const Option = styled.option``
-const Label = styled.label`
-  font-family: Dongle;
+const P = styled.p`
+  font-family: var(--font-Dongle);
   font-style: normal;
   font-weight: bold;
-  font-size: 25px;
-  line-height: 36px;
-  color: rgba(67, 75, 87, 0.94);
-  text-align: left;
+  font-size: 50px;
+  line-height: 43px;
+  color: rgb(67 75 87 / 68%);
+  text-align: center;
 `
-
-// const Image = styled.img``
-const AddButton = styled.button`
-  background: #c54646;
-  border-radius: 50%;
+const ButtonRed = styled.button`
+  background: transparent;
+  /* border-radius: 50%; */
+  border: 3px;
+  border-radius: 3px;
   border: none;
   padding: 1rem;
-  color: #f6f6f9;
+  color: #c54646;
+  width: 17%;
   font-size: 1.8rem;
   align-items: center;
   display: flex;
+  padding: 0.1rem 1.5rem;
+  width: fit-content;
   cursor: pointer;
   :hover {
-    background: var(--hover-dasb);
+    background: #e7dbe7;
   }
 `
-const InputLink = styled('input')(
-  () => css`
-    background: #ffffff;
-    border: 2px solid rgba(67, 75, 87, 0.31);
-    box-sizing: border-box;
-    border-radius: 8px;
-    font-family: var(--font-Dongle);
-    font-style: normal;
-    font-weight: bold;
-    font-size: 2.5rem;
-    line-height: 36px;
-    padding: 0 1rem;
-    text-align: center;
-    width: inherit;
-    ::placeholder {
-      color: rgba(67, 75, 87, 0.45);
-    }
-    @media screen and (min-width: 768px) {
-    }
-    @media screen and (min-width: 1024px) {
-    }
-  `
-)
-const SaveButton = styled.button`
-  background: #c54646;
-  border: none;
-  padding: 1rem;
-  color: #f6f6f9;
-  font-size: 1.8rem;
-  align-items: center;
+const ContentMore = styled.div`
+  display: flex;
+  gap: 1.3rem;
   justify-content: center;
-  display: flex;
-  border-radius: 0.8rem;
-  gap: 1rem;
-  width: 100%;
-  margin: 4rem 0 0 0;
+  align-items: center;
+`
+const ButtonMore = styled.button`
+  font-family: var(--font-Dongle);
+  font-style: normal;
+  font-size: 30px;
+  line-height: 43px;
+  color: #8b8080;
+  text-align: center;
+  border: none;
+  background: transparent;
+  border-radius: 3px;
+  padding: 0 1rem;
   cursor: pointer;
   :hover {
-    background: var(--hover-dasb);
+    background: #e7dbe7;
   }
 `
-const About = () => {
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      occupation: '',
-      about: '',
-      interests: '',
-    },
-    onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
-      console.log('envi', values)
-    },
-  })
-  return (
-    <Container>
-      <Form onSubmit={formik.handlleSubmit}>
-        <ContentAddImage>
-          <Figure>
-            <FaUserAlt />
-          </Figure>
-          <label htmlFor="comPhoto">
-            <input
-              type="file"
-              name="comPhoto"
-              id="comPhoto"
-              accept="image/*"
-              multiple
-            />
-            <AddImage>
-              <BiImageAdd />
-              Añadir imagen de pérfil
-            </AddImage>
-          </label>
-        </ContentAddImage>
-        <InputDashboard
-          placeholder="Un nombre y un Apellido NayruthCalla"
-          textLabel=" Nombre y Apellido para tu portada"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          id={formik.values.name}
-        />
-        <TextareaDashboard
-          placeholder="Apasionada en Desarrollo Javascript React / Web Apps y Automatización con NodeJS"
-          textLabel="¿ A qué te dedicas ?"
-        />
-        <TextareaDashboard
-          placeholder="Hola, soy Nayruth 😄, una desarrolladora 💻 de Perú 🇵🇪. Soy una programodora web [Javascript] me apasiona todo lo relacionado con aplicaciones en tiempo real. Me gusta el cine y los deportes 🏃.
-          Aficionada por el autoaprendizaje y el gran impacto que tiene programar.
-          
-          ¡Hagamos historia!"
-          textLabel="Habla sobre tí"
-          size="big"
-        />
+const ContMore = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem;
+`
+// const Container = styled('article')(
+//   ({ colorBtn }) => css`
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     width: 100%;
+//     max-width: ${colorBtn === 'dasboard' ? '35rem' : '40rem'};
+//     padding: 2rem;
+//     background-color: transparent;
+//     /* background: #ffffff; */
+//     border: ${colorBtn === 'dasboard'
+//       ? '1px solid rgba(143, 3, 3, 0.35)'
+//       : '2px solid rgba(43, 184, 218, 0.5)'};
+//     box-sizing: border-box;
+//     border-radius: 8px;
+//     @media screen and (min-width: 768px) {
+//     }
+//     @media screen and (min-width: 1024px) {
+//       min-width: 35rem;
+//     }
+//   `
+// )
 
-        <InputDashboard
-          placeholder="Que estoy haciendo actualmente"
-          textLabel="Comparte tus intereses"
+const AboutMe = () => {
+  const [more, setMore] = useState(false)
+  const [showCont, setShowCont] = useState(true)
+  const { data, error } = useAboutMe()
+  const [dataAboutM] = useState({
+    firstName: '',
+    profession: '',
+    aboutMeText: '',
+    interests: '',
+    resultLink: [],
+  })
+
+  //   const [dataUser, setDataUser] = useState({ getUser: { userName: '' } })
+  //   const [dataAbout, setDataAbout] = useState({})
+  // const { data } = getUserCurrent()
+  //   const [GetAboutMeByUserName, result] = useAboutByUserName()
+  // console.log(data)
+  const handleMore = () => {
+    setMore(!more)
+    // console.log(more)
+  }
+  //   console.log(data)
+  useEffect(() => {
+    // setDataAboutM(data.getAboutMe)
+  }, [data])
+
+  const edited = async () => {
+    try {
+      //   const resp = await GetAboutMeByUserName({
+      //     variables: { userName: data.getUser.userName },
+      //   })
+      //   setDataAbout(resp.data.getAboutMeByUserName)
+    } catch (e) {
+      // console.log(e)
+    }
+  }
+  //   console.log(dataAbout, dataUser)
+  return (
+    <div>
+      <ContMore>
+        <ButtonRed type="button" onClick={handleMore}>
+          <FaEllipsisH />
+        </ButtonRed>
+        <P>Sobre mí</P>
+      </ContMore>
+      {more ? (
+        <ContentMore>
+          <ButtonMore type="button" onClick={edited}>
+            Editar
+          </ButtonMore>
+          <ButtonMore type="button">Eliminar</ButtonMore>
+        </ContentMore>
+      ) : null}
+      {Object.keys(dataAboutM).length !== 0 ? (
+        <AboutRead
+          userName={dataAboutM.firstName}
+          profession={dataAboutM.profession}
+          about={dataAboutM.aboutMeText}
+          interests={dataAboutM.interests}
+          links={dataAboutM.links}
         />
-        <ContSelect>
-          <Label>Agrega el link de tus Contactos</Label>
-          <ContSocialNetwork>
-            <Select>
-              <Option>Eligir</Option>
-              <Option>Gmail</Option>
-              <Option>LinkedIn</Option>
-              <Option>GitHub</Option>
-              <Option>Instagram</Option>
-              <Option>Facebook</Option>
-            </Select>
-            <InputLink placeholder="Link https://..." />
-            <AddButton>
-              <FaPlus />
-            </AddButton>
-          </ContSocialNetwork>
-        </ContSelect>
-        <SaveButton>Guardar</SaveButton>
-      </Form>
-    </Container>
+      ) : (
+        error
+      )}
+      <CreateAbout showCont={showCont} setShowCont={setShowCont} />
+    </div>
   )
 }
 
-export default About
+export default AboutMe

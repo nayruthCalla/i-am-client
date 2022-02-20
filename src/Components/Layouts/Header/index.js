@@ -81,6 +81,10 @@ const ButtonSign = styled(ButtonLogin)`
 const Header = () => {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
   const navigate = useNavigate()
+  const logoutSess = () => {
+    logout({ returnTo: window.location.origin })
+    localStorage.clear()
+  }
   return (
     <Container>
       <Figure onClick={() => navigate('/')}>
@@ -96,14 +100,10 @@ const Header = () => {
           </LiSec> */}
           {isAuthenticated ? (
             <div>
-              <ButtonLogin onClick={() => navigate('/dasboard')}>
+              <ButtonLogin onClick={() => navigate('/dashboard')}>
                 Mi Panel
               </ButtonLogin>
-              <ButtonLogin
-                onClick={() => logout({ returnTo: window.location.origin })}
-              >
-                Cerrar Sesión
-              </ButtonLogin>
+              <ButtonLogin onClick={logoutSess}>Cerrar Sesión</ButtonLogin>
             </div>
           ) : (
             <ButtonLogin onClick={() => loginWithRedirect()}>

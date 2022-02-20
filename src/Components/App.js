@@ -18,7 +18,7 @@ const App = () => {
       {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/dasboard" element={<Dasboard />} />
+        <Route path="/dashboard" element={<Dasboard />} />
         <Route path="/portfolio" element={<FirstTemplateWeb />} />
 
         {/* <Dasboard /> */}

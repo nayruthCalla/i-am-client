@@ -28,7 +28,7 @@ const Button = styled('button')(
       color: #c54646;
     }
     @media screen and (min-width: 768px) {
-      margin: 0.5rem 0 0.5rem 10%;
+      margin: 0.5rem 0 0.5rem 0;
     }
     @media screen and (min-width: 1024px) {
     }

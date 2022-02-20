@@ -89,19 +89,23 @@ const ADD_USER = gql`
 const Landing = () => {
   const { user, isAuthenticated } = useAuth0()
   const [addUser] = useMutation(ADD_USER)
-
+  // console.log(client)
   useEffect(async () => {
     if (isAuthenticated) {
-      const { data } = await addUser({
-        variables: {
-          name: user.name,
-          nickname: user.nickname,
-          email: user.name,
-        },
-      })
-      console.log('enrtor de use', data)
-      const { token } = data.addUser
-      localStorage.setItem('token', token)
+      try {
+        const { data } = await addUser({
+          variables: {
+            name: user.name,
+            nickname: user.nickname,
+            email: user.name,
+          },
+        })
+
+        const { token } = data.addUser
+        localStorage.setItem('token', token)
+      } catch (e) {
+        // console.log('errores', e)
+      }
     }
   }, [user])
   return (

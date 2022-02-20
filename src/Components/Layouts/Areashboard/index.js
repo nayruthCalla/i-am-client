@@ -26,10 +26,10 @@ const TextArea = styled('textarea')(
     padding: 1.5rem;
     height: ${size === 'big' ? '20rem' : '8rem'};
     resize: none;
+    color: #484747;
     ::placeholder {
       color: rgba(67, 75, 87, 0.45);
     }
-    color: rgba(67, 75, 87, 0.45);
     @media screen and (min-width: 768px) {
     }
     @media screen and (min-width: 1024px) {
@@ -46,11 +46,26 @@ const Label = styled.label`
   text-align: left;
 `
 
-const TextareaDashboard = ({ placeholder, textLabel, size }) => {
+const TextareaDashboard = ({
+  placeholder,
+  textLabel,
+  size,
+  value,
+  onChange,
+  name,
+}) => {
   return (
     <Container>
-      <Label>{textLabel}</Label>
-      <TextArea placeholder={placeholder} size={size} />
+      <Label htmlFor={name}>{textLabel}</Label>
+      <TextArea
+        type="text"
+        placeholder={placeholder}
+        size={size}
+        value={value}
+        onChange={onChange}
+        id={name}
+        name={name}
+      />
     </Container>
   )
 }

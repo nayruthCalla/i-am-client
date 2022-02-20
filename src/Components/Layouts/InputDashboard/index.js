@@ -23,6 +23,7 @@ const Input = styled('input')(
     line-height: 36px;
     padding: 0 1rem;
     text-align: center;
+    color: #484747;
     ::placeholder {
       color: rgba(67, 75, 87, 0.45);
     }
@@ -42,16 +43,17 @@ const Label = styled.label`
   text-align: left;
 `
 
-const InputDashboard = ({ placeholder, textLabel, value, onChange, id }) => {
+const InputDashboard = ({ placeholder, textLabel, value, onChange, name }) => {
   return (
     <Container>
-      <Label htmlFor={value}>{textLabel}</Label>
+      <Label htmlFor={name}>{textLabel}</Label>
       <Input
         type="text"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        id={id}
+        id={name}
+        name={name}
       />
     </Container>
   )

@@ -34,6 +34,7 @@ const Title = styled.p`
   font-size: 30px;
   line-height: 47px;
   color: #a3a8c3;
+  white-space: normal;
 `
 const Description = styled.p`
   font-family: var(--font-saira);
@@ -42,7 +43,7 @@ const Description = styled.p`
   font-size: 15px;
   line-height: 24px;
   text-align: justify;
-
+  white-space: normal;
   color: #a3a8c3;
 `
 const ContLine = styled.div`

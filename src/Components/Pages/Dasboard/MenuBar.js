@@ -40,11 +40,19 @@ const UserPhoto = styled.figure`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 50%;
 `
 const Photo = styled.img`
-  width: 7rem;
+  /* width: 10rem;
   border-radius: 50%;
-  border: 4px solid var(--color-pink-prim);
+  background-color: var(--color-pink-prim);
+  border: 4px solid var(--color-pink-prim); */
+  object-fit: cover;
+  object-position: center center;
+  width: 100px;
+  height: 100px;
+  border-radius: 65px;
+  border: 5px solid #6c646538;
 `
 const Li = styled.li`
   width: 100%;

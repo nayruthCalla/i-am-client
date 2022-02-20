@@ -32,6 +32,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   margin: 0;
+  text-overflow: ellipsis;
 }
 
 code {
@@ -42,6 +43,7 @@ code {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-overflow: ellipsis;
 }
 
 html {
@@ -57,4 +59,8 @@ html {
   min-height: 100vh;
   flex-direction: column;
   margin: 0;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

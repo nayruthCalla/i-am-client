@@ -26,6 +26,7 @@ const Container = styled('article')(
     @media screen and (min-width: 768px) {
     }
     @media screen and (min-width: 1024px) {
+      min-width: 35rem;
     }
   `
 )
@@ -46,7 +47,7 @@ const HeaderCard = styled('header')(
     }
   `
 )
-const ButtonLink = styled('button')(
+const ButtonLink = styled('a')(
   () => css`
     border: none;
     padding: 1rem;
@@ -134,6 +135,7 @@ const CardProyect = ({
   techFirst,
   techSecond,
   level,
+  links,
 }) => {
   const value = useMemo(() => ({ className: 'card-icon' }))
   //   const valueFooter = useMemo(() => ({ className: 'footer-icon' }))
@@ -144,19 +146,26 @@ const CardProyect = ({
           <FaFolderMinus />
         </IconContext.Provider>
         <ContainerBtn>
-          <ButtonLink>
-            <IconContext.Provider value={value}>
-              <FaExternalLinkAlt />
-            </IconContext.Provider>
-          </ButtonLink>
-          <ButtonLink>
-            <IconContext.Provider value={value}>
-              <FaGithub />
-            </IconContext.Provider>
-          </ButtonLink>
+          {links.map((e, i) => (
+            <div key={i}>
+              {e.name === 'Demo' ? (
+                <ButtonLink href={e.link} target="_blank">
+                  <IconContext.Provider value={value}>
+                    <FaExternalLinkAlt />
+                  </IconContext.Provider>
+                </ButtonLink>
+              ) : (
+                <ButtonLink href={e.link} target="_blank">
+                  <IconContext.Provider value={value}>
+                    <FaGithub />
+                  </IconContext.Provider>
+                </ButtonLink>
+              )}
+            </div>
+          ))}
         </ContainerBtn>
       </HeaderCard>
-      <BodyCard>
+      <BodyCard colorBtn={colorBtn}>
         <Title>{title}</Title>
         <Description>{description}</Description>
       </BodyCard>

@@ -7,7 +7,7 @@ import { useFormik } from 'formik'
 // import { FaPlus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import Message from '../../../Layouts/MessageError'
-import { useAddSkill } from './customHooks'
+import { useEditSkill } from './customHooks'
 
 const Container = styled.div`
   display: flex;
@@ -62,13 +62,13 @@ const SaveButton = styled.button`
     flex-direction: row;
   }
 `
-const AddSkill = ({ setAddCard, addCard }) => {
+const EditSkill = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
   // const [textLink, setLinkText] = useState([])
-  const [addSkill] = useAddSkill()
+  const [updateSkill] = useEditSkill()
 
   const formik = useFormik({
     initialValues: {
-      skillName: '',
+      skillName: dataEdited.skillName,
       // inputLink: '',
       // resultLink: textLink,
     },
@@ -78,15 +78,15 @@ const AddSkill = ({ setAddCard, addCard }) => {
         .min(3, 'Puedes poner un nombre más descriptivo'),
     }),
     onSubmit: async (values) => {
-      console.log(values)
+      // console.log(values.skillName)
       try {
         // // console.log(textLink)
-        const { data } = await addSkill({
+        const { data } = await updateSkill({
           variables: {
+            updateSkillId: dataEdited.id,
             skillName: values.skillName,
           },
         })
-
         // setStateForm([])
         console.log(data)
         // if (data.addSkill) {
@@ -101,10 +101,21 @@ const AddSkill = ({ setAddCard, addCard }) => {
       } catch (e) {
         console.log(e)
       }
-      setAddCard(!addCard)
+      // setStateForm([
+      //   ...stateForm,
+      //   {
+      //     userId: '620db8375913666d02a1f5ba',
+      //     proyectName: skillName,
+      //     description: descriptionProyc,
+      //     techFirst,
+      //     techSecond,
+      //     level,
+      //     links: textLink,
+      //   },
+      // ])
+      setAddCardEdit(!addCardEdit)
     },
   })
-  // console.log(addCard)
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
@@ -127,4 +138,4 @@ const AddSkill = ({ setAddCard, addCard }) => {
   )
 }
 
-export default AddSkill
+export default EditSkill

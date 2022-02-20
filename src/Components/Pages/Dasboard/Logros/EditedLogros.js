@@ -6,8 +6,9 @@ import { useFormik } from 'formik'
 // Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
 // import { FaPlus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
+import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
-import { useAddSkill } from './customHooks'
+import { useEditLogro } from './customHooks'
 
 const Container = styled.div`
   display: flex;
@@ -62,31 +63,34 @@ const SaveButton = styled.button`
     flex-direction: row;
   }
 `
-const AddSkill = ({ setAddCard, addCard }) => {
-  // const [textLink, setLinkText] = useState([])
-  const [addSkill] = useAddSkill()
+const AddLogros = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
+  const [updateLogros] = useEditLogro()
 
   const formik = useFormik({
     initialValues: {
-      skillName: '',
-      // inputLink: '',
+      title: dataEdited.title,
+      description: dataEdited.description,
       // resultLink: textLink,
     },
     validationSchema: Yup.object({
-      skillName: Yup.string()
-        .required(':( Escribe el nombre de tu skill!')
-        .min(3, 'Puedes poner un nombre más descriptivo'),
+      title: Yup.string()
+        .required(':( Escribe un título para este logro!')
+        .min(3, 'Puedes poner un título más descriptivo'),
+      description: Yup.string()
+        .required(':( Pon una descripción a este logro')
+        .min(10, 'Destalla más sobre que hiciste en este logro'),
     }),
     onSubmit: async (values) => {
       console.log(values)
       try {
         // // console.log(textLink)
-        const { data } = await addSkill({
+        const { data } = await updateLogros({
           variables: {
-            skillName: values.skillName,
+            updateLogrosId: dataEdited.id,
+            title: values.title,
+            description: values.description,
           },
         })
-
         // setStateForm([])
         console.log(data)
         // if (data.addSkill) {
@@ -101,30 +105,42 @@ const AddSkill = ({ setAddCard, addCard }) => {
       } catch (e) {
         console.log(e)
       }
-      setAddCard(!addCard)
+      setAddCardEdit(!addCardEdit)
     },
   })
-  // console.log(addCard)
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
         <InputDashboard
-          placeholder="Javascript.."
-          textLabel="Nombre de Skill"
-          value={formik.values.skillName}
+          placeholder="Front-end developer en Laboratoria"
+          textLabel="Escribe un título"
+          value={formik.values.title}
           onChange={formik.handleChange}
-          id="skillName"
-          name="skillName"
+          id="title"
+          name="title"
           onBlur={formik.handleBlur}
         />
-        {formik.touched.skillName && formik.errors.skillName ? (
-          <Message text={formik.errors.skillName} />
+        {formik.touched.title && formik.errors.title ? (
+          <Message text={formik.errors.title} />
+        ) : null}
+        <TextareaDashboard
+          placeholder="Bootcamp intensivo en el desarrollo de hábilidades blandas y técnicas para desarrollo web, bajo metodología ágil. Lenguajes: Javascript, HTML5, CSS3."
+          textLabel="Describe brebemente tu experiencia"
+          size="big"
+          value={formik.values.description}
+          onChange={formik.handleChange}
+          id="description"
+          name="description"
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.description && formik.errors.description ? (
+          <Message text={formik.errors.description} />
         ) : null}
 
-        <SaveButton type="submit">Guardar</SaveButton>
+        <SaveButton type="submit">Editar</SaveButton>
       </Form>
     </Container>
   )
 }
 
-export default AddSkill
+export default AddLogros

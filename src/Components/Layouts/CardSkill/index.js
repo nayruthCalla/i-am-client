@@ -8,13 +8,14 @@ const Container = styled('article')(
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: ${colorBtn === 'dasboard' ? '20rem' : '20rem'};
+    /* max-width: ${colorBtn === 'dasboard' ? '20rem' : '20rem'}; */
     background-color: transparent;
     font-family: var(--font-SpaceM);
     font-style: normal;
     font-weight: normal;
     font-size: 2.5rem;
     line-height: 37px;
+    gap: 1rem;
     color: ${colorBtn === 'dasboard' ? '#797770' : 'rgba(204, 204, 204, 0.77)'};
     .card-icon {
       color: ${colorBtn === 'dasboard' ? '#c54646' : '#EFEFEF'};

@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-expressions */
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import styled, { css } from 'styled-components'
+import Swal from 'sweetalert2'
 // import PropTypes from 'prop-types';
 
 // Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
@@ -9,7 +11,8 @@ import { FaPlus, FaMinus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
-import { useAddProyects } from './customHooks'
+import { useEditProyect } from './customHooks'
+import correct from '../../../../assets/correct.gif'
 // import CardProyect from '../../../Layouts/CardProyect'
 
 const Container = styled.div`
@@ -203,22 +206,29 @@ const DivColum = styled.div`
   width: 100%;
 `
 
-const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
-  const [textLink, setLinkText] = useState([])
+const EditedProyect = ({
+  // setStateForm,
+  //   stateForm,
+  dataEdited,
+  setAddCardEdit,
+  addCardEdit,
+}) => {
+  const [textLink, setLinkText] = useState([dataEdited.links])
   const [mess, setMess] = useState(false)
   const [messRequired, setMessRequired] = useState(false)
   const [validateQtyLinks, setValidateQtyLinks] = useState(false)
-  const [AddProyect] = useAddProyects()
+  const [updateProyect] = useEditProyect()
+  const [textSelect, setTextSelect] = useState()
 
   const formik = useFormik({
     initialValues: {
-      nameProyect: '',
-      descriptionProyc: '',
-      techFirst: '',
-      techSecond: '',
-      level: '',
+      nameProyect: dataEdited.proyectName,
+      descriptionProyc: dataEdited.description,
+      techFirst: dataEdited.techFirst,
+      techSecond: dataEdited.techSecond,
+      level: dataEdited.level,
       inputLink: '',
-      linktype: '',
+      linktype: dataEdited.links[0].link,
       resultLink: textLink,
     },
     validationSchema: Yup.object({
@@ -238,15 +248,7 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
         .oneOf(['facil', 'intermedio', 'complejo'], 'Ivalido nivel')
         .required(':( Debes elegir un nivel, para este proyecto'),
       inputLink: Yup.string().url(),
-      linktype: Yup.string()
-        .oneOf(['Demo', 'Repo'], 'Invalid Link Type')
-        .required(':( Debes elegir una cuenta a la que vas a asociar el link'),
-      // resultLink: Yup.string()
-      //   .required(
-      //     ':( Tienes que agregar como mínimo una red para que se contacten contigo!'
-      //   )
-      //   .url()
-      //   .nullable(),
+      linktype: Yup.string(),
     }),
     onSubmit: async ({
       nameProyect,
@@ -255,36 +257,9 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
       techSecond,
       level,
     }) => {
-      try {
-        // console.log(textLink)
-        const dataPost = await AddProyect({
-          variables: {
-            proyectName: nameProyect,
-            description: descriptionProyc,
-            techFirst,
-            techSecond,
-            level,
-            links: textLink,
-          },
-        })
-        setStateForm([])
-        console.log(dataPost)
-        // if (data.addAboutMe) {
-        //   Swal.fire({
-        //     title: 'Excelente!',
-        //     text: 'Tus datos se guardarón exitosamente!',
-        //     imageUrl: `${correct}`,
-        //     imageWidth: 300,
-        //     imageAlt: 'Custom image',
-        //   })
-        // }
-      } catch (e) {
-        console.log(e)
-      }
-      setStateForm([
-        ...stateForm,
-        {
-          userId: '620db8375913666d02a1f5ba',
+      const { data } = await updateProyect({
+        variables: {
+          updateProyectId: dataEdited.id,
           proyectName: nameProyect,
           description: descriptionProyc,
           techFirst,
@@ -292,10 +267,22 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
           level,
           links: textLink,
         },
-      ])
-      setAddCard(!addCard)
+      })
+      // console.log(data.edit)
+      if (data.updateProyect) {
+        await Swal.fire({
+          title: 'Excelente!',
+          text: 'Tus datos se guardarón exitosamente!',
+          imageUrl: `${correct}`,
+          imageWidth: 300,
+          imageAlt: 'Custom image',
+          confirmButtonColor: '#f95a61',
+        })
+      }
+      setAddCardEdit(!addCardEdit)
     },
   })
+  // console.log(dataEdited)
   const handleClick = () => {
     if (formik.values.linktype && formik.values.inputLink) {
       setMessRequired(false)
@@ -334,6 +321,10 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
     setMess(false)
     setValidateQtyLinks(false)
   }
+  useEffect(() => {
+    setLinkText(dataEdited.links)
+    setTextSelect(formik.values.level)
+  }, [])
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
@@ -402,6 +393,9 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
         <Div>
           <ContSelect>
             <Label name="level">¿Que tan complejo fue este proyecto?</Label>
+            <ContPrev>
+              <P>{textSelect}</P>
+            </ContPrev>
             <ContSocialNetwork>
               <SelectLevel
                 label="level"
@@ -474,19 +468,10 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
             ) : null}
           </ContSelect>
         </Div>
-        <SaveButton type="submit">Agregar Proyecto</SaveButton>
+        <SaveButton type="submit">Editar Proyecto</SaveButton>
       </Form>
-      {/* <CardProyect
-        colorBtn="dasboard"
-        title={formik.values.nameProyect}
-        description={formik.values.descriptionProyc}
-        techFirst={formik.values.techFirst}
-        techSecond={formik.values.techSecond}
-        level={formik.values.level}
-        links={textLink}
-      /> */}
     </Container>
   )
 }
 
-export default AddProyectC
+export default EditedProyect

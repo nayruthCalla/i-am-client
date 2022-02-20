@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Header from '../../Layouts/Header'
 import ButtonDashborad from '../../Layouts/ButtonDashborad'
 import Line from '../../Layouts/LineStyle'
+import Username from './Username'
 import About from './About'
 import Proyects from './Proyects'
 import Skills from './Skills'
@@ -49,6 +50,12 @@ const DasBoard = () => {
       <Container>
         <Menu />
         <ContainerCont>
+          <ContMenuButton id="about">
+            <ButtonDashborad text="Mi nombre de usuario" screen="mobile" />
+            <Line />
+            <Username />
+            <Line />
+          </ContMenuButton>
           <ContMenuButton id="about">
             <ButtonDashborad text="Acerca de Mí" screen="mobile" />
             <Line />

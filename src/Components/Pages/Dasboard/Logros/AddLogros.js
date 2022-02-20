@@ -1,16 +1,21 @@
 import styled from 'styled-components'
+import * as Yup from 'yup'
+import { useFormik } from 'formik'
 // import PropTypes from 'prop-types';
 
 // Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
 // import { FaPlus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
+import Message from '../../../Layouts/MessageError'
+import { useAddLogro } from './customHooks'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `
 const Form = styled.form`
   width: 100%;
@@ -51,22 +56,87 @@ const SaveButton = styled.button`
   :hover {
     background: var(--hover-dasb);
   }
+  @media screen and (min-width: 768px) {
+    width: 40%;
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+  }
 `
-const AddLogros = () => {
+const AddLogros = ({ setAddCard, addCard }) => {
+  const [addLogros] = useAddLogro()
+
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      description: '',
+      // resultLink: textLink,
+    },
+    validationSchema: Yup.object({
+      title: Yup.string()
+        .required(':( Escribe un título para este logro!')
+        .min(3, 'Puedes poner un título más descriptivo'),
+      description: Yup.string()
+        .required(':( Pon una descripción a este logro')
+        .min(10, 'Destalla más sobre que hiciste en este logro'),
+    }),
+    onSubmit: async (values) => {
+      console.log(values)
+      try {
+        // // console.log(textLink)
+        const { data } = await addLogros({
+          variables: {
+            title: values.title,
+            description: values.description,
+          },
+        })
+        // setStateForm([])
+        console.log(data)
+        // if (data.addSkill) {
+        //   Swal.fire({
+        //     title: 'Excelente!',
+        //     text: 'Tus datos se guardarón exitosamente!',
+        //     imageUrl: `${correct}`,
+        //     imageWidth: 300,
+        //     imageAlt: 'Custom image',
+        //   })
+        // }
+      } catch (e) {
+        console.log(e)
+      }
+      setAddCard(!addCard)
+    },
+  })
   return (
     <Container>
-      <Form>
+      <Form onSubmit={formik.handleSubmit}>
         <InputDashboard
           placeholder="Front-end developer en Laboratoria"
           textLabel="Escribe un título"
+          value={formik.values.title}
+          onChange={formik.handleChange}
+          id="title"
+          name="title"
+          onBlur={formik.handleBlur}
         />
+        {formik.touched.title && formik.errors.title ? (
+          <Message text={formik.errors.title} />
+        ) : null}
         <TextareaDashboard
           placeholder="Bootcamp intensivo en el desarrollo de hábilidades blandas y técnicas para desarrollo web, bajo metodología ágil. Lenguajes: Javascript, HTML5, CSS3."
           textLabel="Describe brebemente tu experiencia"
           size="big"
+          value={formik.values.description}
+          onChange={formik.handleChange}
+          id="description"
+          name="description"
+          onBlur={formik.handleBlur}
         />
+        {formik.touched.description && formik.errors.description ? (
+          <Message text={formik.errors.description} />
+        ) : null}
 
-        <SaveButton>Guardar</SaveButton>
+        <SaveButton type="submit">Guardar</SaveButton>
       </Form>
     </Container>
   )

@@ -134,14 +134,16 @@ const SaveButton = styled.button`
   display: flex;
   border-radius: 0.8rem;
   gap: 1rem;
-  width: 100%;
+  /* width: 80%; */
   margin: 4rem 0 0 0;
   cursor: pointer;
   :hover {
     background: var(--hover-dasb);
   }
   @media screen and (min-width: 768px) {
-    width: 40%;
+    flex-direction: row;
+    gap: 3rem;
+    width: 35%;
   }
   @media screen and (min-width: 1024px) {
   }
@@ -203,12 +205,12 @@ const DivColum = styled.div`
   width: 100%;
 `
 
-const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
+const AddProyect = ({ setStateForm, stateForm, setAddCard, addCard }) => {
   const [textLink, setLinkText] = useState([])
   const [mess, setMess] = useState(false)
   const [messRequired, setMessRequired] = useState(false)
   const [validateQtyLinks, setValidateQtyLinks] = useState(false)
-  const [AddProyect] = useAddProyects()
+  const [addArrProyects] = useAddProyects()
 
   const formik = useFormik({
     initialValues: {
@@ -257,14 +259,19 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
     }) => {
       try {
         // console.log(textLink)
-        const dataPost = await AddProyect({
+        const dataPost = await addArrProyects({
           variables: {
-            proyectName: nameProyect,
-            description: descriptionProyc,
-            techFirst,
-            techSecond,
-            level,
-            links: textLink,
+            proyects: [
+              {
+                userId: '620db8375913666d02a1f5ba',
+                proyectName: nameProyect,
+                description: descriptionProyc,
+                techFirst,
+                techSecond,
+                level,
+                links: textLink,
+              },
+            ],
           },
         })
         setStateForm([])
@@ -489,4 +496,4 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
   )
 }
 
-export default AddProyectC
+export default AddProyect
