@@ -81,14 +81,14 @@ const EditSkill = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
       // console.log(values.skillName)
       try {
         // // console.log(textLink)
-        const { data } = await updateSkill({
+        await updateSkill({
           variables: {
             updateSkillId: dataEdited.id,
             skillName: values.skillName,
           },
         })
         // setStateForm([])
-        console.log(data)
+        // console.log(data)
         // if (data.addSkill) {
         //   Swal.fire({
         //     title: 'Excelente!',
@@ -99,7 +99,7 @@ const EditSkill = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
         //   })
         // }
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
       // setStateForm([
       //   ...stateForm,

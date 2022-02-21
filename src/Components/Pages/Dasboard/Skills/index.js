@@ -143,7 +143,7 @@ const Skills = () => {
     setColor(!colorPrev)
   }
   const handleEdit = async (items) => {
-    console.log(items)
+    // console.log(items)
     setEdited(items)
     // setAddCard(!addCard)
     setAddCardEdit(!addCardEdit)

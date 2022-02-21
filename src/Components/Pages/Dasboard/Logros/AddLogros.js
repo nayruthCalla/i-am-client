@@ -81,17 +81,17 @@ const AddLogros = ({ setAddCard, addCard }) => {
         .min(10, 'Destalla más sobre que hiciste en este logro'),
     }),
     onSubmit: async (values) => {
-      console.log(values)
+      // console.log(values)
       try {
         // // console.log(textLink)
-        const { data } = await addLogros({
+        await addLogros({
           variables: {
             title: values.title,
             description: values.description,
           },
         })
         // setStateForm([])
-        console.log(data)
+        // console.log(data)
         // if (data.addSkill) {
         //   Swal.fire({
         //     title: 'Excelente!',
@@ -102,7 +102,7 @@ const AddLogros = ({ setAddCard, addCard }) => {
         //   })
         // }
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
       setAddCard(!addCard)
     },

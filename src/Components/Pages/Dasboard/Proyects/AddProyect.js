@@ -257,7 +257,7 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
     }) => {
       try {
         // console.log(textLink)
-        const dataPost = await AddProyect({
+        await AddProyect({
           variables: {
             proyectName: nameProyect,
             description: descriptionProyc,
@@ -268,7 +268,7 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
           },
         })
         setStateForm([])
-        console.log(dataPost)
+        // console.log(dataPost)
         // if (data.addAboutMe) {
         //   Swal.fire({
         //     title: 'Excelente!',
@@ -279,7 +279,7 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
         //   })
         // }
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
       setStateForm([
         ...stateForm,

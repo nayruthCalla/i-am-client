@@ -81,10 +81,10 @@ const AddLogros = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
         .min(10, 'Destalla más sobre que hiciste en este logro'),
     }),
     onSubmit: async (values) => {
-      console.log(values)
+      // console.log(values)
       try {
         // // console.log(textLink)
-        const { data } = await updateLogros({
+        await updateLogros({
           variables: {
             updateLogrosId: dataEdited.id,
             title: values.title,
@@ -92,7 +92,7 @@ const AddLogros = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
           },
         })
         // setStateForm([])
-        console.log(data)
+        // console.log(data)
         // if (data.addSkill) {
         //   Swal.fire({
         //     title: 'Excelente!',
@@ -103,7 +103,7 @@ const AddLogros = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
         //   })
         // }
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
       setAddCardEdit(!addCardEdit)
     },

@@ -78,17 +78,17 @@ const AddSkill = ({ setAddCard, addCard }) => {
         .min(3, 'Puedes poner un nombre más descriptivo'),
     }),
     onSubmit: async (values) => {
-      console.log(values)
+      // console.log(values)
       try {
         // // console.log(textLink)
-        const { data } = await addSkill({
+        await addSkill({
           variables: {
             skillName: values.skillName,
           },
         })
 
         // setStateForm([])
-        console.log(data)
+        // console.log(data)
         // if (data.addSkill) {
         //   Swal.fire({
         //     title: 'Excelente!',
@@ -99,7 +99,7 @@ const AddSkill = ({ setAddCard, addCard }) => {
         //   })
         // }
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
       setAddCard(!addCard)
     },

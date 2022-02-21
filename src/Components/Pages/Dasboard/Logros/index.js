@@ -133,7 +133,7 @@ const Logros = () => {
   const [addCardEdit, setAddCardEdit] = useState(false)
   const [deleteLogros] = useDeleteLogro()
 
-  console.log(edited)
+  // console.log(edited)
   const handleMore = () => {
     setMore(!more)
     // setColor(!colorPrev)
