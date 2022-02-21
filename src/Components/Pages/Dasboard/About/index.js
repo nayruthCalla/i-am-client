@@ -125,7 +125,7 @@ const AboutMe = () => {
   //   const [dataAbout, setDataAbout] = useState({})
   // const { data } = getUserCurrent()
   //   const [GetAboutMeByUserName, result] = useAboutByUserName()
-  console.log(edited)
+  // console.log(edited)
   const handleMore = () => {
     setMore(!more)
     // console.log(more)
@@ -136,7 +136,7 @@ const AboutMe = () => {
   // }, [data])
 
   const handleEdit = async (items) => {
-    console.log(items)
+    // console.log(items)
     setEdited(items)
     // setAddCard(!addCard)
     setAddCardEdit(!addCardEdit)

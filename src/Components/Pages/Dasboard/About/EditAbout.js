@@ -216,7 +216,7 @@ const SaveButton = styled.button`
 `
 
 const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
-  console.log(dataEdited.socialNetworks)
+  // console.log(dataEdited.socialNetworks)
   const [url, setLink] = useState(true)
   const [textLink, setLinkText] = useState([dataEdited.socialNetworks])
   const [updateAboutMe] = useEditAbout()
