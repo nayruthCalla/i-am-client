@@ -147,7 +147,7 @@ const Username = () => {
                   href={`https://iAm.netlify.com/${e.userName}`}
                   target="_blank"
                 >
-                  https://iAm.netlify.com/{e.userName}
+                  https://iamp.netlify.app/{e.userName}
                 </P>
               )}
             </div>
