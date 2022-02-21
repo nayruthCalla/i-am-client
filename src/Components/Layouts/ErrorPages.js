@@ -1,54 +1,41 @@
 /* eslint-disable no-undef */
-import { GiCoffeeCup } from 'react-icons/gi'
+
 import styled from 'styled-components'
+import error from '../../assets/error.gif'
+import Footer from './Footer'
+import Header from './Header'
 
-const Container = styled.div``
-const Message = styled.p``
-const Form = styled.form``
-const Button = styled.button`
-  border: none;
-  background: none;
-  color: var(--principal-color);
-  font-size: 2.8rem;
-  margin-left: 10px;
-  cursor: pointer;
-  &:hover {
-    color: #29ace094;
-  }
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 `
+const Image = styled.img``
+// const Message = styled.p``
+// const Form = styled.form``
+// const Button = styled.button`
+//   border: none;
+//   background: none;
+//   color: var(--principal-color);
+//   font-size: 2.8rem;
+//   margin-left: 10px;
+//   cursor: pointer;
+//   &:hover {
+//     color: #29ace094;
+//   }
+// `
 
-const Payment = () => {
-  const [message, setMessage] = useState('')
-  const baseURL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8081'
-  const action = `${baseURL}api/payment/create-checkout-session`
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search)
-
-    if (query.get('success')) {
-      setMessage('Order placed! You will receive an email confirmation.')
-    }
-
-    if (query.get('canceled')) {
-      setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      )
-    }
-  }, [])
-
+const Error = () => {
   return (
-    <Container>
-      {message ? (
-        <Message>{message}</Message>
-      ) : (
-        <Form data-test="donate" action={action} method="POST">
-          <Button type="submit">
-            <GiCoffeeCup />
-          </Button>
-        </Form>
-      )}
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Image src={error} />
+      </Container>
+      <Footer />
+    </>
   )
 }
-export default Payment
+export default Error

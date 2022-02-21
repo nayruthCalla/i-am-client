@@ -90,6 +90,7 @@ const Desc = styled.p`
   align-items: center;
   text-align: justify;
   color: #3e3f3a;
+  white-space: normal;
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1024px) {
@@ -103,6 +104,7 @@ const TextFooter = styled(Desc)`
   font-weight: bold;
   font-style: normal;
   color: #3e3f3ab8;
+  white-space: normal;
 `
 
 // say

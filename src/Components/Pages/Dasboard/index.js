@@ -77,9 +77,9 @@ const DasBoard = () => {
             <Line />
             <Logros />
           </ContMenuButton>
-          <ContMenuButton>
+          {/* <ContMenuButton>
             <ButtonDashborad text="Mi CV" screen="mobile" />
-          </ContMenuButton>
+          </ContMenuButton> */}
         </ContainerCont>
       </Container>
     </>
