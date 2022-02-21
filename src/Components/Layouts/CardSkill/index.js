@@ -8,7 +8,8 @@ const Container = styled('article')(
     display: flex;
     align-items: center;
     width: 100%;
-    /* max-width: ${colorBtn === 'dasboard' ? '20rem' : '20rem'}; */
+    /* max-width: ${colorBtn === 'dasboard' ? '' : '20rem'}; */
+    width: auto;
     background-color: transparent;
     font-family: var(--font-SpaceM);
     font-style: normal;
@@ -32,7 +33,9 @@ const Container = styled('article')(
   `
 )
 
-const Text = styled.p``
+const Text = styled.p`
+  white-space: normal;
+`
 
 const CardSkill = ({ colorBtn, text }) => {
   const value = useMemo(() => ({ className: 'card-icon' }))

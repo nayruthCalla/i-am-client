@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import {
+  FaGithub,
+  FaLinkedin,
+  FaRegEnvelopeOpen,
+  FaFacebookSquare,
+  FaInstagram,
+  FaSquarespace,
+} from 'react-icons/fa'
+// import LinksCompnent from '../../Layouts/LinksRedes'
 
 const Container = styled.section`
   /* margin-top: 31rem; */
@@ -10,7 +18,10 @@ const Container = styled.section`
   gap: 2rem;
   padding: 2rem 3rem;
   width: 100%;
+
   @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
     flex-direction: row-reverse;
     min-height: 100vh;
     padding: 2rem 8rem;
@@ -27,9 +38,10 @@ const ContWlcome = styled.div`
   }
 `
 const ContWlcomeSecond = styled(ContWlcome)`
+  width: fit-content;
   @media screen and (min-width: 768px) {
     align-items: flex-start;
-    width: 70%;
+    /* width: 70%; */
   }
 `
 const Figure = styled.figure`
@@ -86,6 +98,13 @@ const Name = styled.h1`
   font-family: var(--font-SpaceM);
   color: #ffffff;
   font-size: 6rem;
+  width: 100%;
+  /* min-width: 40px; */
+  white-space: normal;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   @media screen and (min-width: 768px) {
     font-size: 8rem;
   }
@@ -109,7 +128,40 @@ const ButtonContc = styled.button`
   color: #2bb8da;
 `
 
-const Hero = ({ photo, linkGit, linkLinke, userName, description }) => {
+const Hero = ({ photo, links, userName, description }) => {
+  // console.log(links)
+  const selectLink = (Arrlink) => {
+    if (Arrlink.length > 1) {
+      const filtLink = Arrlink.filter(
+        (e) => e.name === 'github' || e.name === 'linkedin'
+      )
+      if (filtLink.length > 0) {
+        return filtLink
+      }
+      const sliceLink = Arrlink.slice(0, 2)
+      return sliceLink
+    }
+    return Arrlink
+  }
+  // console.log(selectLink(links))
+  const iconSocialNetwor = (nameIcon) => {
+    if (nameIcon === 'github') {
+      return <FaGithub />
+    }
+    if (nameIcon === 'linkedin') {
+      return <FaLinkedin />
+    }
+    if (nameIcon === 'gmail') {
+      return <FaRegEnvelopeOpen />
+    }
+    if (nameIcon === 'instagram') {
+      return <FaInstagram />
+    }
+    if (nameIcon === 'facebook') {
+      return <FaFacebookSquare />
+    }
+    return <FaSquarespace />
+  }
   return (
     <Container>
       <ContWlcome>
@@ -117,12 +169,11 @@ const Hero = ({ photo, linkGit, linkLinke, userName, description }) => {
           <Image src={photo} />
         </Figure>
         <FooterDataContainer>
-          <FooterLink href={linkGit}>
-            <FaGithub />
-          </FooterLink>
-          <FooterLink href={linkLinke}>
-            <FaLinkedin />
-          </FooterLink>
+          {selectLink(links).map((e, i) => (
+            <FooterLink key={i} href={e.link} target="_blank">
+              {iconSocialNetwor(e.name)}
+            </FooterLink>
+          ))}
         </FooterDataContainer>
       </ContWlcome>
       <ContWlcomeSecond>

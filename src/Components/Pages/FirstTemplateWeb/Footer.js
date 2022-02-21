@@ -60,6 +60,7 @@ const Text = styled.p`
   line-height: 24px;
   text-align: center;
   color: #a3a8c3;
+  white-space: normal;
 `
 const ButtonContc = styled.button`
   background: #120e26;
@@ -74,6 +75,12 @@ const ButtonContc = styled.button`
   padding: 0 3rem;
   color: #2bb8da;
 `
+const ContText = styled.div`
+  @media screen and (min-width: 768px) {
+    width: 50%;
+    /* justify-content: flex-start; */
+  }
+`
 
 const Skills = () => {
   return (
@@ -85,11 +92,14 @@ const Skills = () => {
         <Line />
       </ContSectionTitle>
       <Title>Ponernos en contacto</Title>
-      <Text>
-        Aunque actualmente no estoy buscando nuevas oportunidades, mi bandeja de
-        entrada siempre está abierta. Ya sea que tenga una pregunta o
-        simplemente quiera saludar, ¡haré todo lo posible para responderle!
-      </Text>
+      <ContText>
+        <Text>
+          Mi bandeja de entrada siempre está abierta. Ya sea que tenga una
+          pregunta o simplemente quiera saludar, ¡haré todo lo posible para
+          responderle!
+        </Text>
+      </ContText>
+
       <ButtonContc>Dí Hola</ButtonContc>
     </Container>
   )

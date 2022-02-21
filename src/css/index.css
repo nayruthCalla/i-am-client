@@ -22,19 +22,6 @@
   --secondarey-font-size: 1.8rem;
 }
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  margin: 0;
-  text-overflow: ellipsis;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -53,7 +40,18 @@ html {
   flex-direction: column;
   margin: 0;
 }
-
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+  text-overflow: ellipsis;
+  font-size: 2.5rem;
+}
 #root {
   display: flex;
   min-height: 100vh;

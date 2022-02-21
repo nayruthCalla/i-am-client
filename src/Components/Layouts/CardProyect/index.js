@@ -16,7 +16,9 @@ const Container = styled('article')(
     width: 100%;
     max-width: ${colorBtn === 'dasboard' ? '35rem' : '40rem'};
     padding: 2rem;
-    background-color: transparent;
+    background-color: ${colorBtn === 'dasboard'
+      ? 'transparent'
+      : 'rgb(26, 19, 54)'};
     /* background: #ffffff; */
     border: ${colorBtn === 'dasboard'
       ? '1px solid rgba(143, 3, 3, 0.35)'
@@ -90,6 +92,12 @@ const Title = styled.h2`
   font-size: 3rem;
   line-height: 47px;
   text-align: justify;
+  white-space: normal;
+  white-space: normal;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `
 const Description = styled.p`
   font-style: normal;
@@ -97,6 +105,12 @@ const Description = styled.p`
   font-size: 1.7rem;
   line-height: 24px;
   text-align: justify;
+  white-space: normal;
+  white-space: normal;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `
 const FooterCard = styled('div')(
   ({ colorBtn }) => css`
@@ -127,7 +141,13 @@ const ContText = styled.div`
   display: flex;
   gap: 1.5rem;
 `
-const TextFooter = styled.p``
+const TextFooter = styled.p`
+  white-space: normal;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`
 const CardProyect = ({
   colorBtn,
   title,

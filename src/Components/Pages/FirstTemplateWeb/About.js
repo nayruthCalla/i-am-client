@@ -1,13 +1,15 @@
-import { useMemo } from 'react'
-import { IconContext } from 'react-icons'
+// import { useMemo } from 'react'
+// import { IconContext } from 'react-icons'
 import styled from 'styled-components'
+
 import {
-  FaGithub,
-  FaLinkedin,
-  FaRegEnvelopeOpen,
+  // FaGithub,
+  // FaLinkedin,
+  // FaRegEnvelopeOpen,
   FaChevronRight,
   FaLink,
 } from 'react-icons/fa'
+import LinksCompnent from '../../Layouts/LinksRedes'
 
 const Container = styled.section`
   /* margin-top: 31rem; */
@@ -50,6 +52,7 @@ const Greet = styled.p`
   font-size: 2rem;
   line-height: 37px;
   color: #ffffff;
+  white-space: normal;
 `
 const AboutMe = styled(Greet)`
   color: rgb(163, 168, 195);
@@ -74,33 +77,33 @@ const FooterDataContainer = styled.div`
   }
 `
 
-const FooterLink = styled.a`
-  font-family: var(--font-SpaceM);
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.8rem;
-  line-height: 37px;
-  color: rgba(204, 204, 204, 0.77);
-  background: #000000;
-  width: fit-content;
-  padding: 0 1.5rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  :hover {
-    color: #2bb8da;
-  }
-  .icon {
-    color: #ffffffba;
-    font-size: 2rem;
-  }
-  @media screen and (min-width: 768px) {
-    padding: 0px 20px;
-  }
-`
+// const FooterLink = styled.a`
+//   font-family: var(--font-SpaceM);
+//   font-style: normal;
+//   font-weight: normal;
+//   font-size: 1.8rem;
+//   line-height: 37px;
+//   color: rgba(204, 204, 204, 0.77);
+//   background: #000000;
+//   width: fit-content;
+//   padding: 0 1.5rem;
+//   display: flex;
+//   gap: 1rem;
+//   align-items: center;
+//   :hover {
+//     color: #2bb8da;
+//   }
+//   .icon {
+//     color: #ffffffba;
+//     font-size: 2rem;
+//   }
+//   @media screen and (min-width: 768px) {
+//     padding: 0px 20px;
+//   }
+// `
 
-const About = ({ linkGit, linkLinke, aboutMe, firstChractr }) => {
-  const value = useMemo(() => ({ className: 'icon' }))
+const About = ({ links, aboutMe, firstChractr }) => {
+  // const value = useMemo(() => ({ className: 'icon' }))
   return (
     <Container id="about">
       <ContSectionTitle>
@@ -121,7 +124,8 @@ const About = ({ linkGit, linkLinke, aboutMe, firstChractr }) => {
         Contáctame conmingo
       </TitleSocialNet>
       <FooterDataContainer>
-        <FooterLink href={linkGit}>
+        <LinksCompnent links={links} />
+        {/* <FooterLink href={linkGit}>
           <IconContext.Provider value={value}>
             <FaRegEnvelopeOpen />
           </IconContext.Provider>
@@ -138,7 +142,7 @@ const About = ({ linkGit, linkLinke, aboutMe, firstChractr }) => {
             <FaLinkedin />
           </IconContext.Provider>
           LinkedIn
-        </FooterLink>
+        </FooterLink> */}
       </FooterDataContainer>
     </Container>
   )

@@ -16,7 +16,12 @@ const Container = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 0;
+  padding: 6.5rem 0;
+  @media screen and (min-width: 768px) {
+    height: 100vh;
+  }
+  @media screen and (min-width: 1024px) {
+  }
 `
 const ContainerUsername = styled.div`
   display: flex;
@@ -50,7 +55,7 @@ const AddButton = styled.button`
     background: var(--hover-dasb);
   }
 `
-const P = styled.p`
+const P = styled.a`
   font-family: var(--font-Dongle);
   font-style: normal;
   font-weight: bold;
@@ -138,7 +143,12 @@ const Username = () => {
                   </AddButton>
                 </>
               ) : (
-                <P>https://iAm.netlify.com/{e.userName}</P>
+                <P
+                  href={`https://iAm.netlify.com/${e.userName}`}
+                  target="_blank"
+                >
+                  https://iAm.netlify.com/{e.userName}
+                </P>
               )}
             </div>
           ))}

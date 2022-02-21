@@ -1,4 +1,8 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-constant-condition */
+/* eslint-disable react/jsx-no-useless-fragment */
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
 import Header from './Header'
 import Hero from './Hero'
 import About from './About'
@@ -7,6 +11,7 @@ import Skills from './Skills'
 import Logros from './Logros'
 import Footer from './Footer'
 import user from '../../../assets/user.gif'
+import { useGetProfileUser } from './Data/customHooks'
 
 const Container = styled.div`
   display: flex;
@@ -25,31 +30,47 @@ const TextFooter = styled.p`
   color: #a3a8c3;
 `
 const PortflTamplate = () => {
+  const { userName } = useParams()
+  const { data } = useGetProfileUser(userName)
+
   return (
     <Container>
-      <Header userName="Nayruth Calla" />
-      <Hero
-        photo={user}
-        linkGit="https://www.linkedin.com/"
-        linkLinke="https://www.linkedin.com/"
-        userName="Nayruth Calla"
-        description="Apasionada en Desarrollo Javascript Java / Kotlin & JS Web Apps y Automatización con NodeJS"
-      />
-      <About
-        aboutMe="Hola, soy Nayruth 😄, una desarrolladora 💻 de Perú 🇵🇪. Soy una programodora web [Javascript] me apasiona todo lo relacionado con aplicaciones en tiempo real. Me gusta el cine y los deportes 🏃.
-Aficionada por el autoaprendizaje y el gran impacto que tiene programar.
+      {data?.getProfileUserAbout.length > 0 ? (
+        <>
+          {data?.getProfileUserAbout.map((e, i) => (
+            <div key={i}>
+              <Header userName={e.firstName} />
+              <Hero
+                photo={user}
+                linkGit="https://www.linkedin.com/"
+                linkLinke="https://www.linkedin.com/"
+                userName={e.firstName}
+                description={e.profession}
+                links={e.socialNetworks}
+              />
+              <About
+                aboutMe={e.aboutMeText}
+                firstChractr={e.interests}
+                links={e.socialNetworks}
+              />
+            </div>
+          ))}
+        </>
+      ) : null}
+      {data?.getProfileUserProyect.length > 0 ? (
+        <Proyects proyects={data?.getProfileUserProyect} />
+      ) : null}
+      {data?.getProfileUserSkill.length > 0 ? (
+        <Skills skills={data?.getProfileUserSkill} />
+      ) : null}
+      {data?.getProfileUserLogros.length > 0 ? (
+        <Logros logros={data?.getProfileUserLogros} />
+      ) : null}
 
-¡Hagamos historia!"
-        firstChractr="👩💻 Actualmente estoy trabajando en la aplicación web con React y Node"
-        secondChractr="🌱 Actualmente estoy aprendiendo MongoDb Express Android Nodejs y Google AppScript."
-      />
-      <Proyects />
-      <Skills />
-      <Logros />
       <Footer />
 
-      <TextFooter>© 2022 Nayruth Calla</TextFooter>
-      <TextFooter>Desarrollado por Iam</TextFooter>
+      <TextFooter>© 2022 {userName}</TextFooter>
+      <TextFooter>Desarrollado por © 2022 Nayruth Calla - i-Am</TextFooter>
     </Container>
   )
 }

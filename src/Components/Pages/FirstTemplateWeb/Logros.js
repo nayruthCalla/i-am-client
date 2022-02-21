@@ -49,7 +49,7 @@ const ContainerLogros = styled.div`
   @media screen and (min-width: 1024px) {
   }
 `
-const Logros = () => {
+const Logros = ({ logros }) => {
   return (
     <Container id="logros">
       <ContSectionTitle>
@@ -59,21 +59,14 @@ const Logros = () => {
         <Line />
       </ContSectionTitle>
       <ContainerLogros>
-        <CardLogros
-          colorBtn="template"
-          title="Front-end developer en Laboratoria"
-          description="Bootcamp intensivo en el desarrollo de hábilidades blandas y técnicas para desarrollo web, bajo metodología ágil. Lenguajes: Javascript, HTML5, CSS3."
-        />
-        <CardLogros
-          colorBtn="template"
-          title="Front-end developer en Laboratoria"
-          description="Bootcamp intensivo en el desarrollo de hábilidades blandas y técnicas para desarrollo web, bajo metodología ágil. Lenguajes: Javascript, HTML5, CSS3."
-        />
-        <CardLogros
-          colorBtn="template"
-          title="Front-end developer en Laboratoria"
-          description="Bootcamp intensivo en el desarrollo de hábilidades blandas y técnicas para desarrollo web, bajo metodología ágil. Lenguajes: Javascript, HTML5, CSS3."
-        />
+        {logros?.map((e, i) => (
+          <CardLogros
+            key={i}
+            colorBtn="template"
+            title={e.title}
+            description={e.description}
+          />
+        ))}
       </ContainerLogros>
     </Container>
   )

@@ -11,7 +11,7 @@ import {
   FaFileAlt,
 } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
-// import userdefault from '../../../assets/user.gif'
+import userdefault from '../../../assets/user.gif'
 
 const MenuBar = styled.nav`
   background: rgba(196, 196, 196, 0.1);
@@ -81,55 +81,55 @@ const DasBoard = () => {
   const { user, isAuthenticated, isLoading } = useAuth0()
   const value = useMemo(() => ({ className: 'icon-button' }))
   if (isLoading) {
-    return <div>Loading ...</div>
+    return <MenuBar> ... </MenuBar>
   }
   return (
-    isAuthenticated && (
-      <MenuBar>
-        <UserPhoto>
-          <Photo src={user.picture} />
-          <UserName>{user.name}</UserName>
-        </UserPhoto>
-        <Ul>
-          <Li>
-            <IconContext.Provider value={value}>
-              <FaExternalLinkAlt />
-            </IconContext.Provider>
-            <Link href="#userName">Mi Link</Link>
-          </Li>
-          <Li>
-            <IconContext.Provider value={value}>
-              <FaUserAlt />
-            </IconContext.Provider>
-            <Link href="#about">Acerca de mí</Link>
-          </Li>
-          <Li>
-            <IconContext.Provider value={value}>
-              <FaElementor />
-            </IconContext.Provider>
-            <Link href="#proyects">Mis Proyectos</Link>
-          </Li>
-          <Li>
-            <IconContext.Provider value={value}>
-              <FaMedal />
-            </IconContext.Provider>
-            <Link href="#skills">Mis Skills</Link>
-          </Li>
-          <Li>
-            <IconContext.Provider value={value}>
-              <FaChild />
-            </IconContext.Provider>
-            <Link href="#logros">Mis Logros</Link>
-          </Li>
-          <Li>
-            <IconContext.Provider value={value}>
-              <FaFileAlt />
-            </IconContext.Provider>
-            <Link href="#cv">Mi CV</Link>
-          </Li>
-        </Ul>
-      </MenuBar>
-    )
+    // isAuthenticated && (
+    <MenuBar>
+      <UserPhoto>
+        <Photo src={isAuthenticated ? user.picture : userdefault} />
+        <UserName>{user.name}</UserName>
+      </UserPhoto>
+      <Ul>
+        <Li>
+          <IconContext.Provider value={value}>
+            <FaExternalLinkAlt />
+          </IconContext.Provider>
+          <Link href="#userName">Mi Link</Link>
+        </Li>
+        <Li>
+          <IconContext.Provider value={value}>
+            <FaUserAlt />
+          </IconContext.Provider>
+          <Link href="#about">Acerca de mí</Link>
+        </Li>
+        <Li>
+          <IconContext.Provider value={value}>
+            <FaElementor />
+          </IconContext.Provider>
+          <Link href="#proyects">Mis Proyectos</Link>
+        </Li>
+        <Li>
+          <IconContext.Provider value={value}>
+            <FaMedal />
+          </IconContext.Provider>
+          <Link href="#skills">Mis Skills</Link>
+        </Li>
+        <Li>
+          <IconContext.Provider value={value}>
+            <FaChild />
+          </IconContext.Provider>
+          <Link href="#logros">Mis Logros</Link>
+        </Li>
+        <Li>
+          <IconContext.Provider value={value}>
+            <FaFileAlt />
+          </IconContext.Provider>
+          <Link href="#cv">Mi CV</Link>
+        </Li>
+      </Ul>
+    </MenuBar>
+    // )
   )
 }
 

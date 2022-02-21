@@ -42,15 +42,17 @@ const ContainerSkills = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 5rem;
+
   @media screen and (min-width: 768px) {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
   }
   @media screen and (min-width: 1024px) {
   }
 `
-const Skills = () => {
+const Skills = ({ skills }) => {
   return (
     <Container id="skills">
       <ContSectionTitle>
@@ -60,10 +62,9 @@ const Skills = () => {
         <Line />
       </ContSectionTitle>
       <ContainerSkills>
-        <CardSkill colorBtn="template" text="Javascript" />
-        <CardSkill colorBtn="template" text="Javascript" />
-        <CardSkill colorBtn="template" text="Javascript" />
-        <CardSkill colorBtn="template" text="Javascript" />
+        {skills?.map((e, i) => (
+          <CardSkill key={i} colorBtn="template" text={e.skillName} />
+        ))}
       </ContainerSkills>
     </Container>
   )

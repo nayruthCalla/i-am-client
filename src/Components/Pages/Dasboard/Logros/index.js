@@ -14,7 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 0;
+  padding: 6.5rem 0;
 `
 const ContainerLogros = styled.div`
   display: flex;

@@ -25,8 +25,7 @@ const Container = styled.div`
 `
 const ContMenuButton = styled.div`
   @media screen and (min-width: 768px) {
-    /* height: 100vh; */
-    /* padding: 2rem 8rem; */
+    min-height: 100vh;
   }
 `
 

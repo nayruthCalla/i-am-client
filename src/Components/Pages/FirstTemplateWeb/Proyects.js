@@ -49,7 +49,7 @@ const ContainerProyects = styled.div`
   @media screen and (min-width: 1024px) {
   }
 `
-const Proyects = () => {
+const Proyects = ({ proyects }) => {
   return (
     <Container id="proyects">
       <ContSectionTitle>
@@ -58,31 +58,20 @@ const Proyects = () => {
         </SectionTitle>
         <Line />
       </ContSectionTitle>
+
       <ContainerProyects>
-        <CardProyect
-          colorBtn="template"
-          title="Burguer Queen"
-          description="Aplicación educativa de Android que agrega la interfaz de usuario de la aplicación Design Course"
-          techFirst="React"
-          techSecond="Graphql"
-          level="Intermedio"
-        />
-        <CardProyect
-          colorBtn="template"
-          title="Burguer Queen"
-          description="Aplicación educativa de Android que agrega la interfaz de usuario de la aplicación Design Course"
-          techFirst="React"
-          techSecond="Graphql"
-          level="Intermedio"
-        />
-        <CardProyect
-          colorBtn="template"
-          title="Burguer Queen"
-          description="Aplicación educativa de Android que agrega la interfaz de usuario de la aplicación Design Course"
-          techFirst="React"
-          techSecond="Graphql"
-          level="Intermedio"
-        />
+        {proyects?.map((e, i) => (
+          <CardProyect
+            key={i}
+            colorBtn="template"
+            title={e.proyectName}
+            description={e.description}
+            techFirst={e.techFirst}
+            techSecond={e.techSecond}
+            level={e.level}
+            links={e.links}
+          />
+        ))}
       </ContainerProyects>
     </Container>
   )
