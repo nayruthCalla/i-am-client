@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import styled, { css } from 'styled-components'
-// import PropTypes from 'prop-types';
+import { AdvancedImage } from '@cloudinary/react'
+import { Cloudinary } from '@cloudinary/url-gen'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import Axios from 'axios'
 
 // Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
 import { BiImageAdd } from 'react-icons/bi'
@@ -221,6 +223,8 @@ const About = ({ showCont, setShowCont }) => {
   const [addAboutMe] = useAddAbout()
   const [url, setLink] = useState(true)
   const [textLink, setLinkText] = useState([])
+  const [imgAdd, setImgAdd] = useState('')
+  const [imgPerfil, setImgPerfil] = useState('')
 
   const formik = useFormik({
     initialValues: {
@@ -268,7 +272,7 @@ const About = ({ showCont, setShowCont }) => {
             aboutMeText: values.aboutMe,
             interests: values.interests,
             socialNetworks: textLink,
-            photo: '',
+            photo: imgPerfil,
           },
         })
         // console.log(data.addAboutMe)
@@ -301,9 +305,37 @@ const About = ({ showCont, setShowCont }) => {
     // console.log(filterLinks)
     setLinkText(filterLinks)
   }
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'demo',
+    },
+  })
+  const uploadImage = async () => {
+    // console.log(er[0])
+    try {
+      const formData = new FormData()
+      formData.append('file', imgAdd)
+      formData.append('upload_preset', 'hy996ubi')
+
+      const imgResul = await Axios.post(
+        'https://api.cloudinary.com/v1_1/drcn7ijzl/image/upload',
+        formData
+      )
+      setImgPerfil(imgResul)
+      // console.log(imgAdd, imgResul)
+    } catch (e) {
+      // console.log(e)
+    }
+
+    // .then((response) => console.log('Success:', response))
+    // .catch((e) => console.log('e', e))
+  }
+  // console.log(imgAdd)
+  const myImage = cld.image('sample')
   // useEffect(() => {}, [textLink])
   return (
     <Container>
+      <AdvancedImage cldImg={myImage} />
       <Form onSubmit={formik.handleSubmit}>
         <ContentAddImage>
           <Figure>
@@ -316,9 +348,13 @@ const About = ({ showCont, setShowCont }) => {
               id="comPhoto"
               accept="image/*"
               multiple
+              onChange={(e) => {
+                // uploadImage(e.target.files)
+                setImgAdd(e.target.files[0])
+              }}
             />
             <AddImage>
-              <BiImageAdd />
+              <BiImageAdd type="button" onClick={() => uploadImage} />
               Añadir imagen de pérfil
             </AddImage>
           </label>

@@ -28,8 +28,7 @@ const ContainerUsername = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 3rem;
-  padding: 0 4rem 3rem 4rem;
-  width: 50%;
+  padding: 0 0 3rem 0;
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1024px) {
@@ -48,7 +47,6 @@ const AddButton = styled.button`
   border-radius: 0.8rem;
   gap: 1rem;
   width: 100%;
-  max-width: 25rem;
   justify-content: center;
   cursor: pointer;
   :hover {
@@ -144,10 +142,10 @@ const Username = () => {
                 </>
               ) : (
                 <P
-                  href={`https://iAm.netlify.com/${e.userName}`}
+                  href={`https://iamp.netlify.app/profile/${e.userName}`}
                   target="_blank"
                 >
-                  https://iamp.netlify.app/{e.userName}
+                  https://iamp.netlify.app/profile/{e.userName}
                 </P>
               )}
             </div>
