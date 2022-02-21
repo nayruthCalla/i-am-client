@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import styled, { css } from 'styled-components'
-import { AdvancedImage } from '@cloudinary/react'
-import { Cloudinary } from '@cloudinary/url-gen'
+// import { AdvancedImage } from '@cloudinary/react'
+// import { Cloudinary } from '@cloudinary/url-gen'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Axios from 'axios'
@@ -220,6 +220,7 @@ const SaveButton = styled.button`
 //--------------------------
 
 const About = ({ showCont, setShowCont }) => {
+  const nameKey = process.env.REACT_APP_NAME_KEY
   const [addAboutMe] = useAddAbout()
   const [url, setLink] = useState(true)
   const [textLink, setLinkText] = useState([])
@@ -305,11 +306,11 @@ const About = ({ showCont, setShowCont }) => {
     // console.log(filterLinks)
     setLinkText(filterLinks)
   }
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'demo',
-    },
-  })
+  // const cld = new Cloudinary({
+  //   cloud: {
+  //     cloudName: 'demo',
+  //   },
+  // })
   const uploadImage = async () => {
     // console.log(er[0])
     try {
@@ -318,7 +319,7 @@ const About = ({ showCont, setShowCont }) => {
       formData.append('upload_preset', 'hy996ubi')
 
       const imgResul = await Axios.post(
-        'https://api.cloudinary.com/v1_1/drcn7ijzl/image/upload',
+        `https://api.cloudinary.com/v1_1/${nameKey}/image/upload`,
         formData
       )
       setImgPerfil(imgResul)
@@ -331,11 +332,10 @@ const About = ({ showCont, setShowCont }) => {
     // .catch((e) => console.log('e', e))
   }
   // console.log(imgAdd)
-  const myImage = cld.image('sample')
+
   // useEffect(() => {}, [textLink])
   return (
     <Container>
-      <AdvancedImage cldImg={myImage} />
       <Form onSubmit={formik.handleSubmit}>
         <ContentAddImage>
           <Figure>
