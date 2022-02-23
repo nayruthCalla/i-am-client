@@ -65,6 +65,9 @@ const ButtonSign = styled(ButtonLogin)`
 const Cont = styled.div``
 const ContMenu = styled.div`
   box-shadow: 0px 2px 16px rgba(0, 9, 128, 0.25);
+  .bm-item-list {
+    background: var(--color-pink-prim);
+  }
   @media screen and (min-width: 768px) {
     display: none;
   }
@@ -87,7 +90,9 @@ const ButtonMobile = styled(ButtonLogin)`
   color: #fff;
 `
 const ColorBackground = styled.div`
-  /* background: #f95a61; */
+  /* background: #f95a61;
+  position: fixed;
+  height: 100%; */
 `
 
 const Header = () => {
@@ -97,9 +102,6 @@ const Header = () => {
     logout({ returnTo: window.location.origin })
     localStorage.clear()
   }
-  // const showSettings = (event) => {
-  //   event.preventDefault()
-  // }
 
   return (
     <Cont>
@@ -140,9 +142,9 @@ const Header = () => {
           </FigureNav>
           <FaBars />
         </Div>
-
-        <Menu right isOpen={false}>
-          <ColorBackground>
+        <ColorBackground>
+          <Menu right isOpen={false}>
+            <ButtonMobile onClick={() => navigate('/')}>Inicio</ButtonMobile>
             {isAuthenticated ? (
               <div>
                 <ButtonMobile onClick={() => navigate('/dashboard')}>
@@ -165,8 +167,8 @@ const Header = () => {
                 Crear Página
               </ButtonMobile>
             )}
-          </ColorBackground>
-        </Menu>
+          </Menu>
+        </ColorBackground>
       </ContMenu>
     </Cont>
   )
