@@ -71,7 +71,7 @@ const Title = styled.h1`
 `
 const Button = styled.button`
   padding: 0 1rem 0 1rem;
-  border-radius: 2rem;
+  border-radius: 8px;
   width: 70%;
   background: var(--color-pink-prim);
   font-family: var(--font-Dongle);

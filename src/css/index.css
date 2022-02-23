@@ -50,15 +50,16 @@ body {
   flex-direction: column;
   margin: 0;
   text-overflow: ellipsis;
-  font-size: 2.5rem;
+  font-size: 17px;
 }
 #root {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   margin: 0;
-  text-overflow: ellipsis;
-  text-overflow: ellipsis;
+}
+p {
   overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }

@@ -8,7 +8,7 @@ import { FaPlus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import Message from '../../../Layouts/MessageError'
 import { useEditUser, useGetUserAbout } from './customHooks'
-import sad from '../../../../assets/sad.gif'
+// import sad from '../../../../assets/sad.gif'
 import correct from '../../../../assets/correct.gif'
 
 const Container = styled.form`
@@ -57,10 +57,15 @@ const P = styled.a`
   font-family: var(--font-Dongle);
   font-style: normal;
   font-weight: bold;
-  font-size: 50px;
   line-height: 43px;
   color: rgb(67 75 87 / 68%);
   text-align: center;
+  font-size: 2.5rem;
+  @media screen and (min-width: 768px) {
+    font-size: 5rem;
+  }
+  @media screen and (min-width: 1024px) {
+  }
 `
 
 const Username = () => {
@@ -103,7 +108,7 @@ const Username = () => {
         Swal.fire({
           title: 'Ups :(',
           text: 'Otra persona ya tine ese nombre, deberas cambiar',
-          imageUrl: `${sad}`,
+          icon: 'error',
           imageWidth: 300,
           confirmButtonColor: '#f95a61',
           imageAlt: 'Custom image',

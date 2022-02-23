@@ -23,8 +23,6 @@ const ContainerLogros = styled.div`
   gap: 3rem;
   padding: 0 4rem 3rem 4rem;
   @media screen and (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
   }
   @media screen and (min-width: 1024px) {
   }
@@ -41,12 +39,17 @@ const AddButton = styled.button`
   display: flex;
   border-radius: 0.8rem;
   gap: 1rem;
-  width: 100%;
-  max-width: 25rem;
+  width: 80%;
   justify-content: center;
   cursor: pointer;
   :hover {
     background: var(--hover-dasb);
+  }
+  @media screen and (min-width: 768px) {
+    width: 35rem;
+    max-width: 35rem;
+  }
+  @media screen and (min-width: 1024px) {
   }
 `
 const ContAddProyect = styled('div')`
@@ -88,17 +91,12 @@ const P = styled.p`
   text-align: center;
 `
 const Preview = styled('div')`
-  /* width: 100%; */
   display: flex;
   gap: 1.3rem;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 1rem;
   background: ${({ colorPrev }) => (colorPrev ? '#29abe014;' : 'transparent')};
   @media screen and (min-width: 768px) {
-    /* flex-direction: row;
-    flex-wrap: wrap; */
   }
   @media screen and (min-width: 1024px) {
   }
@@ -141,29 +139,8 @@ const Logros = () => {
   const handleEdit = async (items) => {
     // console.log(items)
     setEdited(items)
-    // setAddCard(!addCard)
+
     setAddCardEdit(!addCardEdit)
-    // Swal.fire({
-    //   title: 'Eliminar Proyecto',
-    //   text: 'Recuerda que podras agregar otro proyecto cuando quieras :)',
-    //   imageUrl: `${alert}`,
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#29ABE0',
-    //   cancelButtonColor: '#D9534F',
-    //   confirmButtonText: 'Sí, Eliminar',
-    //   imageWidth: 300,
-    //   imageHeight: 250,
-    //   imageAlt: 'Custom image',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     Swal.fire('Se eliminó Proyecto', '', 'success')
-    //     deleteProyect({
-    //       variables: {
-    //         deleteProyectId: id,
-    //       },
-    //     })
-    //   }
-    // })
   }
   const handleDelete = async (id) => {
     // console.log(id)

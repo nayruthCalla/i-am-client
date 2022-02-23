@@ -17,17 +17,13 @@ const Container = styled.div`
   align-items: center;
   padding: 6.5rem 0 4rem 0;
   @media screen and (min-width: 768px) {
-    min-height: 100vh;
     justify-content: flex-start;
-    /* padding: 2rem 8rem; */
   }
 `
 const ContainerProyects = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* padding: 4rem 2rem; */
-  /* background: #543a3a08; */
   width: 100%;
   margin: 2rem;
   gap: 3rem;
@@ -55,11 +51,16 @@ const AddButton = styled.button`
   border-radius: 0.8rem;
   gap: 1rem;
   width: 80%;
-  max-width: 35rem;
   justify-content: center;
   cursor: pointer;
   :hover {
     background: var(--hover-dasb);
+  }
+  @media screen and (min-width: 768px) {
+    width: 35rem;
+    max-width: 35rem;
+  }
+  @media screen and (min-width: 1024px) {
   }
 `
 
@@ -149,27 +150,6 @@ const Proyects = () => {
     setEdited(items)
     // setAddCard(!addCard)
     setAddCardEdit(!addCardEdit)
-    // Swal.fire({
-    //   title: 'Eliminar Proyecto',
-    //   text: 'Recuerda que podras agregar otro proyecto cuando quieras :)',
-    //   imageUrl: `${alert}`,
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#29ABE0',
-    //   cancelButtonColor: '#D9534F',
-    //   confirmButtonText: 'Sí, Eliminar',
-    //   imageWidth: 300,
-    //   imageHeight: 250,
-    //   imageAlt: 'Custom image',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     Swal.fire('Se eliminó Proyecto', '', 'success')
-    //     deleteProyect({
-    //       variables: {
-    //         deleteProyectId: id,
-    //       },
-    //     })
-    //   }
-    // })
   }
 
   const handleDelete = async (id) => {
@@ -266,10 +246,6 @@ const Proyects = () => {
               </Preview>
             ))}
           </ContainerProyects>
-
-          {/* <SaveButtonDB onClick={handleSend}>
-            Guardar mis Proyectos
-          </SaveButtonDB> */}
         </ContAddProyect>
       ) : (
         error

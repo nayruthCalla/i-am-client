@@ -127,7 +127,12 @@ const Footer = () => {
               <IconContext.Provider value={value}>
                 <FaLinkedin />
               </IconContext.Provider>
-              <Link>Nayruth Calla</Link>
+              <Link
+                href="https://www.linkedin.com/in/nayruth-calla/"
+                target="_blank"
+              >
+                Nayruth Calla
+              </Link>
             </Contact>
           </Li>
         </Ul>

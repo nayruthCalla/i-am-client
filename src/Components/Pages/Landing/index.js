@@ -67,17 +67,7 @@ const Figure = styled.figure`
 const Image = styled.img`
   width: 100%;
 `
-// graphql
-// const GET_USERS = gql`
-//   query Query {
-//     getUsers {
-//       fullName
-//       userName
-//       id
-//       email
-//     }
-//   }
-// `
+
 const ADD_USER = gql`
   mutation Mutation($name: String, $nickname: String!, $email: String) {
     addUser(name: $name, nickname: $nickname, email: $email) {
@@ -131,7 +121,7 @@ const Landing = () => {
             <Figure>
               <Image alt="logo-app" src={rrss} />
               <TitleImg>
-                CAgrega tus Redes sociales para que se contacten
+                Agrega tus Redes sociales para que se contacten
               </TitleImg>
             </Figure>
           </ContImg>

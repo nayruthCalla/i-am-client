@@ -14,13 +14,21 @@ import { IconContext } from 'react-icons'
 import userdefault from '../../../assets/user.gif'
 
 const MenuBar = styled.nav`
-  background: rgba(196, 196, 196, 0.1);
-  width: 25rem;
-  box-shadow: 6px 4px 10px 0px rgb(0 9 128 / 25%);
-  padding: 3rem 0;
-  min-height: 100vh;
-  position: fixed;
-  left: 0;
+  display: none;
+  @media screen and (min-width: 768px) {
+    /* min-height: 100vh; */
+  }
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    background: rgba(196, 196, 196, 0.1);
+    width: 25rem;
+    box-shadow: 6px 4px 10px 0px rgb(0 9 128 / 25%);
+    padding: 3rem 0;
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+  }
 `
 const Ul = styled.ul`
   width: 100%;
@@ -75,6 +83,10 @@ const UserName = styled.p`
   font-weight: bold;
   font-size: 2.5rem;
   color: rgba(67, 75, 87, 0.78);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 20rem;
 `
 
 const DasBoard = () => {
