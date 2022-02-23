@@ -55,6 +55,7 @@ const AddButton = styled.button`
 const ContAddProyect = styled('div')`
   align-items: center;
   margin: 4rem 2rem 2rem 2rem;
+  width: 100%;
 `
 const ContMore = styled.div`
   display: flex;

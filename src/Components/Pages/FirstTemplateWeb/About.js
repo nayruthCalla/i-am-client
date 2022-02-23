@@ -21,7 +21,9 @@ const Container = styled.section`
   padding: 2rem 3rem;
   @media screen and (min-width: 768px) {
     min-height: 100vh;
-    padding: 2rem 8rem;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 1024px;
   }
 `
 
@@ -77,31 +79,6 @@ const FooterDataContainer = styled.div`
   }
 `
 
-// const FooterLink = styled.a`
-//   font-family: var(--font-SpaceM);
-//   font-style: normal;
-//   font-weight: normal;
-//   font-size: 1.8rem;
-//   line-height: 37px;
-//   color: rgba(204, 204, 204, 0.77);
-//   background: #000000;
-//   width: fit-content;
-//   padding: 0 1.5rem;
-//   display: flex;
-//   gap: 1rem;
-//   align-items: center;
-//   :hover {
-//     color: #2bb8da;
-//   }
-//   .icon {
-//     color: #ffffffba;
-//     font-size: 2rem;
-//   }
-//   @media screen and (min-width: 768px) {
-//     padding: 0px 20px;
-//   }
-// `
-
 const About = ({ links, aboutMe, firstChractr }) => {
   // const value = useMemo(() => ({ className: 'icon' }))
   return (
@@ -125,24 +102,6 @@ const About = ({ links, aboutMe, firstChractr }) => {
       </TitleSocialNet>
       <FooterDataContainer>
         <LinksCompnent links={links} />
-        {/* <FooterLink href={linkGit}>
-          <IconContext.Provider value={value}>
-            <FaRegEnvelopeOpen />
-          </IconContext.Provider>
-          Email
-        </FooterLink>
-        <FooterLink href={linkGit}>
-          <IconContext.Provider value={value}>
-            <FaGithub />
-          </IconContext.Provider>
-          GitHub
-        </FooterLink>
-        <FooterLink href={linkLinke}>
-          <IconContext.Provider value={value}>
-            <FaLinkedin />
-          </IconContext.Provider>
-          LinkedIn
-        </FooterLink> */}
       </FooterDataContainer>
     </Container>
   )

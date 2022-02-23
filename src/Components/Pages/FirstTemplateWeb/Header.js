@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useState } from 'react'
 import styled from 'styled-components'
-
-// import logo from '../../../assets/logoIam.svg'
+import { FaBars } from 'react-icons/fa'
+import { firtsLetter } from './Data/utilis'
 
 const Container = styled.header`
   display: flex;
@@ -14,10 +15,12 @@ const Container = styled.header`
   box-shadow: 1px 8px 4px 5px rgba(0, 0, 0, 0.26);
   /* position: fixed; */
   font-size: 1.5rem;
+  display: none;
   @media screen and (min-width: 768px) {
-    flex-direction: row;
   }
   @media screen and (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
     font-size: 35px;
     line-height: 52px;
   }
@@ -26,18 +29,30 @@ const ContTitle = styled.div``
 const Title = styled.a`
   font-family: var(--font-SpaceM);
   font-style: normal;
-  font-weight: normal;
-  color: rgb(244, 244, 244);
+  font-weight: bold;
+  font-size: 25px;
+  color: #2bb8da;
 `
 const Nagitation = styled.nav``
+const NagitationMobile = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  padding: 1.7rem 3rem;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+`
 const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  align-items: center;
   @media screen and (min-width: 768px) {
-    flex-direction: row;
-  }
-  @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 1024px) {
+      flex-direction: row;
+    }
   }
 `
 const Li = styled.li`
@@ -49,12 +64,7 @@ const Li = styled.li`
     /* background: rgba(249, 90, 97, 0.09); */
   }
 `
-// const LiSec = styled(Li)`
-//   list-style: none;
-//   &:hover {
-//     background: #f95a61b8;
-//   }
-// `
+
 const Link = styled.a`
   text-decoration: none;
   font-family: var(--font-SpaceM);
@@ -70,46 +80,100 @@ const Link = styled.a`
 const Span = styled.span`
   color: #2bb8da;
 `
-// const LinkLogin = styled(Link)`
-//   color: #ffffff;
-// `
-// say
+const ButtonHamb = styled.button`
+  border: none;
+  background: transparent;
+  font-size: 3.5rem;
+  color: #ffffffcf;
+  &:hover {
+    background: rgba(249, 90, 97, 0.09);
+  }
+`
+const ContHeader = styled.div`
+  position: fixed;
+  width: 100%;
+  box-shadow: 1px 8px 4px 5px rgb(0 0 0 / 26%);
+  background: var(--primary-template);
+`
 
-const Header = ({ userName }) => (
-  <Container>
-    <ContTitle>
-      <Title>{userName}</Title>
-    </ContTitle>
-    <Nagitation>
-      <Ul>
-        <Li>
-          <Link href="#about">
-            <Span>01.</Span> Sobre mí
-          </Link>
-        </Li>
-        <Li>
-          <Link href="#proyects">
-            <Span>02.</Span> Proyectos
-          </Link>
-        </Li>
-        <Li>
-          <Link href="#skills">
-            <Span>03.</Span> Skills
-          </Link>
-        </Li>
-        <Li>
-          <Link href="#logros">
-            <Span>04.</Span> Logros
-          </Link>
-        </Li>
-        <Li>
-          <Link href="#contact">
-            <Span>05.</Span> Contacto
-          </Link>
-        </Li>
-      </Ul>
-    </Nagitation>
-  </Container>
-)
+const Header = ({ userName }) => {
+  const [showMenu, setShowMenu] = useState(false)
+  return (
+    <ContHeader>
+      <Container>
+        <Link href="#Home">
+          <Title>{firtsLetter(userName)}</Title>
+        </Link>
+        <Nagitation>
+          <Ul>
+            <Li>
+              <Link href="#about">
+                <Span>01.</Span> Sobre mí
+              </Link>
+            </Li>
+            <Li>
+              <Link href="#proyects">
+                <Span>02.</Span> Proyectos
+              </Link>
+            </Li>
+            <Li>
+              <Link href="#skills">
+                <Span>03.</Span> Skills
+              </Link>
+            </Li>
+            <Li>
+              <Link href="#logros">
+                <Span>04.</Span> Logros
+              </Link>
+            </Li>
+            <Li>
+              <Link href="#contact">
+                <Span>05.</Span> Contacto
+              </Link>
+            </Li>
+          </Ul>
+        </Nagitation>
+      </Container>
+
+      <NagitationMobile>
+        <ContTitle>
+          <Title>{firtsLetter(userName)}</Title>
+        </ContTitle>
+        <ButtonHamb onClick={() => setShowMenu(!showMenu)}>
+          <FaBars />
+        </ButtonHamb>
+      </NagitationMobile>
+      {showMenu ? (
+        <Ul>
+          <Li>
+            <Link href="#about">
+              <Span>01.</Span> Sobre mí
+            </Link>
+          </Li>
+          <Li>
+            <Link href="#proyects">
+              <Span>02.</Span> Proyectos
+            </Link>
+          </Li>
+          <Li>
+            <Link href="#skills">
+              <Span>03.</Span> Skills
+            </Link>
+          </Li>
+          <Li>
+            <Link href="#logros">
+              <Span>04.</Span> Logros
+            </Link>
+          </Li>
+          <Li>
+            <Link href="#contact">
+              <Span>05.</Span> Contacto
+            </Link>
+          </Li>
+        </Ul>
+      ) : null}
+    </ContHeader>
+  )
+}
 
 export default Header

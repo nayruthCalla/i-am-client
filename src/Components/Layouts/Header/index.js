@@ -1,10 +1,10 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-// import React from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useNavigate } from 'react-router-dom'
-import { slide as Menu } from 'react-burger-menu'
+// import { slide as Menu } from 'react-burger-menu'
 import { FaBars } from 'react-icons/fa'
 
 import logo from '../../../assets/logoIam.svg'
@@ -64,10 +64,10 @@ const ButtonSign = styled(ButtonLogin)`
 `
 const Cont = styled.div``
 const ContMenu = styled.div`
-  box-shadow: 0px 2px 16px rgba(0, 9, 128, 0.25);
-  .bm-item-list {
-    background: var(--color-pink-prim);
-  }
+  background: #f95a61;
+  position: fixed;
+  width: 100%;
+  margin-top: 71px;
   @media screen and (min-width: 768px) {
     display: none;
   }
@@ -84,18 +84,41 @@ const Div = styled.div`
   font-size: 3.5rem;
   padding: 0 2rem;
   color: #998f8f;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0px 2px 16px rgba(0, 9, 128, 0.25);
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  @media screen and (min-width: 1024px) {
+  }
+`
+const ButtonHamb = styled.button`
+  border: none;
+  background: transparent;
+  font-size: 3.5rem;
+  color: #998f8f;
+  &:hover {
+    background: rgba(249, 90, 97, 0.09);
+  }
 `
 const ButtonMobile = styled(ButtonLogin)`
-  font-size: 4rem;
+  font-size: 3.5rem;
   color: #fff;
 `
-const ColorBackground = styled.div`
-  /* background: #f95a61;
-  position: fixed;
-  height: 100%; */
+const MenuHamb = styled('div')`
+  background: #f95a61;
+  display: flex;
+  flex-direction: column;
+`
+const ContColumn = styled('div')`
+  display: flex;
+  flex-direction: column;
 `
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState(false)
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
   const navigate = useNavigate()
   const logoutSess = () => {
@@ -135,24 +158,25 @@ const Header = () => {
           </Ul>
         </Nagitation>
       </Container>
-      <ContMenu>
-        <Div>
-          <FigureNav onClick={() => navigate('/')}>
-            <Image alt="logo-app" src={logo} />
-          </FigureNav>
+      <Div>
+        <FigureNav onClick={() => navigate('/')}>
+          <Image alt="logo-app" src={logo} />
+        </FigureNav>
+        <ButtonHamb onClick={() => setShowMenu(!showMenu)}>
           <FaBars />
-        </Div>
-        <ColorBackground>
-          <Menu right isOpen={false}>
+        </ButtonHamb>
+      </Div>
+      <ContMenu>
+        {showMenu ? (
+          <MenuHamb>
             <ButtonMobile onClick={() => navigate('/')}>Inicio</ButtonMobile>
             {isAuthenticated ? (
-              <div>
+              <ContColumn>
                 <ButtonMobile onClick={() => navigate('/dashboard')}>
                   Mi Panel
                 </ButtonMobile>
-                <br />
                 <ButtonMobile onClick={logoutSess}>Cerrar Sesión</ButtonMobile>
-              </div>
+              </ContColumn>
             ) : (
               <ButtonMobile onClick={() => loginWithRedirect()}>
                 Iniciar Sesión
@@ -167,8 +191,8 @@ const Header = () => {
                 Crear Página
               </ButtonMobile>
             )}
-          </Menu>
-        </ColorBackground>
+          </MenuHamb>
+        ) : null}
       </ContMenu>
     </Cont>
   )

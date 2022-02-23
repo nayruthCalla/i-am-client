@@ -58,8 +58,3 @@ body {
   flex-direction: column;
   margin: 0;
 }
-p {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}

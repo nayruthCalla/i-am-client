@@ -29,6 +29,13 @@ const TextFooter = styled.p`
   text-align: center;
   color: #a3a8c3;
 `
+const ContDestop = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+
 const PortflTamplate = () => {
   const { userName } = useParams()
   const { data } = useGetProfileUser(userName)
@@ -40,32 +47,36 @@ const PortflTamplate = () => {
           {data?.getProfileUserAbout.map((e, i) => (
             <div key={i}>
               <Header userName={e.firstName} />
-              <Hero
-                photo={user}
-                linkGit="https://www.linkedin.com/"
-                linkLinke="https://www.linkedin.com/"
-                userName={e.firstName}
-                description={e.profession}
-                links={e.socialNetworks}
-              />
-              <About
-                aboutMe={e.aboutMeText}
-                firstChractr={e.interests}
-                links={e.socialNetworks}
-              />
+              <ContDestop>
+                <Hero
+                  photo={user}
+                  linkGit="https://www.linkedin.com/"
+                  linkLinke="https://www.linkedin.com/"
+                  userName={e.firstName}
+                  description={e.profession}
+                  links={e.socialNetworks}
+                />
+                <About
+                  aboutMe={e.aboutMeText}
+                  firstChractr={e.interests}
+                  links={e.socialNetworks}
+                />
+              </ContDestop>
             </div>
           ))}
         </>
       ) : null}
-      {data?.getProfileUserProyect.length > 0 ? (
-        <Proyects proyects={data?.getProfileUserProyect} />
-      ) : null}
-      {data?.getProfileUserSkill.length > 0 ? (
-        <Skills skills={data?.getProfileUserSkill} />
-      ) : null}
-      {data?.getProfileUserLogros.length > 0 ? (
-        <Logros logros={data?.getProfileUserLogros} />
-      ) : null}
+      <ContDestop>
+        {data?.getProfileUserProyect.length > 0 ? (
+          <Proyects proyects={data?.getProfileUserProyect} />
+        ) : null}
+        {data?.getProfileUserSkill.length > 0 ? (
+          <Skills skills={data?.getProfileUserSkill} />
+        ) : null}
+        {data?.getProfileUserLogros.length > 0 ? (
+          <Logros logros={data?.getProfileUserLogros} />
+        ) : null}
+      </ContDestop>
 
       <Footer />
 

@@ -474,17 +474,8 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
             ) : null}
           </ContSelect>
         </Div>
-        <SaveButton type="submit">Agregar Proyecto</SaveButton>
+        <SaveButton type="submit">Guardar Proyecto</SaveButton>
       </Form>
-      {/* <CardProyect
-        colorBtn="dasboard"
-        title={formik.values.nameProyect}
-        description={formik.values.descriptionProyc}
-        techFirst={formik.values.techFirst}
-        techSecond={formik.values.techSecond}
-        level={formik.values.level}
-        links={textLink}
-      /> */}
     </Container>
   )
 }

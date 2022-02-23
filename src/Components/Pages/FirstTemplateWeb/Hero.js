@@ -18,13 +18,14 @@ const Container = styled.section`
   gap: 2rem;
   padding: 2rem 3rem;
   width: 100%;
+  margin-top: 10rem;
 
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1024px) {
     flex-direction: row-reverse;
     min-height: 100vh;
-    padding: 2rem 8rem;
+    width: 1024px;
   }
 `
 const ContWlcome = styled.div`
@@ -38,7 +39,7 @@ const ContWlcome = styled.div`
   }
 `
 const ContWlcomeSecond = styled(ContWlcome)`
-  width: fit-content;
+  width: 100%;
   @media screen and (min-width: 768px) {
     align-items: flex-start;
     /* width: 70%; */
@@ -98,15 +99,17 @@ const Name = styled.h1`
   font-family: var(--font-SpaceM);
   color: #ffffff;
   font-size: 6rem;
-  width: 100%;
+
   /* min-width: 40px; */
   white-space: normal;
   text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  width: 75%;
   @media screen and (min-width: 768px) {
     font-size: 8rem;
+    width: 50%;
   }
 `
 const Description = styled(Welcome)`
@@ -126,6 +129,10 @@ const ButtonContc = styled.button`
   line-height: 44px;
   padding: 0 1rem;
   color: #2bb8da;
+  cursor: pointer;
+  :hover {
+    background: #2bb8da45;
+  }
 `
 
 const Hero = ({ photo, links, userName, description }) => {
@@ -144,36 +151,60 @@ const Hero = ({ photo, links, userName, description }) => {
     return Arrlink
   }
   // console.log(selectLink(links))
-  const iconSocialNetwor = (nameIcon) => {
+  const iconSocialNetwor = (nameIcon, link, i) => {
     if (nameIcon === 'github') {
-      return <FaGithub />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <FaGithub />
+        </FooterLink>
+      )
     }
     if (nameIcon === 'linkedin') {
-      return <FaLinkedin />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <FaLinkedin />
+        </FooterLink>
+      )
     }
     if (nameIcon === 'gmail') {
-      return <FaRegEnvelopeOpen />
+      return (
+        <FooterLink
+          key={i}
+          href={`mailto:${link}?subject=Questions&body=Escribe aquí si tienes preguntas`}
+          target="_blank"
+        >
+          <FaRegEnvelopeOpen />
+        </FooterLink>
+      )
     }
     if (nameIcon === 'instagram') {
-      return <FaInstagram />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <FaInstagram />
+        </FooterLink>
+      )
     }
     if (nameIcon === 'facebook') {
-      return <FaFacebookSquare />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <FaFacebookSquare />
+        </FooterLink>
+      )
     }
-    return <FaSquarespace />
+    return (
+      <FooterLink key={i} href={link} target="_blank">
+        <FaSquarespace />
+      </FooterLink>
+    )
   }
   return (
-    <Container>
+    <Container id="Home">
       <ContWlcome>
         <Figure>
           <Image src={photo} />
         </Figure>
         <FooterDataContainer>
-          {selectLink(links).map((e, i) => (
-            <FooterLink key={i} href={e.link} target="_blank">
-              {iconSocialNetwor(e.name)}
-            </FooterLink>
-          ))}
+          {selectLink(links).map((e, i) => iconSocialNetwor(e.name, e.link, i))}
         </FooterDataContainer>
       </ContWlcome>
       <ContWlcomeSecond>

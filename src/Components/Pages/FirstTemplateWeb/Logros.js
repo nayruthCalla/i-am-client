@@ -8,11 +8,12 @@ const Container = styled.section`
   justify-content: center;
   /* align-items: center; */
   gap: 2rem;
-  padding: 3rem 3rem;
+  padding: 2rem 3rem;
   @media screen and (min-width: 768px) {
     min-height: 100vh;
-    padding: 2rem 8rem;
-    justify-content: flex-start;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 1024px;
   }
 `
 
@@ -43,8 +44,6 @@ const ContainerLogros = styled.div`
   justify-content: center;
   gap: 3rem;
   @media screen and (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
   }
   @media screen and (min-width: 1024px) {
   }

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import {
-  FaFolderMinus,
+  FaFolderOpen,
   FaExternalLinkAlt,
   FaGithub,
   FaFireAlt,
@@ -18,7 +18,7 @@ const Container = styled('article')(
     padding: 2rem;
     background-color: ${colorBtn === 'dasboard'
       ? 'transparent'
-      : 'rgb(26, 19, 54)'};
+      : 'transparent'};
     /* background: #ffffff; */
     border: ${colorBtn === 'dasboard'
       ? '1px solid rgba(143, 3, 3, 0.35)'
@@ -131,7 +131,11 @@ const FooterCard = styled('div')(
       }
     }
     padding: 1rem 0 0 0;
+    flex-direction: column;
+    gap: 1rem;
     @media screen and (min-width: 768px) {
+      flex-direction: row;
+      gap: 0;
     }
     @media screen and (min-width: 1024px) {
     }
@@ -163,7 +167,7 @@ const CardProyect = ({
     <Container colorBtn={colorBtn}>
       <HeaderCard colorBtn={colorBtn}>
         <IconContext.Provider value={value}>
-          <FaFolderMinus />
+          <FaFolderOpen />
         </IconContext.Provider>
         <ContainerBtn>
           {links.map((e, i) => (
