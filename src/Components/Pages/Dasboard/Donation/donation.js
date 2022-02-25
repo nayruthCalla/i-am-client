@@ -43,7 +43,7 @@ const Payment = () => {
       )
     }
   }, [data])
-  console.log(data, loading)
+  // console.log(data, loading)
   return (
     <Container>
       {message ? (
