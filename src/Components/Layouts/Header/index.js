@@ -145,7 +145,10 @@ const Header = () => {
                 <ButtonLogin onClick={logoutSess}>Cerrar Sesión</ButtonLogin>
               </div>
             ) : (
-              <ButtonLogin onClick={() => loginWithRedirect()}>
+              <ButtonLogin
+                data-test="loginbtn"
+                onClick={() => loginWithRedirect()}
+              >
                 Iniciar Sesión
               </ButtonLogin>
             )}
@@ -192,7 +195,10 @@ const Header = () => {
                 <ButtonMobile onClick={logoutSess}>Cerrar Sesión</ButtonMobile>
               </ContColumn>
             ) : (
-              <ButtonMobile onClick={() => loginWithRedirect()}>
+              <ButtonMobile
+                data-test="loginbtn"
+                onClick={() => loginWithRedirect()}
+              >
                 Iniciar Sesión
               </ButtonMobile>
             )}

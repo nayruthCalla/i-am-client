@@ -39,6 +39,7 @@ const HeaderCard = styled('header')(
     width: 100%;
     justify-content: space-between;
     font-size: 2.5rem;
+    color: ${colorBtn === 'dasboard' ? '#c54646' : '#EFEFEF'};
     .card-icon {
       color: ${colorBtn === 'dasboard' ? '#c54646' : '#EFEFEF'};
       :hover {
@@ -164,7 +165,7 @@ const CardProyect = ({
   links,
 }) => {
   const value = useMemo(() => ({ className: 'card-icon' }))
-  //   const valueFooter = useMemo(() => ({ className: 'footer-icon' }))
+
   return (
     <Container colorBtn={colorBtn}>
       <HeaderCard colorBtn={colorBtn}>

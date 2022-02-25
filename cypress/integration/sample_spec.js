@@ -16,4 +16,8 @@ describe('Landing', () => {
     cy.contains('Agregar tus skills, retos y experiencias')
     cy.contains('Agrega tus Redes Sociales para que te contacten')
   })
+  it('Be able to log in to the web application', () => {
+    cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
+    cy.location('pathname').should('include', 'login')
+  })
 })
