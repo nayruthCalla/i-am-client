@@ -4,7 +4,7 @@ import {
   FaFolderOpen,
   FaExternalLinkAlt,
   FaGithub,
-  FaFireAlt,
+  // FaFireAlt,
 } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 
@@ -105,12 +105,9 @@ const Description = styled.p`
   font-size: 1.7rem;
   line-height: 24px;
   text-align: justify;
-  white-space: normal;
-  white-space: normal;
-  text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  margin-top: 10px;
 `
 const FooterCard = styled('div')(
   ({ colorBtn }) => css`
@@ -134,8 +131,10 @@ const FooterCard = styled('div')(
     flex-direction: column;
     gap: 1rem;
     @media screen and (min-width: 768px) {
+      flex-wrap: wrap;
+      justify-content: center;
       flex-direction: row;
-      gap: 0;
+      align-items: center;
     }
     @media screen and (min-width: 1024px) {
     }
@@ -151,6 +150,9 @@ const TextFooter = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-size: 1.5rem;
+  font-family: var(--font-SpaceM);
+  text-transform: capitalize;
 `
 const CardProyect = ({
   colorBtn,
@@ -166,9 +168,12 @@ const CardProyect = ({
   return (
     <Container colorBtn={colorBtn}>
       <HeaderCard colorBtn={colorBtn}>
-        <IconContext.Provider value={value}>
-          <FaFolderOpen />
-        </IconContext.Provider>
+        <ContText>
+          <IconContext.Provider value={value}>
+            <FaFolderOpen />
+          </IconContext.Provider>
+          <TextFooter>{level}</TextFooter>
+        </ContText>
         <ContainerBtn>
           {links.map((e, i) => (
             <div key={i}>
@@ -195,13 +200,7 @@ const CardProyect = ({
       </BodyCard>
       <FooterCard colorBtn={colorBtn}>
         <ContText>
-          <IconContext.Provider value={value}>
-            <FaFireAlt />
-          </IconContext.Provider>
-          <TextFooter>{level}</TextFooter>
-        </ContText>
-        <ContText>
-          <TextFooter>{techFirst}</TextFooter>
+          <TextFooter>{techFirst}</TextFooter>|
           <TextFooter>{techSecond}</TextFooter>
         </ContText>
       </FooterCard>
