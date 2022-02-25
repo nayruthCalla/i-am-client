@@ -7,12 +7,6 @@ import Dasboard from './Pages/Dasboard'
 import FirstTemplateWeb from './Pages/FirstTemplateWeb'
 import PageError from './Layouts/ErrorPages'
 
-// const Container = styled.div`
-//   display: flex;
-//   min-height: 100vh;
-//   flex-direction: column;
-//   margin: 0;
-// `
 const App = () => {
   return (
     <>
@@ -20,12 +14,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/dashboard" element={<Dasboard />} />
-        <Route path="/profile/:userName" element={<FirstTemplateWeb />} />
+        <Route path="/ia/:userName" element={<FirstTemplateWeb />} />
         <Route path="*" element={<PageError />} />
-
-        {/* <Dasboard /> */}
-        {/* <Footer /> */}
-        {/* <FirstTemplateWeb /> */}
       </Routes>
     </>
   )

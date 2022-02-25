@@ -68,7 +68,8 @@ const Image = styled.img`
   background: #120e26;
   border-radius: 50%;
   :hover {
-    filter: grayscale(80%);
+    /* filter: grayscale(80%); */
+    filter: hue-rotate(331deg);
   }
   @media screen and (min-width: 768px) {
     width: 25rem;
@@ -109,7 +110,7 @@ const Name = styled.h1`
   width: 75%;
   @media screen and (min-width: 768px) {
     font-size: 8rem;
-    width: 50%;
+    width: 100%;
   }
 `
 const Description = styled(Welcome)`
@@ -170,7 +171,7 @@ const Hero = ({ photo, links, userName, description }) => {
       return (
         <FooterLink
           key={i}
-          href={`mailto:${link}?subject=Questions&body=Escribe aquí si tienes preguntas`}
+          href={`mailto:${link}?subject=Quiero saber más de tí&body=Escribe aquí si tienes preguntas`}
           target="_blank"
         >
           <FaRegEnvelopeOpen />

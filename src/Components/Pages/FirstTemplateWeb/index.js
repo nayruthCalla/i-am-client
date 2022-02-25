@@ -11,6 +11,7 @@ import Skills from './Skills'
 import Logros from './Logros'
 import Footer from './Footer'
 import user from '../../../assets/user.gif'
+import error from '../../../assets/errorprof.png'
 import { useGetProfileUser } from './Data/customHooks'
 
 const Container = styled.div`
@@ -19,6 +20,10 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0;
   background: var(--primary-template);
+`
+const ContainerError = styled(Container)`
+  align-items: center;
+  justify-content: center;
 `
 const TextFooter = styled.p`
   font-family: Saira;
@@ -35,11 +40,35 @@ const ContDestop = styled.div`
   flex-direction: column;
   width: 100%;
 `
+const Name = styled.h1`
+  font-family: var(--font-SpaceM);
+  color: #ffffff;
+  font-size: 2.5rem;
+  white-space: normal;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  @media screen and (min-width: 768px) {
+  }
+`
+const Image = styled.img`
+  width: 30rem;
+`
 
 const PortflTamplate = () => {
   const { userName } = useParams()
   const { data } = useGetProfileUser(userName)
-
+  if (userName === 'undefined') {
+    return (
+      <ContainerError>
+        <Image src={error} alt="error" />
+        <Name>
+          Necesitas crear tu nombre de usuario para obtener tu portafolio web :)
+        </Name>
+      </ContainerError>
+    )
+  }
   return (
     <Container>
       {data?.getProfileUserAbout.length > 0 ? (
@@ -49,7 +78,7 @@ const PortflTamplate = () => {
               <Header userName={e.firstName} />
               <ContDestop>
                 <Hero
-                  photo={user}
+                  photo={e.photo === '' ? user : e.photo}
                   linkGit="https://www.linkedin.com/"
                   linkLinke="https://www.linkedin.com/"
                   userName={e.firstName}
@@ -77,8 +106,9 @@ const PortflTamplate = () => {
           <Logros logros={data?.getProfileUserLogros} />
         ) : null}
       </ContDestop>
-
-      <Footer />
+      {data?.getProfileUserAbout.length > 0 ? (
+        <Footer dataUser={data?.getProfileUserAbout} />
+      ) : null}
 
       <TextFooter>© 2022 {userName}</TextFooter>
       <TextFooter>Desarrollado por © 2022 Nayruth Calla - i-Am</TextFooter>

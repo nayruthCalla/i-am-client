@@ -8,6 +8,13 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 4rem;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
 `
 const Title = styled.p`
   font-family: var(--font-saira);
@@ -42,11 +49,51 @@ const ContainerAbo = styled.div`
   flex-direction: column;
   padding: 1rem;
 `
+const FigurePrevw = styled.figure`
+  background: transparent;
+  border: 3px solid #2bb8da;
+  width: 17rem;
+  height: 17rem;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  @media screen and (min-width: 768px) {
+    width: 30rem;
+    height: 30rem;
+  }
+`
+const ImagePrevw = styled.img`
+  width: 15rem;
+  height: 15rem;
+  background: transparent;
+  /* border: 3px solid #2bb8da; */
+  box-sizing: border-box;
+  background: #120e26;
+  border-radius: 50%;
+  :hover {
+    filter: grayscale(80%);
+  }
+  @media screen and (min-width: 768px) {
+    width: 25rem;
+    height: 25rem;
+  }
+`
 
-const AboutMeRead = ({ userName, profession, about, interests, links }) => {
-  // console.log(links)
+const AboutMeRead = ({
+  userName,
+  profession,
+  about,
+  interests,
+  links,
+  photo,
+}) => {
+  // console.log(photo, links)
   return (
     <Container>
+      <FigurePrevw>
+        <ImagePrevw src={photo} />
+      </FigurePrevw>
       <ContainerAbo>
         <TitleText>Mi Nombre:</TitleText>
         <Title>{userName}</Title>
@@ -57,8 +104,8 @@ const AboutMeRead = ({ userName, profession, about, interests, links }) => {
         <TitleText>Que me interesa:</TitleText>
         <Description>{interests}</Description>
         <TitleText>Mis Redes Sociales:</TitleText>
+        <LinksCompnent links={links} />
       </ContainerAbo>
-      <LinksCompnent links={links} />
     </Container>
   )
 }

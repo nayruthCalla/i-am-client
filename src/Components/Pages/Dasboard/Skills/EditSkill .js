@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-// import PropTypes from 'prop-types';
-
-// Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
-// import { FaPlus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import Message from '../../../Layouts/MessageError'
 import { useEditSkill } from './customHooks'
@@ -87,32 +83,10 @@ const EditSkill = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
             skillName: values.skillName,
           },
         })
-        // setStateForm([])
-        // console.log(data)
-        // if (data.addSkill) {
-        //   Swal.fire({
-        //     title: 'Excelente!',
-        //     text: 'Tus datos se guardarón exitosamente!',
-        //     imageUrl: `${correct}`,
-        //     imageWidth: 300,
-        //     imageAlt: 'Custom image',
-        //   })
-        // }
       } catch (e) {
         // console.log(e)
       }
-      // setStateForm([
-      //   ...stateForm,
-      //   {
-      //     userId: '620db8375913666d02a1f5ba',
-      //     proyectName: skillName,
-      //     description: descriptionProyc,
-      //     techFirst,
-      //     techSecond,
-      //     level,
-      //     links: textLink,
-      //   },
-      // ])
+
       setAddCardEdit(!addCardEdit)
     },
   })

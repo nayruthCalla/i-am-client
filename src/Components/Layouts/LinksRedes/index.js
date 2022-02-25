@@ -50,34 +50,66 @@ const FooterLink = styled.a`
 
 const About = ({ links }) => {
   const value = useMemo(() => ({ className: 'icon' }))
-  const iconSocialNetwor = (nameIcon) => {
+  const iconSocialNetwor = (nameIcon, link, i) => {
     if (nameIcon === 'github') {
-      return <FaGithub />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <IconContext.Provider value={value}>
+            <FaGithub />
+          </IconContext.Provider>
+          <p>{nameIcon}</p>
+        </FooterLink>
+      )
     }
     if (nameIcon === 'linkedin') {
-      return <FaLinkedin />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <IconContext.Provider value={value}>
+            <FaLinkedin />
+          </IconContext.Provider>
+          <p>{nameIcon}</p>
+        </FooterLink>
+      )
     }
     if (nameIcon === 'gmail') {
-      return <FaRegEnvelopeOpen />
+      return (
+        <FooterLink
+          key={i}
+          href={`mailto:${link}?subject=Quiero saber más de tí&body=Escribe aquí si tienes preguntas`}
+          target="_blank"
+        >
+          <IconContext.Provider value={value}>
+            <FaRegEnvelopeOpen />
+          </IconContext.Provider>
+          <p>{nameIcon}</p>
+        </FooterLink>
+      )
     }
     if (nameIcon === 'instagram') {
-      return <FaInstagram />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <IconContext.Provider value={value}>
+            <FaInstagram />
+          </IconContext.Provider>
+          <p>{nameIcon}</p>
+        </FooterLink>
+      )
     }
     if (nameIcon === 'facebook') {
-      return <FaFacebookSquare />
+      return (
+        <FooterLink key={i} href={link} target="_blank">
+          <IconContext.Provider value={value}>
+            <FaFacebookSquare />
+          </IconContext.Provider>
+          <p>{nameIcon}</p>
+        </FooterLink>
+      )
     }
     return <FaSquarespace />
   }
   return (
     <FooterDataContainer>
-      {links.map((e, i) => (
-        <FooterLink key={i} href={e.link} target="_blank">
-          <IconContext.Provider value={value}>
-            {iconSocialNetwor(e.name)}
-          </IconContext.Provider>
-          <p>{e.name}</p>
-        </FooterLink>
-      ))}
+      {links.map((e, i) => iconSocialNetwor(e.name, e.link, i))}
     </FooterDataContainer>
   )
 }

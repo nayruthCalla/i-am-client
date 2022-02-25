@@ -69,17 +69,27 @@ const Image = styled.img`
 `
 
 const ADD_USER = gql`
-  mutation Mutation($name: String, $nickname: String!, $email: String) {
-    addUser(name: $name, nickname: $nickname, email: $email) {
+  mutation Mutation(
+    $name: String
+    $nickname: String!
+    $email: String
+    $picture: String
+  ) {
+    addUser(
+      name: $name
+      nickname: $nickname
+      email: $email
+      picture: $picture
+    ) {
       token
     }
   }
 `
 
 const Landing = () => {
-  const { user, isAuthenticated } = useAuth0()
+  const { isAuthenticated, user } = useAuth0()
   const [addUser] = useMutation(ADD_USER)
-  // console.log(client)
+  // console.log(user)
   useEffect(async () => {
     if (isAuthenticated) {
       try {
@@ -88,6 +98,7 @@ const Landing = () => {
             name: user.name,
             nickname: user.nickname,
             email: user.name,
+            picture: user.picture,
           },
         })
 

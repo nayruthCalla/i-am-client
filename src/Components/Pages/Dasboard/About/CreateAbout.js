@@ -1,21 +1,17 @@
+/* eslint-disable react/void-dom-elements-no-children */
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import styled, { css } from 'styled-components'
-// import { AdvancedImage } from '@cloudinary/react'
-// import { Cloudinary } from '@cloudinary/url-gen'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Axios from 'axios'
 
-// Components FaLinkedin, FaGithub, FaInstagram, FaFacebook
 import { BiImageAdd } from 'react-icons/bi'
 import { FaUserAlt, FaPlus, FaMinus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
-import correct from '../../../../assets/correct.gif'
 import { useAddAbout } from './customHooks'
-// import LinkSocialNet from './SocialNetwork'
 
 const Container = styled.div`
   display: flex;
@@ -68,6 +64,19 @@ const Form = styled.form`
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1024px) {
+    max-width: 130rem;
+  }
+`
+const ContainerAbout = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: space-around;
   }
 `
 
@@ -216,6 +225,36 @@ const SaveButton = styled.button`
   @media screen and (min-width: 1024px) {
   }
 `
+const ImagePrevw = styled.img`
+  width: 15rem;
+  height: 15rem;
+  background: transparent;
+  /* border: 3px solid #2bb8da; */
+  box-sizing: border-box;
+  background: #120e26;
+  border-radius: 50%;
+  :hover {
+    filter: grayscale(80%);
+  }
+  @media screen and (min-width: 768px) {
+    width: 25rem;
+    height: 25rem;
+  }
+`
+const FigurePrevw = styled.figure`
+  background: transparent;
+  border: 3px solid #2bb8da;
+  width: 17rem;
+  height: 17rem;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  @media screen and (min-width: 768px) {
+    width: 30rem;
+    height: 30rem;
+  }
+`
 
 //--------------------------
 
@@ -224,8 +263,7 @@ const About = ({ showCont, setShowCont }) => {
   const [addAboutMe] = useAddAbout()
   const [url, setLink] = useState(true)
   const [textLink, setLinkText] = useState([])
-  const [imgAdd, setImgAdd] = useState('')
-  const [imgPerfil, setImgPerfil] = useState('')
+  const [imgPerfil, setImgPerfil] = useState(' ')
 
   const formik = useFormik({
     initialValues: {
@@ -273,7 +311,7 @@ const About = ({ showCont, setShowCont }) => {
             aboutMeText: values.aboutMe,
             interests: values.interests,
             socialNetworks: textLink,
-            photo: imgPerfil,
+            photo: imgPerfil.data.secure_url,
           },
         })
         // console.log(data.addAboutMe)
@@ -281,7 +319,7 @@ const About = ({ showCont, setShowCont }) => {
           Swal.fire({
             title: 'Excelente!',
             text: 'Tus datos se guardarón exitosamente!',
-            imageUrl: `${correct}`,
+            icon: 'success',
             imageWidth: 300,
             imageAlt: 'Custom image',
           })
@@ -306,164 +344,165 @@ const About = ({ showCont, setShowCont }) => {
     // console.log(filterLinks)
     setLinkText(filterLinks)
   }
-  // const cld = new Cloudinary({
-  //   cloud: {
-  //     cloudName: 'demo',
-  //   },
-  // })
-  const uploadImage = async () => {
-    // console.log(er[0])
+
+  const uploadImage = async (event) => {
     try {
       const formData = new FormData()
-      formData.append('file', imgAdd)
-      formData.append('upload_preset', 'hy996ubi')
+      formData.append('file', event.target.files[0])
+      formData.append('upload_preset', `${process.env.REACT_APP_CLOUD}`)
 
       const imgResul = await Axios.post(
         `https://api.cloudinary.com/v1_1/${nameKey}/image/upload`,
         formData
       )
       setImgPerfil(imgResul)
-      // console.log(imgAdd, imgResul)
     } catch (e) {
       // console.log(e)
     }
-
-    // .then((response) => console.log('Success:', response))
-    // .catch((e) => console.log('e', e))
   }
-  // console.log(imgAdd)
-
-  // useEffect(() => {}, [textLink])
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
-        <ContentAddImage>
-          <Figure>
-            <FaUserAlt />
-          </Figure>
-          <label htmlFor="comPhoto">
-            <input
-              type="file"
-              name="comPhoto"
-              id="comPhoto"
-              accept="image/*"
-              multiple
-              onChange={(e) => {
-                // uploadImage(e.target.files)
-                setImgAdd(e.target.files[0])
-              }}
+        <ContainerAbout>
+          <div>
+            <ContentAddImage>
+              {imgPerfil !== ' ' ? (
+                <FigurePrevw>
+                  <ImagePrevw src={imgPerfil.data.secure_url} />
+                </FigurePrevw>
+              ) : (
+                <Figure>
+                  <FaUserAlt />
+                </Figure>
+              )}
+
+              <label htmlFor="comPhoto">
+                <input
+                  type="file"
+                  name="comPhoto"
+                  id="comPhoto"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    uploadImage(e)
+                  }}
+                />
+
+                <AddImage>
+                  <BiImageAdd />
+                  Añadir imagen de pérfil
+                </AddImage>
+              </label>
+            </ContentAddImage>
+          </div>
+          <div>
+            <InputDashboard
+              placeholder="Un nombre y un Apellido Nayruth Calla"
+              textLabel=" Nombre y Apellido para tu portada"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              id="username"
+              name="username"
+              onBlur={formik.handleBlur}
             />
-            <AddImage>
-              <BiImageAdd type="button" onClick={() => uploadImage} />
-              Añadir imagen de pérfil
-            </AddImage>
-          </label>
-        </ContentAddImage>
-        <InputDashboard
-          placeholder="Un nombre y un Apellido Nayruth Calla"
-          textLabel=" Nombre y Apellido para tu portada"
-          value={formik.values.username}
-          onChange={formik.handleChange}
-          id="username"
-          name="username"
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.username && formik.errors.username ? (
-          <Message text={formik.errors.username} />
-        ) : null}
-        {/* {console.log(formik.touched.username)} */}
-        <TextareaDashboard
-          placeholder="Apasionada en Desarrollo Javascript React / Web Apps y Automatización con NodeJS"
-          textLabel="¿ A qué te dedicas ?"
-          value={formik.values.occupation}
-          onChange={formik.handleChange}
-          id="occupation"
-          name="occupation"
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.occupation && formik.errors.occupation ? (
-          <Message text={formik.errors.occupation} />
-        ) : null}
-        <TextareaDashboard
-          placeholder="Hola, soy Nayruth 😄, una desarrolladora 💻 de Perú 🇵🇪. Soy una programodora web [Javascript] me apasiona todo lo relacionado con aplicaciones en tiempo real. Me gusta el cine y los deportes 🏃.
+            {formik.touched.username && formik.errors.username ? (
+              <Message text={formik.errors.username} />
+            ) : null}
+            {/* {console.log(formik.touched.username)} */}
+            <TextareaDashboard
+              placeholder="Apasionada en Desarrollo Javascript React / Web Apps y Automatización con NodeJS"
+              textLabel="¿ A qué te dedicas ?"
+              value={formik.values.occupation}
+              onChange={formik.handleChange}
+              id="occupation"
+              name="occupation"
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.occupation && formik.errors.occupation ? (
+              <Message text={formik.errors.occupation} />
+            ) : null}
+            <TextareaDashboard
+              placeholder="Hola, soy Nayruth 😄, una desarrolladora 💻 de Perú 🇵🇪. Soy una programodora web [Javascript] me apasiona todo lo relacionado con aplicaciones en tiempo real. Me gusta el cine y los deportes 🏃.
           Aficionada por el autoaprendizaje y el gran impacto que tiene programar.
           
           ¡Hagamos historia!"
-          textLabel="Habla sobre tí"
-          size="big"
-          value={formik.values.aboutMe}
-          onChange={formik.handleChange}
-          id="aboutMe"
-          name="aboutMe"
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.aboutMe && formik.errors.aboutMe ? (
-          <Message text={formik.errors.aboutMe} />
-        ) : null}
-
-        <TextareaDashboard
-          placeholder="Que estoy haciendo actualmente"
-          textLabel="Comparte tus intereses"
-          value={formik.values.interests}
-          onChange={formik.handleChange}
-          id="interests"
-          name="interests"
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.interests && formik.errors.interests ? (
-          <Message text={formik.errors.interests} />
-        ) : null}
-        <ContSelect>
-          <Label htmlFor="linktype">Agrega el link de tus Contactos</Label>
-          {textLink.length > 0 ? (
-            <ContPrev>
-              {textLink.map((e, i) => (
-                <Preview key={i}>
-                  <P>{e.name}</P>
-                  <P>{e.link}</P>
-                  <ButtonRed
-                    type="button"
-                    onClick={() => handleReduce(e.name, e.link)}
-                  >
-                    <FaMinus />
-                  </ButtonRed>
-                </Preview>
-              ))}
-            </ContPrev>
-          ) : null}
-
-          <ContSocialNetwork>
-            <Select
-              label="link Type"
-              name="linktype"
+              textLabel="Habla sobre tí"
+              size="big"
+              value={formik.values.aboutMe}
               onChange={formik.handleChange}
-            >
-              <Option value="">Eligir</Option>
-              <Option value="gmail">Gmail</Option>
-              <Option value="linkedin">LinkedIn</Option>
-              <Option value="github">GitHub</Option>
-              <Option value="instagram">Instagram</Option>
-              <Option value="facebook">Facebook</Option>
-            </Select>
-            <InputLink
-              placeholder="Link https://..."
-              value={formik.values.inputLink}
-              onChange={formik.handleChange}
-              id="inputLink"
-              name="inputLink"
+              id="aboutMe"
+              name="aboutMe"
               onBlur={formik.handleBlur}
             />
-            <AddButton type="button" onClick={handleClick}>
-              <FaPlus />
-            </AddButton>
-          </ContSocialNetwork>
-          {formik.touched.inputLink && formik.errors.inputLink ? (
-            <Message text={formik.errors.inputLink} />
-          ) : null}
-          {formik.touched.linktype && formik.errors.linktype ? (
-            <Message text={formik.errors.linktype} />
-          ) : null}
-        </ContSelect>
+            {formik.touched.aboutMe && formik.errors.aboutMe ? (
+              <Message text={formik.errors.aboutMe} />
+            ) : null}
+
+            <TextareaDashboard
+              placeholder="Que estoy haciendo actualmente"
+              textLabel="Comparte tus intereses"
+              value={formik.values.interests}
+              onChange={formik.handleChange}
+              id="interests"
+              name="interests"
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.interests && formik.errors.interests ? (
+              <Message text={formik.errors.interests} />
+            ) : null}
+            <ContSelect>
+              <Label htmlFor="linktype">Agrega el link de tus Contactos</Label>
+              {textLink.length > 0 ? (
+                <ContPrev>
+                  {textLink.map((e, i) => (
+                    <Preview key={i}>
+                      <P>{e.name}</P>
+                      <P>{e.link}</P>
+                      <ButtonRed
+                        type="button"
+                        onClick={() => handleReduce(e.name, e.link)}
+                      >
+                        <FaMinus />
+                      </ButtonRed>
+                    </Preview>
+                  ))}
+                </ContPrev>
+              ) : null}
+
+              <ContSocialNetwork>
+                <Select
+                  label="link Type"
+                  name="linktype"
+                  onChange={formik.handleChange}
+                >
+                  <Option value="">Eligir</Option>
+                  <Option value="gmail">Gmail</Option>
+                  <Option value="linkedin">LinkedIn</Option>
+                  <Option value="github">GitHub</Option>
+                  <Option value="instagram">Instagram</Option>
+                  <Option value="facebook">Facebook</Option>
+                </Select>
+                <InputLink
+                  placeholder="Link https://..."
+                  value={formik.values.inputLink}
+                  onChange={formik.handleChange}
+                  id="inputLink"
+                  name="inputLink"
+                  onBlur={formik.handleBlur}
+                />
+                <AddButton type="button" onClick={handleClick}>
+                  <FaPlus />
+                </AddButton>
+              </ContSocialNetwork>
+              {formik.touched.inputLink && formik.errors.inputLink ? (
+                <Message text={formik.errors.inputLink} />
+              ) : null}
+              {formik.touched.linktype && formik.errors.linktype ? (
+                <Message text={formik.errors.linktype} />
+              ) : null}
+            </ContSelect>
+          </div>
+        </ContainerAbout>
         <SaveButton type="submit">Guardar</SaveButton>
       </Form>
     </Container>

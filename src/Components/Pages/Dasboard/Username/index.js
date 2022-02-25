@@ -9,7 +9,7 @@ import InputDashboard from '../../../Layouts/InputDashboard'
 import Message from '../../../Layouts/MessageError'
 import { useEditUser, useGetUserAbout } from './customHooks'
 // import sad from '../../../../assets/sad.gif'
-import correct from '../../../../assets/correct.gif'
+// import correct from '../../../../assets/correct.gif'
 
 const Container = styled.form`
   display: flex;
@@ -98,7 +98,7 @@ const Username = () => {
           Swal.fire({
             title: 'Excelente!',
             text: 'Tus datos se guardarón exitosamente!',
-            imageUrl: `${correct}`,
+            icon: 'success',
             imageWidth: 300,
             confirmButtonColor: '#f95a61',
             imageAlt: 'Custom image',
@@ -147,10 +147,10 @@ const Username = () => {
                 </>
               ) : (
                 <P
-                  href={`https://iamp.netlify.app/profile/${e.userName}`}
+                  href={`https://iamp.netlify.app/ia/${e.userName}`}
                   target="_blank"
                 >
-                  https://iamp.netlify.app/profile/{e.userName}
+                  https://iamp.netlify.app/ia/{e.userName}
                 </P>
               )}
             </div>

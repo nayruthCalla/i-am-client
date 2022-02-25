@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import LinksCompnent from '../../Layouts/LinksRedes'
 
 const Container = styled.section`
   /* margin-top: 31rem; */
@@ -82,7 +83,8 @@ const ContText = styled.div`
   }
 `
 
-const Skills = () => {
+const Footer = ({ dataUser }) => {
+  // console.log(dataUser)
   return (
     <Container id="contact">
       <ContSectionTitle>
@@ -101,8 +103,9 @@ const Skills = () => {
       </ContText>
 
       <ButtonContc>Dí Hola</ButtonContc>
+      <LinksCompnent links={dataUser[0].socialNetworks} />
     </Container>
   )
 }
 
-export default Skills
+export default Footer

@@ -105,7 +105,7 @@ const Preview = styled('div')`
 const ContentMore = styled.div`
   display: flex;
   gap: 1.3rem;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `
 const ButtonMore = styled.button`

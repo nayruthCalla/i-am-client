@@ -1,10 +1,13 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useEffect } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import phono from '../../../assets/phone.svg'
 import share from '../../../assets/share.svg'
-import link from '../../../assets/link-main.svg'
+import link from '../../../assets/link-her.svg'
 
 const Container = styled.section`
   display: flex;
@@ -44,7 +47,6 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-top: 60px;
   margin-left: 30px;
   @media screen and (min-width: 768px) {
     width: 65%;
@@ -72,7 +74,6 @@ const Title = styled.h1`
 const Button = styled.button`
   padding: 0 1rem 0 1rem;
   border-radius: 8px;
-  width: 70%;
   background: var(--color-pink-prim);
   font-family: var(--font-Dongle);
   font-size: 2.5rem;
@@ -84,17 +85,20 @@ const Button = styled.button`
   &:hover {
     background: #f95a61b8;
   }
+  width: 20rem;
   @media screen and (min-width: 768px) {
-    width: 50%;
   }
   @media screen and (min-width: 1024px) {
-    width: 50%;
   }
 `
 
 // say g
 
 const Hero = () => {
+  const { loginWithRedirect, isAuthenticated, user } = useAuth0()
+
+  useEffect(() => {}, [user])
+  const navigate = useNavigate()
   return (
     <Container>
       <Figure>
@@ -105,7 +109,13 @@ const Hero = () => {
         <Figure>
           <Image alt="logo-app" src={link} />
         </Figure>
-        <Button>Crear Pagina</Button>
+        {isAuthenticated ? (
+          <div>
+            <Button onClick={() => navigate('/dashboard')}>Mi Panel</Button>
+          </div>
+        ) : (
+          <Button onClick={() => loginWithRedirect()}>Crear Pagina</Button>
+        )}
       </Main>
       <FigureMobile>
         <Image alt="logo-app" src={share} />

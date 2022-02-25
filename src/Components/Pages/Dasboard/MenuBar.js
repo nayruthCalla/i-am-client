@@ -9,6 +9,7 @@ import {
   FaChild,
   FaExternalLinkAlt,
   FaFileAlt,
+  FaDonate,
 } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 import userdefault from '../../../assets/user.gif'
@@ -138,6 +139,12 @@ const DasBoard = () => {
             <FaFileAlt />
           </IconContext.Provider>
           <Link href="#cv">Mi CV</Link>
+        </Li>
+        <Li>
+          <IconContext.Provider value={value}>
+            <FaDonate />
+          </IconContext.Provider>
+          <Link href="#donation">Donaciones</Link>
         </Li>
       </Ul>
     </MenuBar>

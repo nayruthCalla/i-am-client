@@ -9,6 +9,7 @@ import Proyects from './Proyects'
 import Skills from './Skills'
 import Logros from './Logros'
 import Menu from './MenuBar'
+import Donation from './Donation/donation'
 import { useGetUserAbout } from './Username/customHooks'
 
 const Container = styled.div`
@@ -62,7 +63,7 @@ const DasBoard = () => {
                   <ContainerCont>
                     <ContMenuButton id="userName">
                       <ButtonDashborad
-                        text="Mi nombre de usuario"
+                        text="Mi Link de mi portafolio web"
                         screen="mobile"
                       />
                       <Line />
@@ -91,9 +92,15 @@ const DasBoard = () => {
                       <Line />
                       <Logros />
                     </ContMenuButton>
-                    {/* <ContMenuButton>
-                    <ButtonDashborad text="Mi CV" screen="mobile" />
-                  </ContMenuButton> */}
+                    <ContMenuButton id="cv">
+                      <ButtonDashborad text="Mis CV" screen="mobile" />
+                      <Line />
+                    </ContMenuButton>
+                    <ContMenuButton id="donation">
+                      <ButtonDashborad text="Donaciones" screen="mobile" />
+                      <Line />
+                      <Donation />
+                    </ContMenuButton>
                   </ContainerCont>
                 </Container>
               )}

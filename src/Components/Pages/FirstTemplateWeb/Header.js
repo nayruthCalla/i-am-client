@@ -27,11 +27,12 @@ const Container = styled.header`
 `
 const ContTitle = styled.div``
 const Title = styled.a`
-  font-family: var(--font-SpaceM);
   font-style: normal;
   font-weight: bold;
-  font-size: 25px;
+  font-family: 'Bangers', cursive;
+  font-size: 4rem;
   color: #2bb8da;
+  text-decoration: none;
 `
 const Nagitation = styled.nav``
 const NagitationMobile = styled.nav`
@@ -101,9 +102,7 @@ const Header = ({ userName }) => {
   return (
     <ContHeader>
       <Container>
-        <Link href="#Home">
-          <Title>{firtsLetter(userName)}</Title>
-        </Link>
+        <Title href="#Home">{firtsLetter(userName)}</Title>
         <Nagitation>
           <Ul>
             <Li>
@@ -137,7 +136,7 @@ const Header = ({ userName }) => {
 
       <NagitationMobile>
         <ContTitle>
-          <Title>{firtsLetter(userName)}</Title>
+          <Title href="#Home">{firtsLetter(userName)}</Title>
         </ContTitle>
         <ButtonHamb onClick={() => setShowMenu(!showMenu)}>
           <FaBars />

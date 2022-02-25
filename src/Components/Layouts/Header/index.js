@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useNavigate } from 'react-router-dom'
-// import { slide as Menu } from 'react-burger-menu'
 import { FaBars } from 'react-icons/fa'
+import { useGetUserAbout } from '../../Pages/Dasboard/Username/customHooks'
 
 import logo from '../../../assets/logoIam.svg'
 
@@ -107,6 +108,7 @@ const ButtonMobile = styled(ButtonLogin)`
   font-size: 3.5rem;
   color: #fff;
 `
+
 const MenuHamb = styled('div')`
   background: #f95a61;
   display: flex;
@@ -120,6 +122,7 @@ const ContColumn = styled('div')`
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
+  const { data } = useGetUserAbout()
   const navigate = useNavigate()
   const logoutSess = () => {
     logout({ returnTo: window.location.origin })
@@ -147,9 +150,20 @@ const Header = () => {
               </ButtonLogin>
             )}
             {isAuthenticated ? (
-              <ButtonSign onClick={() => navigate('/portfolio')}>
-                Ver mi Página
-              </ButtonSign>
+              <>
+                {data?.getUserByIdAbout.length > 0 ? (
+                  <>
+                    {data?.getUserByIdAbout.map((e, i) => (
+                      <ButtonSign
+                        key={i}
+                        onClick={() => navigate(`/ia/${e.userName}`)}
+                      >
+                        Ver mi Página
+                      </ButtonSign>
+                    ))}
+                  </>
+                ) : null}
+              </>
             ) : (
               <ButtonSign onClick={() => loginWithRedirect()}>
                 Crear Página
@@ -183,9 +197,20 @@ const Header = () => {
               </ButtonMobile>
             )}
             {isAuthenticated ? (
-              <ButtonMobile onClick={() => navigate('/portfolio')}>
-                Ver mi Página
-              </ButtonMobile>
+              <>
+                {data?.getUserByIdAbout.length > 0 ? (
+                  <>
+                    {data?.getUserByIdAbout.map((e, i) => (
+                      <ButtonMobile
+                        key={i}
+                        onClick={() => navigate(`/ia/${e.userName}`)}
+                      >
+                        Ver mi Página
+                      </ButtonMobile>
+                    ))}
+                  </>
+                ) : null}
+              </>
             ) : (
               <ButtonMobile onClick={() => loginWithRedirect()}>
                 Crear Página

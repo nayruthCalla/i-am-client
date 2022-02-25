@@ -83,28 +83,6 @@ const Preview = styled('div')`
   @media screen and (min-width: 1024px) {
   }
 `
-// const Container = styled('article')(
-//   ({ colorBtn }) => css`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     width: 100%;
-//     max-width: ${colorBtn === 'dasboard' ? '35rem' : '40rem'};
-//     padding: 2rem;
-//     background-color: transparent;
-//     /* background: #ffffff; */
-//     border: ${colorBtn === 'dasboard'
-//       ? '1px solid rgba(143, 3, 3, 0.35)'
-//       : '2px solid rgba(43, 184, 218, 0.5)'};
-//     box-sizing: border-box;
-//     border-radius: 8px;
-//     @media screen and (min-width: 768px) {
-//     }
-//     @media screen and (min-width: 1024px) {
-//       min-width: 35rem;
-//     }
-//   `
-// )
 
 const AboutMe = () => {
   const [more, setMore] = useState(false)
@@ -113,54 +91,17 @@ const AboutMe = () => {
   const [edited, setEdited] = useState()
   const [addCardEdit, setAddCardEdit] = useState(false)
   const [deleteAboutMe] = useDeleteAbout()
-  // const [dataAboutM] = useState({
-  //   firstName: '',
-  //   profession: '',
-  //   aboutMeText: '',
-  //   interests: '',
-  //   resultLink: [],
-  // })
 
-  //   const [dataUser, setDataUser] = useState({ getUser: { userName: '' } })
-  //   const [dataAbout, setDataAbout] = useState({})
-  // const { data } = getUserCurrent()
-  //   const [GetAboutMeByUserName, result] = useAboutByUserName()
-  // console.log(edited)
   const handleMore = () => {
     setMore(!more)
     // console.log(more)
   }
-  //   console.log(data)
-  // useEffect(() => {
-  //   // setDataAboutM(data.getAboutMe)
-  // }, [data])
 
   const handleEdit = async (items) => {
     // console.log(items)
     setEdited(items)
     // setAddCard(!addCard)
     setAddCardEdit(!addCardEdit)
-    // Swal.fire({
-    //   title: 'Eliminar Proyecto',
-    //   text: 'Recuerda que podras agregar otro proyecto cuando quieras :)',
-    //   imageUrl: `${alert}`,
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#29ABE0',
-    //   cancelButtonColor: '#D9534F',
-    //   confirmButtonText: 'Sí, Eliminar',
-    //   imageWidth: 300,
-    //   imageHeight: 250,
-    //   imageAlt: 'Custom image',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     Swal.fire('Se eliminó Proyecto', '', 'success')
-    //     deleteProyect({
-    //       variables: {
-    //         deleteProyectId: id,
-    //       },
-    //     })
-    //   }
-    // })
   }
   //   console.log(dataAbout, dataUser)
   const handleDelete = async (id) => {
@@ -229,6 +170,7 @@ const AboutMe = () => {
                     about={e.aboutMeText}
                     interests={e.interests}
                     links={e.socialNetworks}
+                    photo={e.photo}
                   />
                 </>
               )}
