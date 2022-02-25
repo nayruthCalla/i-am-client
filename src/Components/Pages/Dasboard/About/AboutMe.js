@@ -14,6 +14,7 @@ const Container = styled.div`
     flex-direction: row-reverse;
     align-items: flex-start;
     justify-content: space-around;
+    flex-wrap: wrap;
   }
 `
 const Title = styled.p`
@@ -48,6 +49,11 @@ const ContainerAbo = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 54rem;
+  }
 `
 const FigurePrevw = styled.figure`
   background: transparent;

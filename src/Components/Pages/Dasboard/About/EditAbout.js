@@ -295,7 +295,7 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
     onSubmit: async (values) => {
       // alert(JSON.stringify(values, null, 2));
       try {
-        // console.log(textLink)
+        // console.log('textLink')
         const { data } = await updateAboutMe({
           variables: {
             updateAboutMeId: dataEdited.id,
@@ -304,14 +304,14 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
             aboutMeText: values.aboutMe,
             interests: values.interests,
             socialNetworks: textLink,
-            photo: imgPerfil.data.secure_url,
+            photo: addPhoto ? imgPerfil.data.secure_url : imgPerfil,
           },
         })
-        // console.log(data.addAboutMe)
-        if (data.addAboutMe) {
+        // console.log(data)
+        if (data.updateAboutMe) {
           Swal.fire({
             title: 'Excelente!',
-            text: 'Tus datos se guardarón exitosamente!',
+            text: 'Tus datos se editarón exitosamente!',
             icon: 'success',
             imageWidth: 300,
             imageAlt: 'Custom image',
@@ -356,7 +356,6 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
       // console.log(e)
     }
   }
-
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
@@ -501,7 +500,7 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
             {/* <SaveButton type="submit">Guardar</SaveButton> */}
           </div>
         </ContainerAbout>
-        <SaveButton type="submit">Guardar</SaveButton>
+        <SaveButton type="submit">Editar</SaveButton>
       </Form>
     </Container>
   )
