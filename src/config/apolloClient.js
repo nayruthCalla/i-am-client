@@ -4,9 +4,6 @@ import { setContext } from '@apollo/client/link/context'
 // process.env.REACT_APP_BACKEND_URL ||
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/graphql',
-  fetchOptions: {
-    mode: 'no-cors',
-  },
 })
 
 const authLink = setContext((_, { headers }) => {
