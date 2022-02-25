@@ -125,14 +125,14 @@ const Landing = () => {
           <ContImg>
             <Figure>
               <Image alt="logo-app" src={happy} />
-              <TitleImg>Agregar tus skills, esperiencia laboralb</TitleImg>
+              <TitleImg>Agregar tus skills, retos y experiencias</TitleImg>
             </Figure>
           </ContImg>
           <ContImg>
             <Figure>
               <Image alt="logo-app" src={rrss} />
               <TitleImg>
-                Agrega tus Redes sociales para que se contacten
+                Agrega tus Redes Sociales para que te contacten
               </TitleImg>
             </Figure>
           </ContImg>

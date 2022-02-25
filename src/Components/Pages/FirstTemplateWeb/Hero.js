@@ -60,13 +60,17 @@ const Figure = styled.figure`
   }
 `
 const Image = styled.img`
-  width: 15rem;
-  height: 15rem;
-  background: transparent;
-  /* border: 3px solid #2bb8da; */
-  box-sizing: border-box;
-  background: #120e26;
+  min-height: 250px;
+  min-width: 250px;
+  max-height: 250px;
+  max-width: 250px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
   :hover {
     /* filter: grayscale(80%); */
     filter: hue-rotate(331deg);

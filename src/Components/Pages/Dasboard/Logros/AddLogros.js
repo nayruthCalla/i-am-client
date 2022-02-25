@@ -100,7 +100,7 @@ const AddLogros = ({ setAddCard, addCard }) => {
     <Container>
       <Form onSubmit={formik.handleSubmit}>
         <InputDashboard
-          placeholder="Front-end developer en Laboratoria"
+          placeholder="Full Stack Javascript - Make It Real"
           textLabel="Escribe un título"
           value={formik.values.title}
           onChange={formik.handleChange}
