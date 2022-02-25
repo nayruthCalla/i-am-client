@@ -39,6 +39,7 @@ const ContainerAbout = styled.div`
     flex-direction: row-reverse;
     align-items: flex-start;
     justify-content: space-around;
+    flex-wrap: wrap;
   }
 `
 const ContentAddImage = styled.div`
@@ -72,7 +73,7 @@ const Form = styled.form`
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1024px) {
-    max-width: 130rem;
+    max-width: 100rem;
   }
 `
 
