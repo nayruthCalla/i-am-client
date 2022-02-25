@@ -20,12 +20,14 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0;
   background: var(--primary-template);
+  padding-bottom: 1.6rem;
 `
 const ContainerError = styled(Container)`
   align-items: center;
   justify-content: center;
 `
-const TextFooter = styled.p`
+
+const TextLink = styled.a`
   font-family: Saira;
   font-style: normal;
   font-weight: normal;
@@ -33,6 +35,7 @@ const TextFooter = styled.p`
   line-height: 24px;
   text-align: center;
   color: #a3a8c3;
+  text-decoration: none;
 `
 const ContDestop = styled.div`
   align-items: center;
@@ -110,10 +113,13 @@ const PortflTamplate = () => {
         <Footer dataUser={data?.getProfileUserAbout} />
       ) : null}
 
-      <TextFooter>© 2022 {userName}</TextFooter>
-      <TextFooter>Desarrollado por © 2022 Nayruth Calla - i-Am</TextFooter>
+      <TextLink href="https://iamp.netlify.app/">
+        Desarrollado por © 2022 Nayruth Calla - i-Am
+      </TextLink>
+      <TextLink href="https://jrgarciadev.com/">
+        Adapted from the Brittany Chiang Portfolio
+      </TextLink>
     </Container>
   )
 }
-
 export default PortflTamplate

@@ -268,16 +268,6 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
           },
         })
         setStateForm([])
-        // console.log(dataPost)
-        // if (data.addAboutMe) {
-        //   Swal.fire({
-        //     title: 'Excelente!',
-        //     text: 'Tus datos se guardarón exitosamente!',
-        //     imageUrl: `${correct}`,
-        //     imageWidth: 300,
-        //     imageAlt: 'Custom image',
-        //   })
-        // }
       } catch (e) {
         // console.log(e)
       }

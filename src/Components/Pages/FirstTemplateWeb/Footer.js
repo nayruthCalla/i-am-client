@@ -82,7 +82,15 @@ const ContText = styled.div`
     /* justify-content: flex-start; */
   }
 `
-
+const TextFooter = styled.p`
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #a3a8c3;
+`
 const Footer = ({ dataUser }) => {
   // console.log(dataUser)
   return (
@@ -104,6 +112,7 @@ const Footer = ({ dataUser }) => {
 
       <ButtonContc>Dí Hola</ButtonContc>
       <LinksCompnent links={dataUser[0].socialNetworks} />
+      <TextFooter>© 2022 {dataUser[0].firstName}</TextFooter>
     </Container>
   )
 }

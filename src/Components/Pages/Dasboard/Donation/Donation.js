@@ -1,26 +1,37 @@
 import { useState, useEffect } from 'react'
-import { GiCoffeeCup } from 'react-icons/gi'
 import styled from 'styled-components'
+import { FaCreditCard } from 'react-icons/fa'
 
 const Container = styled.div``
 const Message = styled.p``
 const Form = styled.form``
-const Button = styled.button`
+
+const ButtonLogin = styled.button`
+  font-family: var(--font-Dongle);
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-style: normal;
+  color: #3e3f3ab8;
   border: none;
-  background: none;
-  color: var(--principal-color);
-  font-size: 2.8rem;
-  margin-left: 10px;
-  cursor: pointer;
-  &:hover {
-    color: #29ace094;
+  border-radius: 8px;
+  background-color: transparent;
+  padding: 0 1rem 0 1rem;
+`
+const ButtonSign = styled(ButtonLogin)`
+  background: var(--color-pink-prim);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  :hover {
+    background: #c54646;
   }
 `
-
 const Payment = () => {
   const [message, setMessage] = useState('')
-  const baseURL = 'http://localhost:4000'
-  const action = `${baseURL}api/payment/create-checkout-session`
+  const action = `${process.env.REACT_APP_PAYMENT_URL}api/payment/create-checkout-session`
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -43,9 +54,10 @@ const Payment = () => {
         <Message>{message}</Message>
       ) : (
         <Form data-test="donate" action={action} method="POST">
-          <Button type="submit">
-            <GiCoffeeCup />
-          </Button>
+          <ButtonSign type="submit">
+            <FaCreditCard />
+            Enviar regalito por tarjeta
+          </ButtonSign>
         </Form>
       )}
     </Container>

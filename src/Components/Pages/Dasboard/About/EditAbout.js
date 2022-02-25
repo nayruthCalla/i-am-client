@@ -12,7 +12,7 @@ import { FaPlus, FaMinus } from 'react-icons/fa'
 import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
-import correct from '../../../../assets/correct.gif'
+// import correct from '../../../../assets/correct.gif'
 import { useEditAbout } from './customHooks'
 // import LinkSocialNet from './SocialNetwork'
 
@@ -312,7 +312,7 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
           Swal.fire({
             title: 'Excelente!',
             text: 'Tus datos se guardarón exitosamente!',
-            imageUrl: `${correct}`,
+            icon: 'success',
             imageWidth: 300,
             imageAlt: 'Custom image',
           })

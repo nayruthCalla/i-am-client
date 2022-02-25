@@ -146,7 +146,7 @@ const Logros = () => {
   const handleDelete = async (id) => {
     // console.log(id)
     Swal.fire({
-      title: 'Eliminar Skill',
+      title: 'Eliminar Logro',
       text: 'Podras agregar otro logro cuando quieras :)',
       imageUrl: `${alert}`,
       showCancelButton: true,

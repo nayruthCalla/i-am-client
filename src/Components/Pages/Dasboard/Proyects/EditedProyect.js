@@ -12,7 +12,7 @@ import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
 import { useEditProyect } from './customHooks'
-import correct from '../../../../assets/correct.gif'
+// import correct from '../../../../assets/correct.gif'
 // import CardProyect from '../../../Layouts/CardProyect'
 
 const Container = styled.div`
@@ -273,7 +273,7 @@ const EditedProyect = ({
         await Swal.fire({
           title: 'Excelente!',
           text: 'Tus datos se guardarón exitosamente!',
-          imageUrl: `${correct}`,
+          icon: 'success',
           imageWidth: 300,
           imageAlt: 'Custom image',
           confirmButtonColor: '#f95a61',

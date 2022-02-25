@@ -90,17 +90,6 @@ const AddLogros = ({ setAddCard, addCard }) => {
             description: values.description,
           },
         })
-        // setStateForm([])
-        // console.log(data)
-        // if (data.addSkill) {
-        //   Swal.fire({
-        //     title: 'Excelente!',
-        //     text: 'Tus datos se guardarón exitosamente!',
-        //     imageUrl: `${correct}`,
-        //     imageWidth: 300,
-        //     imageAlt: 'Custom image',
-        //   })
-        // }
       } catch (e) {
         // console.log(e)
       }
