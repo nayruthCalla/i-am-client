@@ -1,15 +1,15 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
-  extends: ["plugin:react/jsx-runtime", "airbnb", "prettier"],
+  extends: ["plugin:react/jsx-runtime", "airbnb", "prettier", "plugin:storybook/recommended"],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 13,
-    sourceType: "module",
+    sourceType: "module"
   },
   plugins: ["react"],
   rules: {
@@ -23,9 +23,8 @@ module.exports = {
     "react/no-array-index-key": "off",
     "react/jsx-no-constructed-context-values": "off",
     "no-use-before-define": "off",
-    "react/function-component-definition": [
-      2,
-      { namedComponents: "arrow-function" },
-    ],
-  },
+    "react/function-component-definition": [2, {
+      namedComponents: "arrow-function"
+    }]
+  }
 };

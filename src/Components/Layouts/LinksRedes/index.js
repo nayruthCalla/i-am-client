@@ -48,7 +48,7 @@ const FooterLink = styled.a`
   }
 `
 
-const About = ({ links }) => {
+const LinkRedes = ({ links }) => {
   const value = useMemo(() => ({ className: 'icon' }))
   const iconSocialNetwor = (nameIcon, link, i) => {
     if (nameIcon === 'github') {
@@ -114,4 +114,4 @@ const About = ({ links }) => {
   )
 }
 
-export default About
+export default LinkRedes
