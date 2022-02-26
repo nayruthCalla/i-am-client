@@ -99,7 +99,7 @@ const Title = styled.h2`
   text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 100%;
+  width: auto;
 `
 const Description = styled.p`
   font-style: normal;
