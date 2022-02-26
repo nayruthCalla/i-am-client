@@ -180,7 +180,7 @@ const ButtonRed = styled.button`
     background: #e7dbe7;
   }
 `
-const P = styled.p`
+const P = styled.a`
   font-family: Dongle;
   font-style: normal;
   font-weight: bold;
@@ -466,8 +466,14 @@ const EditedProyect = ({
               <ContPrev>
                 {textLink.map((e, i) => (
                   <Preview key={i}>
-                    <P>{e.name}</P>
-                    <P>{e.link}</P>
+                    <P
+                      id="linkContact"
+                      name="linkContact"
+                      href={e.link}
+                      target="_blank"
+                    >
+                      {e.name}
+                    </P>
                     <ButtonRed
                       type="button"
                       onClick={() => handleReduce(e.name, e.link)}

@@ -109,13 +109,11 @@ const Name = styled.h1`
   font-family: var(--font-SpaceM);
   color: #ffffff;
   font-size: 6rem;
-
-  /* min-width: 40px; */
   white-space: normal;
   text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 75%;
+  width: 100%;
   @media screen and (min-width: 768px) {
     font-size: 8rem;
     width: 100%;
