@@ -132,14 +132,17 @@ const Header = () => {
   return (
     <Cont>
       <Container>
-        <Figure onClick={() => navigate('/')}>
+        <Figure data-test="btnHome" onClick={() => navigate('/')}>
           <Image alt="logo-app" src={logo} />
         </Figure>
         <Nagitation>
           <Ul>
             {isAuthenticated ? (
               <div>
-                <ButtonLogin onClick={() => navigate('/dashboard')}>
+                <ButtonLogin
+                  data-test="panelbtn"
+                  onClick={() => navigate('/dashboard')}
+                >
                   Mi Panel
                 </ButtonLogin>
                 <ButtonLogin onClick={logoutSess}>Cerrar Sesión</ButtonLogin>
@@ -168,7 +171,10 @@ const Header = () => {
                 ) : null}
               </>
             ) : (
-              <ButtonSign onClick={() => loginWithRedirect()}>
+              <ButtonSign
+                data-test="registerbtn"
+                onClick={() => loginWithRedirect()}
+              >
                 Crear Página
               </ButtonSign>
             )}
@@ -189,7 +195,10 @@ const Header = () => {
             <ButtonMobile onClick={() => navigate('/')}>Inicio</ButtonMobile>
             {isAuthenticated ? (
               <ContColumn>
-                <ButtonMobile onClick={() => navigate('/dashboard')}>
+                <ButtonMobile
+                  data-test="panelbtn"
+                  onClick={() => navigate('/dashboard')}
+                >
                   Mi Panel
                 </ButtonMobile>
                 <ButtonMobile onClick={logoutSess}>Cerrar Sesión</ButtonMobile>

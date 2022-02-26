@@ -9,7 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 6.5rem 0;
+  padding: 6.5rem 3.6rem;
   gap: 3rem;
 `
 
@@ -69,7 +69,15 @@ const ButtonSign = styled(ButtonLogin)`
 `
 const ContButton = styled.div`
   display: flex;
-  gap: 5rem;
+  flex-direction: column;
+  gap: 2rem;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 5rem;
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 65rem;
+  }
 `
 
 const Donation = () => {

@@ -226,10 +226,10 @@ const SaveButton = styled.button`
   }
 `
 const ImagePrevw = styled.img`
-  min-height: 250px;
-  min-width: 250px;
-  max-height: 250px;
-  max-width: 250px;
+  min-height: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  max-width: 150px;
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
@@ -241,8 +241,10 @@ const ImagePrevw = styled.img`
     filter: grayscale(80%);
   }
   @media screen and (min-width: 768px) {
-    width: 25rem;
-    height: 25rem;
+    min-height: 250px;
+    min-width: 250px;
+    max-height: 250px;
+    max-width: 250px;
   }
 `
 const FigurePrevw = styled.figure`
@@ -408,6 +410,7 @@ const About = ({ showCont, setShowCont }) => {
               id="username"
               name="username"
               onBlur={formik.handleBlur}
+              data-test="textName"
             />
             {formik.touched.username && formik.errors.username ? (
               <Message text={formik.errors.username} />

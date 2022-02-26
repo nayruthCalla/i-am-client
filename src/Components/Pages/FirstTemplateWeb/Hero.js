@@ -60,10 +60,10 @@ const Figure = styled.figure`
   }
 `
 const Image = styled.img`
-  min-height: 250px;
-  min-width: 250px;
-  max-height: 250px;
-  max-width: 250px;
+  min-height: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  max-width: 150px;
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
@@ -76,8 +76,10 @@ const Image = styled.img`
     filter: hue-rotate(331deg);
   }
   @media screen and (min-width: 768px) {
-    width: 25rem;
-    height: 25rem;
+    min-height: 250px;
+    min-width: 250px;
+    max-height: 250px;
+    max-width: 250px;
   }
 `
 const FooterDataContainer = styled.div`
@@ -110,7 +112,6 @@ const Name = styled.h1`
   text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
   width: 75%;
   @media screen and (min-width: 768px) {
     font-size: 8rem;

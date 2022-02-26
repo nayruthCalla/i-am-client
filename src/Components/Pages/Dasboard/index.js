@@ -63,7 +63,7 @@ const DasBoard = () => {
                   <ContainerCont>
                     <ContMenuButton id="userName">
                       <ButtonDashborad
-                        text="Mi Link de mi portafolio web"
+                        text="Link de mi Página"
                         screen="mobile"
                       />
                       <Line />

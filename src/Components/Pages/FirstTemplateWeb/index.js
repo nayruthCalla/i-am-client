@@ -117,7 +117,7 @@ const PortflTamplate = () => {
         Desarrollado por © 2022 Nayruth Calla - i-Am
       </TextLink>
       <TextLink href="https://jrgarciadev.com/">
-        Adapted from the Brittany Chiang Portfolio
+        Adapted from the Junior García Portfolio
       </TextLink>
     </Container>
   )
