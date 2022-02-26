@@ -14,7 +14,7 @@ const Container = styled('article')(
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: ${colorBtn === 'dasboard' ? '35rem' : '40rem'};
+    max-width: ${colorBtn === 'dasboard' ? '35rem' : '35rem'};
     padding: 2rem;
     background-color: ${colorBtn === 'dasboard'
       ? 'transparent'
