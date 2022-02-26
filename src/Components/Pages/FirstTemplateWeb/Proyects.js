@@ -9,9 +9,10 @@ const Container = styled.section`
   justify-content: center;
   /* align-items: center; */
   gap: 2rem;
-  padding: 2rem 3rem;
+  padding: 2rem 0;
   @media screen and (min-width: 768px) {
     min-height: 100vh;
+    padding: 2rem 3rem;
   }
   @media screen and (min-width: 1024px) {
     width: 1024px;
@@ -62,6 +63,7 @@ const ContainerProyects = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 3rem;
+  align-items: center;
   @media screen and (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
