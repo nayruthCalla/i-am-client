@@ -7,13 +7,18 @@ import {
   FaRegEnvelopeOpen,
   FaFacebookSquare,
   FaInstagram,
-  FaSquarespace,
 } from 'react-icons/fa'
 
 const FooterDataContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.8rem;
+  line-height: 37px;
+  color: rgba(204, 204, 204, 0.77);
   @media screen and (min-width: 768px) {
     flex-direction: row;
   }
@@ -105,7 +110,7 @@ const LinkRedes = ({ links }) => {
         </FooterLink>
       )
     }
-    return <FaSquarespace />
+    return <p>No ingresaste un link de contacto</p>
   }
   return (
     <FooterDataContainer>

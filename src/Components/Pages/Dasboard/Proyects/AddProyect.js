@@ -204,7 +204,12 @@ const DivColum = styled.div`
 `
 
 const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
-  const [textLink, setLinkText] = useState([])
+  const [textLink, setLinkText] = useState([
+    {
+      name: '',
+      link: '',
+    },
+  ])
   const [mess, setMess] = useState(false)
   const [messRequired, setMessRequired] = useState(false)
   const [validateQtyLinks, setValidateQtyLinks] = useState(false)

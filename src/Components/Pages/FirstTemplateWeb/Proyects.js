@@ -10,6 +10,7 @@ const Container = styled.section`
   /* align-items: center; */
   gap: 2rem;
   padding: 2rem 3rem;
+  width: 100%;
   @media screen and (min-width: 768px) {
     min-height: 100vh;
     padding: 2rem 3rem;

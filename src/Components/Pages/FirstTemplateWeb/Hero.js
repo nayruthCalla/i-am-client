@@ -94,6 +94,9 @@ const FooterLink = styled.a`
   color: #ffffff;
   padding: 5px 0px;
   font-size: 4rem;
+  :hover {
+    color: var(--color-prtfolio);
+  }
   @media screen and (min-width: 768px) {
   }
 `

@@ -26,6 +26,7 @@ const Container = styled('article')(
     box-sizing: border-box;
     border-radius: 8px;
     @media screen and (min-width: 768px) {
+      max-width: ${colorBtn === 'dasboard' ? '40rem' : '40rem'};
     }
     @media screen and (min-width: 1024px) {
       min-width: 35rem;
@@ -98,7 +99,7 @@ const Title = styled.h2`
   text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  width: 100%;
 `
 const Description = styled.p`
   font-style: normal;
@@ -144,6 +145,8 @@ const FooterCard = styled('div')(
 const ContText = styled.div`
   display: flex;
   gap: 1.5rem;
+  width: 100%;
+  justify-content: center;
 `
 const TextFooter = styled.p`
   white-space: normal;
@@ -154,7 +157,13 @@ const TextFooter = styled.p`
   font-size: 1.5rem;
   font-family: var(--font-SpaceM);
   text-transform: capitalize;
+  /* width: 100%; */
 `
+const ContHeaderIcon = styled.div`
+  display: flex;
+  gap: 1rem;
+`
+
 const CardProyect = ({
   colorBtn,
   title,
@@ -169,12 +178,12 @@ const CardProyect = ({
   return (
     <Container colorBtn={colorBtn}>
       <HeaderCard colorBtn={colorBtn}>
-        <ContText>
+        <ContHeaderIcon>
           <IconContext.Provider value={value}>
             <FaFolderOpen />
           </IconContext.Provider>
           <TextFooter>{level}</TextFooter>
-        </ContText>
+        </ContHeaderIcon>
         <ContainerBtn>
           {links.map((e, i) => (
             <div key={i}>

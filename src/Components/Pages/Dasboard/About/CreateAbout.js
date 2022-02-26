@@ -12,6 +12,7 @@ import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
 import { useAddAbout } from './customHooks'
+import user from '../../../../assets/user.gif'
 
 const Container = styled.div`
   display: flex;
@@ -64,7 +65,7 @@ const Form = styled.form`
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1024px) {
-    max-width: 130rem;
+    max-width: 100rem;
   }
 `
 const ContainerAbout = styled.div`
@@ -122,7 +123,7 @@ const Label = styled.label`
   color: rgba(67, 75, 87, 0.94);
   text-align: left;
 `
-const P = styled.p`
+const P = styled.a`
   font-family: Dongle;
   font-style: normal;
   font-weight: bold;
@@ -132,9 +133,20 @@ const P = styled.p`
   text-align: left;
 `
 const Preview = styled.div`
-  width: 100%;
   display: flex;
-  gap: 1.3rem;
+  flex-direction: column;
+  width: 100%;
+  flex-flow: column-reverse;
+  gap: 0;
+  background: #004cff0a;
+  padding: 1rem;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 1.3rem;
+    width: auto;
+  }
+  @media screen and (min-width: 1024px) {
+  }
 `
 const ContPrev = styled.div`
   width: 100%;
@@ -268,8 +280,15 @@ const About = ({ showCont, setShowCont }) => {
   const nameKey = process.env.REACT_APP_NAME_KEY
   const [addAboutMe] = useAddAbout()
   const [url, setLink] = useState(true)
-  const [textLink, setLinkText] = useState([])
+  const [textLink, setLinkText] = useState([
+    {
+      name: '',
+      link: '',
+    },
+  ])
   const [imgPerfil, setImgPerfil] = useState(' ')
+  const [addPhoto, setAddPhoto] = useState(false)
+  // const [validateQtyLinks, setValidateQtyLinks] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -280,6 +299,7 @@ const About = ({ showCont, setShowCont }) => {
       inputLink: '',
       linktype: '',
       resultLink: textLink,
+      // linkContact: '',
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -303,12 +323,12 @@ const About = ({ showCont, setShowCont }) => {
           'Invalid Link Type'
         )
         .required(':( Debes elegir una cuenta a la que vas a asociar tu link'),
-      inputLink: Yup.string().url(),
+      inputLink: Yup.string(),
     }),
     onSubmit: async (values) => {
       // alert(JSON.stringify(values, null, 2));
+      // console.log(values)
       try {
-        // console.log(textLink)
         const { data } = await addAboutMe({
           variables: {
             // userId: '6206b58f284d4e1f15002d39',
@@ -317,7 +337,7 @@ const About = ({ showCont, setShowCont }) => {
             aboutMeText: values.aboutMe,
             interests: values.interests,
             socialNetworks: textLink,
-            photo: imgPerfil.data.secure_url,
+            photo: addPhoto ? imgPerfil.data.secure_url : user,
           },
         })
         // console.log(data.addAboutMe)
@@ -330,6 +350,7 @@ const About = ({ showCont, setShowCont }) => {
             imageAlt: 'Custom image',
           })
           setShowCont(!showCont)
+          setAddPhoto(true)
         }
       } catch (e) {
         // console.log(e)
@@ -337,9 +358,12 @@ const About = ({ showCont, setShowCont }) => {
     },
   })
   const handleClick = () => {
+    // console.log(textLink)
+    const FilterLinks = textLink.filter((e) => e.link !== '')
+    // console.log(FilterLinks)
     setLink(!url)
     setLinkText([
-      ...textLink,
+      ...FilterLinks,
       { name: formik.values.linktype, link: formik.values.inputLink },
     ])
     formik.values.inputLink = ''
@@ -366,6 +390,7 @@ const About = ({ showCont, setShowCont }) => {
       // console.log(e)
     }
   }
+
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
@@ -462,16 +487,26 @@ const About = ({ showCont, setShowCont }) => {
               {textLink.length > 0 ? (
                 <ContPrev>
                   {textLink.map((e, i) => (
-                    <Preview key={i}>
-                      <P>{e.name}</P>
-                      <P>{e.link}</P>
-                      <ButtonRed
-                        type="button"
-                        onClick={() => handleReduce(e.name, e.link)}
-                      >
-                        <FaMinus />
-                      </ButtonRed>
-                    </Preview>
+                    <div key={i}>
+                      {e.link === '' ? null : (
+                        <Preview>
+                          <P
+                            id="linkContact"
+                            name="linkContact"
+                            href={e.link}
+                            target="_blank"
+                          >
+                            {e.name}
+                          </P>
+                          <ButtonRed
+                            type="button"
+                            onClick={() => handleReduce(e.name, e.link)}
+                          >
+                            <FaMinus />
+                          </ButtonRed>
+                        </Preview>
+                      )}
+                    </div>
                   ))}
                 </ContPrev>
               ) : null}
@@ -501,11 +536,18 @@ const About = ({ showCont, setShowCont }) => {
                   <FaPlus />
                 </AddButton>
               </ContSocialNetwork>
+
+              {/* {validateQtyLinks ? (
+                <Message text=":( Ya ingresaste ese link!" />
+              ) : null} */}
               {formik.touched.inputLink && formik.errors.inputLink ? (
                 <Message text={formik.errors.inputLink} />
               ) : null}
               {formik.touched.linktype && formik.errors.linktype ? (
                 <Message text={formik.errors.linktype} />
+              ) : null}
+              {formik.errors.linkContact ? (
+                <Message text={formik.errors.linkContact} />
               ) : null}
             </ContSelect>
           </div>

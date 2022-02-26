@@ -205,6 +205,18 @@ const DivColum = styled.div`
   flex-direction: column;
   width: 100%;
 `
+const ContButtons = styled('div')`
+  display: flex;
+  /* flex-direction: column; */
+  width: 100%;
+  gap: 4rem;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: center;
+  }
+`
 
 const EditedProyect = ({
   // setStateForm,
@@ -468,7 +480,15 @@ const EditedProyect = ({
             ) : null}
           </ContSelect>
         </Div>
-        <SaveButton type="submit">Editar Proyecto</SaveButton>
+        <ContButtons>
+          <SaveButton type="submit">Editar Proyecto</SaveButton>
+          <SaveButton
+            type="button"
+            onClick={() => setAddCardEdit(!addCardEdit)}
+          >
+            Cancelar
+          </SaveButton>
+        </ContButtons>
       </Form>
     </Container>
   )

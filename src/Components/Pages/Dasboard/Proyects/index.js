@@ -27,6 +27,7 @@ const ContainerProyects = styled.div`
   width: 100%;
   margin: 2rem;
   gap: 3rem;
+  padding: 0 2rem;
   @media screen and (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;

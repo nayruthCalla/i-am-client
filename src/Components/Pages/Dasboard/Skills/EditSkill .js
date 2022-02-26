@@ -58,6 +58,19 @@ const SaveButton = styled.button`
     flex-direction: row;
   }
 `
+const ContButtons = styled('div')`
+  display: flex;
+  /* flex-direction: column; */
+  width: 100%;
+  gap: 4rem;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: center;
+  }
+`
+
 const EditSkill = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
   // const [textLink, setLinkText] = useState([])
   const [updateSkill] = useEditSkill()
@@ -106,7 +119,15 @@ const EditSkill = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
           <Message text={formik.errors.skillName} />
         ) : null}
 
-        <SaveButton type="submit">Guardar</SaveButton>
+        <ContButtons>
+          <SaveButton type="submit">Editar</SaveButton>
+          <SaveButton
+            type="button"
+            onClick={() => setAddCardEdit(!addCardEdit)}
+          >
+            Cancelar
+          </SaveButton>
+        </ContButtons>
       </Form>
     </Container>
   )

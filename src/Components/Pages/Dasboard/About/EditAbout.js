@@ -24,7 +24,6 @@ const Container = styled.div`
   width: 100%;
   @media screen and (min-width: 768px) {
     min-height: 100vh;
-    /* padding: 2rem 8rem; */
   }
   @media screen and (min-width: 1024px) {
   }
@@ -39,7 +38,7 @@ const ContainerAbout = styled.div`
     flex-direction: row-reverse;
     align-items: flex-start;
     justify-content: space-around;
-    flex-wrap: wrap;
+    gap: 5rem;
   }
 `
 const ContentAddImage = styled.div`
@@ -123,15 +122,31 @@ const P = styled.p`
   font-family: Dongle;
   font-style: normal;
   font-weight: bold;
-  font-size: 25px;
   line-height: 36px;
   color: rgb(123 157 209 / 94%);
   text-align: left;
+  font-size: 20px;
+  @media screen and (min-width: 768px) {
+    font-size: 25px;
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 100rem;
+  }
 `
 const Preview = styled.div`
-  width: 100%;
   display: flex;
-  gap: 1.3rem;
+  flex-direction: column;
+  width: 100%;
+  flex-flow: column-reverse;
+  gap: 0;
+  background: #004cff0a;
+  padding: 1rem;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 1.3rem;
+  }
+  @media screen and (min-width: 1024px) {
+  }
 `
 const ContPrev = styled.div`
   width: 100%;
@@ -237,19 +252,47 @@ const FigurePrevw = styled.figure`
   }
 `
 const ImagePrevw = styled.img`
-  width: 15rem;
-  height: 15rem;
-  background: transparent;
-  /* border: 3px solid #2bb8da; */
-  box-sizing: border-box;
-  background: #120e26;
+  min-height: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  max-width: 150px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
   :hover {
     filter: grayscale(80%);
   }
   @media screen and (min-width: 768px) {
-    width: 25rem;
-    height: 25rem;
+    min-height: 250px;
+    min-width: 250px;
+    max-height: 250px;
+    max-width: 250px;
+  }
+`
+const ContDashboard = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 50rem;
+    padding-left: 4rem;
+  }
+`
+const ContButtons = styled('div')`
+  display: flex;
+  /* flex-direction: column; */
+  width: 100%;
+  gap: 4rem;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: center;
   }
 `
 
@@ -392,7 +435,7 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
               </label>
             </ContentAddImage>
           </div>
-          <div>
+          <ContDashboard>
             <InputDashboard
               placeholder="Un nombre y un Apellido Nayruth Calla"
               textLabel=" Nombre y Apellido para tu portada"
@@ -499,9 +542,17 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
               ) : null}
             </ContSelect>
             {/* <SaveButton type="submit">Guardar</SaveButton> */}
-          </div>
+          </ContDashboard>
         </ContainerAbout>
-        <SaveButton type="submit">Editar</SaveButton>
+        <ContButtons>
+          <SaveButton type="submit">Editar</SaveButton>
+          <SaveButton
+            type="button"
+            onClick={() => setAddCardEdit(!addCardEdit)}
+          >
+            Cancelar
+          </SaveButton>
+        </ContButtons>
       </Form>
     </Container>
   )

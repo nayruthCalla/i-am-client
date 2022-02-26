@@ -142,12 +142,24 @@ const AboutMe = () => {
           {data?.getAboutMe.map((e, i) => (
             <Preview key={i}>
               {addCardEdit ? (
-                <EditAbout
-                  dataEdited={edited}
-                  ifEdit
-                  setAddCardEdit={setAddCardEdit}
-                  addCardEdit={addCardEdit}
-                />
+                <>
+                  {more ? (
+                    <ContentMore>
+                      <ButtonMore
+                        type="button"
+                        onClick={() => setAddCardEdit(!addCardEdit)}
+                      >
+                        Cancelar
+                      </ButtonMore>
+                    </ContentMore>
+                  ) : null}
+                  <EditAbout
+                    dataEdited={edited}
+                    ifEdit
+                    setAddCardEdit={setAddCardEdit}
+                    addCardEdit={addCardEdit}
+                  />
+                </>
               ) : (
                 <>
                   {more ? (

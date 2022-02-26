@@ -20,6 +20,23 @@ const Container = styled('article')(
           : 'var(--color-prtfolio)'};
       }
     }
+    :hover {
+      .hovercolor {
+        border: ${colorBtn === 'dasboard'
+          ? '3px dashed #c54646'
+          : '3px dashed rgba(43, 184, 218, 0.5)'};
+      }
+      .card-icon {
+        color: ${colorBtn === 'dasboard'
+          ? 'var(--hover-dasb)'
+          : 'var(--color-prtfolio)'};
+      }
+      .hovercolorText {
+        color: ${colorBtn === 'dasboard'
+          ? 'var(--hover-dasb)'
+          : 'var(--color-prtfolio)'};
+      }
+    }
     @media screen and (min-width: 768px) {
     }
     @media screen and (min-width: 1024px) {
@@ -53,10 +70,12 @@ const ContLine = styled.div`
   align-items: center;
   font-size: 4rem;
   gap: 0.5rem;
+  height: -webkit-fill-available;
 `
 const Line = styled.div`
   width: 5px;
   height: 8rem;
+  height: inherit;
   border: ${({ colorBtn }) =>
     colorBtn === 'dasboard'
       ? '3px dashed #c54646'
@@ -70,13 +89,6 @@ const Line = styled.div`
 `
 const ContText = styled.div``
 
-// const Circle = styled.div`
-//   width: 30px;
-//   height: 30px;
-//   border-radius: 50%;
-//   background: rgba(43, 184, 218, 0.5);
-// `
-
 const CardLogro = ({ colorBtn, title, description }) => {
   const value = useMemo(() => ({ className: 'card-icon' }))
   //   const valueFooter = useMemo(() => ({ className: 'footer-icon' }))
@@ -86,10 +98,10 @@ const CardLogro = ({ colorBtn, title, description }) => {
         <IconContext.Provider value={value}>
           <FaCircle />
         </IconContext.Provider>
-        <Line colorBtn={colorBtn} />
+        <Line colorBtn={colorBtn} className="hovercolor" />
       </ContLine>
       <ContText>
-        <Title>{title}</Title>
+        <Title className="hovercolorText">{title}</Title>
         <Description>{description}</Description>
       </ContText>
     </Container>
