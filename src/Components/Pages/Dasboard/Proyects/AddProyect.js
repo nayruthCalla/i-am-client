@@ -204,12 +204,7 @@ const DivColum = styled.div`
 `
 
 const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
-  const [textLink, setLinkText] = useState([
-    {
-      name: '',
-      link: '',
-    },
-  ])
+  const [textLink, setLinkText] = useState([])
   const [mess, setMess] = useState(false)
   const [messRequired, setMessRequired] = useState(false)
   const [validateQtyLinks, setValidateQtyLinks] = useState(false)
@@ -401,9 +396,10 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
               <SelectLevel
                 label="level"
                 name="level"
+                data-test="selectLevelProyect"
                 onChange={formik.handleChange}
               >
-                <Option value="">Eligir</Option>
+                <Option value="">Elegir</Option>
                 <Option value="facil">Fácil</Option>
                 <Option value="intermedio">Intermedio</Option>
                 <Option value="complejo">Complejo</Option>
@@ -419,9 +415,10 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
               <Select
                 label="link Type"
                 name="linktype"
+                data-test="selectLinkProyect"
                 onChange={formik.handleChange}
               >
-                <Option value="">Eligir</Option>
+                <Option value="">Elegir</Option>
                 <Option value="Demo">Demo</Option>
                 <Option value="Repo">Repositorio</Option>
               </Select>
@@ -431,9 +428,14 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
                 onChange={formik.handleChange}
                 id="inputLink"
                 name="inputLink"
+                data-test="inputLinkProyect"
                 onBlur={formik.handleBlur}
               />
-              <AddButton type="button" onClick={handleClick}>
+              <AddButton
+                data-test="addLinkProyect"
+                type="button"
+                onClick={handleClick}
+              >
                 <FaPlus />
               </AddButton>
             </ContSocialNetwork>
@@ -475,7 +477,9 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
             ) : null}
           </ContSelect>
         </Div>
-        <SaveButton type="submit">Guardar Proyecto</SaveButton>
+        <SaveButton name="btnAddProyect" type="submit">
+          Guardar Proyecto
+        </SaveButton>
       </Form>
     </Container>
   )

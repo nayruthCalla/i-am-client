@@ -192,6 +192,7 @@ const Proyects = () => {
       ) : (
         <>
           <AddButton
+            data-test="btnAddProyect"
             onClick={() => {
               setAddCard(!addCard)
             }}

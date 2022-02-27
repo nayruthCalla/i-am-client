@@ -109,7 +109,9 @@ const AddSkill = ({ setAddCard, addCard }) => {
           <Message text={formik.errors.skillName} />
         ) : null}
 
-        <SaveButton type="submit">Guardar</SaveButton>
+        <SaveButton data-test="addCardSkill" type="submit">
+          Guardar
+        </SaveButton>
       </Form>
     </Container>
   )

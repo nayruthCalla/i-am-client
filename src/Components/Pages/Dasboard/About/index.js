@@ -169,6 +169,7 @@ const AboutMe = () => {
                       </ButtonMore>
                       <ButtonMore
                         type="button"
+                        data-test="btnDeleteAbout"
                         onClick={() => handleDelete(e.id)}
                       >
                         Eliminar

@@ -515,7 +515,7 @@ const About = ({ dataEdited, setAddCardEdit, addCardEdit }) => {
                   name="linktype"
                   onChange={formik.handleChange}
                 >
-                  <Option value="">Eligir</Option>
+                  <Option value="">Elegir</Option>
                   <Option value="gmail">Gmail</Option>
                   <Option value="linkedin">LinkedIn</Option>
                   <Option value="github">GitHub</Option>

@@ -192,6 +192,7 @@ const Skills = () => {
       ) : (
         <>
           <AddButton
+            data-test="btnAddSkill"
             onClick={() => {
               setAddCard(!addCard)
             }}
@@ -208,7 +209,11 @@ const Skills = () => {
       {data?.getSkillByUser.length > 0 ? (
         <ContAddProyect>
           <ContMore>
-            <ButtonRed type="button" onClick={handleMore}>
+            <ButtonRed
+              data-test="btnAddSkill"
+              type="button"
+              onClick={handleMore}
+            >
               <FaEllipsisH />
             </ButtonRed>
             <P>Mis Skills</P>

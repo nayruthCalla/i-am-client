@@ -414,7 +414,7 @@ const EditedProyect = ({
                 name="level"
                 onChange={formik.handleChange}
               >
-                <Option value="">Eligir</Option>
+                <Option value="">Elegir</Option>
                 <Option value="facil">Fácil</Option>
                 <Option value="intermedio">Intermedio</Option>
                 <Option value="complejo">Complejo</Option>
@@ -432,7 +432,7 @@ const EditedProyect = ({
                 name="linktype"
                 onChange={formik.handleChange}
               >
-                <Option value="">Eligir</Option>
+                <Option value="">Elegir</Option>
                 <Option value="Demo">Demo</Option>
                 <Option value="Repo">Repositorio</Option>
               </Select>

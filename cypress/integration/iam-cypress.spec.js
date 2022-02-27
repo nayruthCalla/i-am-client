@@ -1,6 +1,6 @@
 /* eslint-disable */
 /// <reference types="Cypress" />
-describe('Landing', () => {
+describe('iAmp - 2to2', () => {
   beforeEach(() => {
     cy.visit('/')
   })
@@ -21,214 +21,105 @@ describe('Landing', () => {
     cy.get('[data-test="loginbtn"]').click()
     cy.contains('Mi Panel').click
     cy.login()
-      .then((resp) => {
-        return resp.body
-      })
-      .then((body) => {
-        const { access_token, expires_in, id_token } = body
-        const auth0State = {
-          nonce: '',
-          state: 'some-random-state',
-        }
-        const callbackUrl = `/callback#access_token=${access_token}&scope=openid&id_token=${id_token}&expires_in=${expires_in}&token_type=Bearer&state=${auth0State.state}`
-        cy.visit(callbackUrl, {
-          onBeforeLoad(win) {
-            win.document.cookie =
-              'com.auth0.auth.some-random-state=' + JSON.stringify(auth0State)
-          },
-        })
-        // cy.visit('/')
-      })
-    //   .then(())
     cy.get('[data-test="btnHome"]').click()
     cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
   })
-  it('Renders text of the page navigation', () => {
-    cy.contains('Mi Panel')
-    cy.contains('Cerrar Sesión')
+
+  it('Add about me ', () => {
+    cy.get('[data-test="loginbtn"]').click()
+    cy.contains('Mi Panel').click
+    cy.login()
+    cy.get('[data-test="btnHome"]').click()
+    cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
+    cy.get('[name="username"]').type('Nayruth Calla')
+    cy.get('[name="occupation"]').type(
+      ' Apasionada en Desarrollo con Javascript React / Web Apps y Automatización con NodeJS'
+    )
+    cy.get('[name="aboutMe"]').type(
+      'Hola, soy Nayruth 😄, una desarrolladora 💻 de Perú 🇵🇪. Soy una programodora web [Javascript] me apasiona todo lo relacionado con aplicaciones en tiempo real. Me gusta el cine y los deportes 🏃'
+    )
+    cy.get('[name="interests"]').type(
+      '👨🏻‍💻 Actualmente estoy trabajando en la aplicación de web con React, Graphql y node'
+    )
+    cy.get('[name="linktype"]').select('LinkedIn')
+    cy.get('[name="inputLink"]').type('https://github.com/nayruthCalla')
+    cy.get('[data-test="btnAddLinkSocialNet"]').click()
+    cy.get('[data-test="btnDeletLinkSocialNet"]').click()
+    cy.get('[name="linktype"]').select('LinkedIn')
+    cy.get('[name="inputLink"]').type('https://github.com/nayruthCalla')
+    cy.get('[data-test="btnAddLinkSocialNet"]').click()
+    cy.get('[name="linktype"]').select('Gmail')
+    cy.get('[name="inputLink"]').type('nayruth.calla@gmail.com')
+    cy.get('[data-test="btnAddLinkSocialNet"]').click()
+    cy.get('[data-test="btnAddAbout"]').click()
+    cy.contains('OK').click()
+    // cy.get('[data-test="btnDeleteAbout"]').click()
+  })
+  it('Add proyect ', () => {
+    cy.get('[data-test="loginbtn"]').click()
+    cy.contains('Mi Panel').click
+    cy.login()
+    cy.get('[data-test="btnHome"]').click()
+    cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
+    // add proyect
+    cy.get('[data-test="btnAddProyect"]').click()
+    cy.get('[name="nameProyect"]').type('Zupport')
+    cy.get('[name="descriptionProyc"]').type(
+      'App web que ayuda a personas pedir y dar ayuda virtual y si está en ti puede invitar un cafecito'
+    )
+    cy.get('[name="techFirst"]').type('React')
+    cy.get('[name="techSecond"]').type('Node.js')
+    cy.get('[data-test="selectLevelProyect"]').select('Intermedio')
+    cy.get('[data-test="selectLinkProyect"]').select('Demo')
+    cy.get('[data-test="inputLinkProyect"]').type(
+      'https://github.com/nayruthCalla'
+    )
+    cy.get('[data-test="addLinkProyect"]').click()
+    cy.get('[name="btnAddProyect"]').click()
+  })
+  it('Add Skill ', () => {
+    cy.get('[data-test="loginbtn"]').click()
+    cy.contains('Mi Panel').click
+    cy.login()
+    cy.get('[data-test="btnHome"]').click()
+    cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
+    // add skill
+    cy.get('[data-test="btnAddSkill"]').click()
+    cy.get('[name="skillName"]').type('Javascript')
+    cy.get('[data-test="addCardSkill"]').click()
+  })
+  it('Add Achievements ', () => {
+    cy.get('[data-test="loginbtn"]').click()
+    cy.contains('Mi Panel').click
+    cy.login()
+    cy.get('[data-test="btnHome"]').click()
+    cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
+    // add skill
+    cy.get('[data-test="btnAddAchiev"]').click()
+    cy.get('[name="title"]').type('Full Stack Javascript')
+    cy.get('#description').type(
+      '💻 Fuí parte de una programa intensivo de cuatro meses, donde he desarrollado mis habilidades técnicas y blandas.'
+    )
+    cy.get('[data-test="addCardAchiev"]').click()
+  })
+  it('Donations ', () => {
+    cy.get('[data-test="loginbtn"]').click()
+    cy.contains('Mi Panel').click
+    cy.login()
+    cy.get('[data-test="btnHome"]').click()
+    cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
+    // payment
+    cy.contains('¿Cómo nos puedes ayudar?')
+    cy.contains(
+      'iAmp, es una App Web si fines de lucro, busca ayudar a compartir lo mejor de ti en un portafolio web. y tú también puedes ayudarnos enviandonos regalitos o invitándonos cafecitos para i-Amp, elige las opciones disponibles para tí'
+    )
+  })
+  it('Renders Portfolio ', () => {
+    cy.get('[data-test="loginbtn"]').click()
+    cy.contains('Mi Panel').click
+    cy.login()
+    cy.get('[data-test="btnHome"]').click()
+    cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
+    cy.get('[data-test="showPortfolio"]').click()
   })
 })
-
-//   it('Log in to the app', () => {
-//     cy.get('[data-test="loginbtn"]').click()
-//     cy.contains('Mi Panel').click
-//     // cy.get('#username').type('nayruth.calla+1@gmail.com')
-//     // cy.get('#password').type('a9vCnVaVdUcieYu')
-//     // cy.contains('Registrese').click()
-//     // cy.contains('Iniciar sesión').click()
-//     // cy.contains('Continuar con GitHub').click()
-
-//     // cy.login()
-//     //   .then((resp) => {
-//     //     return resp.body
-//     //   })
-//     //   .then((body) => {
-//     //     const { access_token, expires_in, id_token } = body
-//     //     const auth0State = {
-//     //       nonce: '',
-//     //       state: 'some-random-state',
-//     //     }
-//     //     const callbackUrl = `/callback#access_token=${access_token}&scope=openid&id_token=${id_token}&expires_in=${expires_in}&token_type=Bearer&state=${auth0State.state}`
-//     //     cy.visit(callbackUrl, {
-//     //       onBeforeLoad(win) {
-//     //         win.document.cookie =
-//     //           'com.auth0.auth.some-random-state=' + JSON.stringify(auth0State)
-//     //       },
-//     //     })
-//     //     // cy.visit('/')
-//     //   })
-//     //   .then(())
-//     // cy.get('[data-test="btnHome"]').click()
-//     // cy.location('pathname').should('include', 'Mi Panel')
-//     // cy.url().should('include', 'http://localhost:3000/dashboard')
-//     // cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
-//     // cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
-//     // cy.get('[data-test="addPhoto"]').contains('Añadir imagen de pérfil').click()
-//   })
-// })
-// describe('DashBoard/about', () => {
-//   beforeEach(() => {
-//     cy.visit('/dashboard')
-//   })
-//   it('Add profile picture', () => {
-//     cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
-//   })
-//   // cy.get('[data-test="panelbtn"]').contains('Mi Panel').click()
-//   // it('Add profile picture', () => {
-//   //   cy.get('[data-test="addPhoto"]').contains('Añadir imagen de pérfil').click()
-//   // })
-// })
-// describe('DashBoard/about', () => {
-//   beforeEach(() => {
-//     cy.visit('/')
-//   })
-//   it('Renders text of the page navigation Dasboard', () => {
-//     cy.contains('Iniciar Sesión')
-//     cy.contains('Crear Página')
-//   })
-//   it('Add my first and last name', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add my profession', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add a description about me', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add my interests', () => {})
-//   it('Add my Social Networks', () => {})
-//   it('Save data', () => {})
-// })
-// describe('DashBoard/proyects', () => {
-//   beforeEach(() => {
-//     cy.visit('/')
-//   })
-//   it('Add Project Name', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add project description', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add first tech', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add second tech', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Choose project difficulty level', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add project link', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Save data', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-// })
-// describe('DashBoard/skills', () => {
-//   beforeEach(() => {
-//     cy.visit('/')
-//   })
-//   it('Add Project Name', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-//   it('Add name skill', () => {
-//     cy.contains('Comparte el link de tu portafolio web')
-//     cy.contains('Agregar tus skills, retos y experiencias')
-//     cy.contains('Agrega tus Redes Sociales para que te contacten')
-//   })
-// })
-// describe('DashBoard/logros', () => {
-//   beforeEach(() => {
-//     cy.visit('/dashboard#logros')
-//   })
-//   it('Add achievement name', () => {
-//     cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
-//     cy.wait(500).contains('Mi Panel').click()
-//     cy.get('[data-test="btnHome"]').click()
-//   })
-//   it('Add achievement description', () => {})
-// })
-// describe('Portfolio', () => {
-//   beforeEach(() => {
-//     cy.visit('/')
-//   })
-//   it('Renders welcome Hero', () => {
-//     cy.contains('Deja que tu portafolio web Hable por tí')
-//     cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
-//     cy.wait(500).contains('Mi Panel').click()
-//     cy.get('[data-test="btnHome"]').click()
-//   })
-//   it('Renders welcome About me', () => {
-//     cy.contains('Deja que tu portafolio web Hable por tí')
-//     cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
-//     cy.wait(500).contains('Mi Panel').click()
-//     cy.get('[data-test="btnHome"]').click()
-//   })
-//   it('Renders welcome proyects', () => {
-//     cy.contains('Deja que tu portafolio web Hable por tí')
-//     cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
-//     cy.wait(500).contains('Mi Panel').click()
-//     cy.get('[data-test="btnHome"]').click()
-//   })
-//   it('Renders welcome skills', () => {
-//     cy.contains('Deja que tu portafolio web Hable por tí')
-//     cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
-//     cy.wait(500).contains('Mi Panel').click()
-//     cy.get('[data-test="btnHome"]').click()
-//   })
-//   it('Renders welcome logros', () => {
-//     cy.contains('Deja que tu portafolio web Hable por tí')
-//     cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
-//     cy.wait(500).contains('Mi Panel').click()
-//     cy.get('[data-test="btnHome"]').click()
-//   })
-//   it('Renders welcome Contact', () => {
-//     cy.contains('Deja que tu portafolio web Hable por tí')
-//     cy.get('[data-test="loginbtn"]').contains('Iniciar Sesión').click()
-//     cy.wait(500).contains('Mi Panel').click()
-//     cy.get('[data-test="btnHome"]').click()
-//   })
-// })

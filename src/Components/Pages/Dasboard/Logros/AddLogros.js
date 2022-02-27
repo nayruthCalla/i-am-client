@@ -119,13 +119,16 @@ const AddLogros = ({ setAddCard, addCard }) => {
           onChange={formik.handleChange}
           id="description"
           name="description"
+          data-test="descriptAddAchiev"
           onBlur={formik.handleBlur}
         />
         {formik.touched.description && formik.errors.description ? (
           <Message text={formik.errors.description} />
         ) : null}
 
-        <SaveButton type="submit">Guardar</SaveButton>
+        <SaveButton data-test="addCardAchiev" type="submit">
+          Guardar
+        </SaveButton>
       </Form>
     </Container>
   )

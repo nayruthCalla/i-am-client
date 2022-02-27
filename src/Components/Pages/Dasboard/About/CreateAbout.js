@@ -350,7 +350,6 @@ const About = ({ showCont, setShowCont }) => {
             imageAlt: 'Custom image',
           })
           setShowCont(!showCont)
-          setAddPhoto(true)
         }
       } catch (e) {
         // console.log(e)
@@ -386,6 +385,7 @@ const About = ({ showCont, setShowCont }) => {
         formData
       )
       setImgPerfil(imgResul)
+      setAddPhoto(true)
     } catch (e) {
       // console.log(e)
     }
@@ -500,6 +500,7 @@ const About = ({ showCont, setShowCont }) => {
                           </P>
                           <ButtonRed
                             type="button"
+                            data-test="btnDeletLinkSocialNet"
                             onClick={() => handleReduce(e.name, e.link)}
                           >
                             <FaMinus />
@@ -517,7 +518,7 @@ const About = ({ showCont, setShowCont }) => {
                   name="linktype"
                   onChange={formik.handleChange}
                 >
-                  <Option value="">Eligir</Option>
+                  <Option value="">Elegir</Option>
                   <Option value="gmail">Gmail</Option>
                   <Option value="linkedin">LinkedIn</Option>
                   <Option value="github">GitHub</Option>
@@ -532,7 +533,11 @@ const About = ({ showCont, setShowCont }) => {
                   name="inputLink"
                   onBlur={formik.handleBlur}
                 />
-                <AddButton type="button" onClick={handleClick}>
+                <AddButton
+                  data-test="btnAddLinkSocialNet"
+                  type="button"
+                  onClick={handleClick}
+                >
                   <FaPlus />
                 </AddButton>
               </ContSocialNetwork>
@@ -552,7 +557,9 @@ const About = ({ showCont, setShowCont }) => {
             </ContSelect>
           </div>
         </ContainerAbout>
-        <SaveButton type="submit">Guardar</SaveButton>
+        <SaveButton data-test="btnAddAbout" type="submit">
+          Guardar
+        </SaveButton>
       </Form>
     </Container>
   )

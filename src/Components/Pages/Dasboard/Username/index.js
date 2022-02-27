@@ -147,6 +147,7 @@ const Username = () => {
                 </>
               ) : (
                 <P
+                  data-test="showPortfolio"
                   href={`https://iamp.netlify.app/ia/${e.userName}`}
                   target="_blank"
                 >

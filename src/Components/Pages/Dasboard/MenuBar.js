@@ -14,6 +14,11 @@ import {
 import { IconContext } from 'react-icons'
 import userdefault from '../../../assets/user.gif'
 
+// const widthText = (text) => {
+//   if(text.length < 25){
+//     return
+//   }
+// } ;
 const MenuBar = styled.nav`
   display: none;
   @media screen and (min-width: 768px) {
@@ -87,7 +92,7 @@ const UserName = styled.p`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 20rem;
+  width: ${({ userNameText }) => (userNameText.length < 25 ? 'auto' : '20rem')};
 `
 
 const DasBoard = () => {
@@ -101,7 +106,7 @@ const DasBoard = () => {
     <MenuBar>
       <UserPhoto>
         <Photo src={isAuthenticated ? user.picture : userdefault} />
-        <UserName>{user.name}</UserName>
+        <UserName userNameText={user.name}>{user.name}</UserName>
       </UserPhoto>
       <Ul>
         <Li>

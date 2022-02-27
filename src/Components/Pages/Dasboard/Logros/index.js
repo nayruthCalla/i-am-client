@@ -182,6 +182,7 @@ const Logros = () => {
       ) : (
         <>
           <AddButton
+            data-test="btnAddAchiev"
             onClick={() => {
               setAddCard(!addCard)
             }}
