@@ -19,5 +19,6 @@ describe('login', () => {
           },
         })
       })
+    // cy.get('.input cdf74ce7b ce07c2f58').contains('Iniciar Sesión').click()
   })
 })

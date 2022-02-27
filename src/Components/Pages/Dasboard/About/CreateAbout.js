@@ -419,7 +419,7 @@ const About = ({ showCont, setShowCont }) => {
                   }}
                 />
 
-                <AddImage>
+                <AddImage data-test="addPhoto">
                   <BiImageAdd />
                   Añadir imagen de pérfil
                 </AddImage>
