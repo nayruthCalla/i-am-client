@@ -126,3 +126,17 @@ export const DELETE_ABOUT_BY_ID = gql`
     }
   }
 `
+
+// github
+export const GET_USER_BY_USERGITHUB = `
+query MyQuery($login: String = "") {
+  user(login: $login) {
+    bio
+    name
+    url
+    location
+    email
+    avatarUrl(size: 10)
+  }
+}
+`

@@ -99,6 +99,7 @@ const Landing = () => {
             nickname: user.nickname,
             email: user.name,
             picture: user.picture,
+            socialNetworks: [user.sub],
           },
         })
 

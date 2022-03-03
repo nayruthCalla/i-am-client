@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import Swal from 'sweetalert2'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { FaPlus, FaEllipsisH } from 'react-icons/fa'
 import AddProyect from './AddProyect'
@@ -9,6 +9,8 @@ import alert from '../../../../assets/alert.gif'
 // import TextareaDashboard from '../../../Layouts/Areashboard'
 import { useAllProyectByUser, useDeleteProyect } from './customHooks'
 import EditedProyect from './EditedProyect'
+import SearchProyectGitHub from './ProyectsGithub/SearchGithub'
+import ShowProyectGH from './ProyectsGithub/ShowProyect'
 
 const Container = styled.div`
   display: flex;
@@ -129,6 +131,16 @@ const ButtonMore = styled.button`
     background: #e7dbe7;
   }
 `
+const ContentButtonProyects = styled.div`
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+`
 
 //--------------------------
 
@@ -140,6 +152,8 @@ const Proyects = () => {
   const { error, data } = useAllProyectByUser()
   const [deleteProyect] = useDeleteProyect()
   const [edited, setEdited] = useState()
+  const [searchProyect, setSearchProyect] = useState()
+  const [showProyectGit, setShowProyectGit] = useState(false)
 
   const handleMore = () => {
     setMore(!more)
@@ -176,6 +190,11 @@ const Proyects = () => {
       }
     })
   }
+
+  useEffect(() => {
+    // console.log(searchProyect, 'buscar')
+  }, [searchProyect])
+
   return (
     <Container>
       {addCardEdit ? (
@@ -191,21 +210,37 @@ const Proyects = () => {
         />
       ) : (
         <>
-          <AddButton
-            data-test="btnAddProyect"
-            onClick={() => {
-              setAddCard(!addCard)
-            }}
-          >
-            <FaPlus />
-            Añadir Proyecto
-          </AddButton>
+          <ContentButtonProyects>
+            <SearchProyectGitHub
+              setSearchProyect={setSearchProyect}
+              setAddCard={setAddCard}
+              addCard={addCard}
+              setShowProyectGit={setShowProyectGit}
+            />
+            <AddButton
+              data-test="btnAddProyect"
+              onClick={() => {
+                setAddCard(!addCard)
+                setShowProyectGit(false)
+              }}
+            >
+              <FaPlus />
+              Añadir Proyecto
+            </AddButton>
+          </ContentButtonProyects>
           {addCard ? (
             <AddProyect
               stateForm={stateForm}
               setStateForm={setStateForm}
               setAddCard={setAddCard}
               addCard={addCard}
+            />
+          ) : null}
+          {showProyectGit ? (
+            <ShowProyectGH
+              searchProyect={searchProyect}
+              setShowProyectGit={setShowProyectGit}
+              showProyectGit={showProyectGit}
             />
           ) : null}
         </>

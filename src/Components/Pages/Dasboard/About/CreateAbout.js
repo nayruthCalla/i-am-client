@@ -1,6 +1,7 @@
 /* eslint-disable react/void-dom-elements-no-children */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
+import { useAuth0 } from '@auth0/auth0-react'
 import styled, { css } from 'styled-components'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -12,7 +13,8 @@ import InputDashboard from '../../../Layouts/InputDashboard'
 import TextareaDashboard from '../../../Layouts/Areashboard'
 import Message from '../../../Layouts/MessageError'
 import { useAddAbout } from './customHooks'
-import user from '../../../../assets/user.gif'
+import userg from '../../../../assets/user.gif'
+import { GET_USER_BY_USERGITHUB } from './querysAndMutations'
 
 const Container = styled.div`
   display: flex;
@@ -277,6 +279,7 @@ const FigurePrevw = styled.figure`
 //--------------------------
 
 const About = ({ showCont, setShowCont }) => {
+  const { user } = useAuth0()
   const nameKey = process.env.REACT_APP_NAME_KEY
   const [addAboutMe] = useAddAbout()
   const [url, setLink] = useState(true)
@@ -337,7 +340,7 @@ const About = ({ showCont, setShowCont }) => {
             aboutMeText: values.aboutMe,
             interests: values.interests,
             socialNetworks: textLink,
-            photo: addPhoto ? imgPerfil.data.secure_url : user,
+            photo: addPhoto ? imgPerfil.data.secure_url : userg,
           },
         })
         // console.log(data.addAboutMe)
@@ -390,7 +393,47 @@ const About = ({ showCont, setShowCont }) => {
       // console.log(e)
     }
   }
+  useEffect(async () => {
+    if (user?.sub.split('|')[0] === 'github') {
+      try {
+        const dataUser = await Axios.post(
+          'https://api.github.com/graphql',
+          {
+            query: GET_USER_BY_USERGITHUB,
+            variables: {
+              login: user.sub.split('|')[0] === 'github' ? user.nickname : '',
+            },
+          },
+          {
+            headers: {
+              Authorization: process.env.REACT_APP_GITHUB_KEY,
+            },
+          }
+        )
+        // console.log(dataUser.data.data.user)
 
+        await addAboutMe({
+          variables: {
+            // userId: '6206b58f284d4e1f15002d39',
+            firstName: dataUser.data.data.user.name,
+            profession: 'Agrega tu ocupación',
+            aboutMeText: dataUser.data.data.user.bio,
+            interests: 'Agrega tus intereses',
+            socialNetworks: [
+              {
+                name: 'github',
+                link: dataUser.data.data.user.url,
+              },
+            ],
+            photo: user.picture,
+          },
+        })
+        // console.log(data)
+      } catch (e) {
+        // console.log('errores', e)
+      }
+    }
+  }, [user])
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>

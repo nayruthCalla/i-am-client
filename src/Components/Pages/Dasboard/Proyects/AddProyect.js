@@ -241,10 +241,11 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
       linktype: Yup.string()
         .oneOf(['Demo', 'Repo'], 'Invalid Link Type')
         .required(':( Debes elegir una cuenta a la que vas a asociar el link'),
-      // resultLink: Yup.string()
-      //   .required(
-      //     ':( Tienes que agregar como mínimo una red para que se contacten contigo!'
-      //   )
+      // resultLink: Yup.array().min(
+      //   1,
+      //   ':( Tienes que agregar como mínimo una red para que se contacten contigo!'
+      // ),
+
       //   .url()
       //   .nullable(),
     }),
@@ -439,7 +440,9 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
                 <FaPlus />
               </AddButton>
             </ContSocialNetwork>
-
+            {textLink.length <= 0 ? (
+              <Message text="Agrega un link para tu proyecto" />
+            ) : null}
             {validateQtyLinks ? (
               <Message text=" :( Ups! Ya no puedes agregar más links" />
             ) : null}
