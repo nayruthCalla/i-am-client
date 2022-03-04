@@ -16,9 +16,9 @@ const Container = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 6.5rem 0;
+  height: 100vh;
+  padding: 0 2rem;
   @media screen and (min-width: 768px) {
-    height: 100vh;
   }
   @media screen and (min-width: 1024px) {
   }

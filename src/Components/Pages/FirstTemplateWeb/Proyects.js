@@ -6,7 +6,7 @@ const Container = styled.section`
   /* margin-top: 31rem; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   /* align-items: center; */
   gap: 2rem;
   padding: 2rem 3rem;

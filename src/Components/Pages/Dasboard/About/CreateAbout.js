@@ -394,6 +394,7 @@ const About = ({ showCont, setShowCont }) => {
     }
   }
   useEffect(async () => {
+    console.log(user?.sub)
     if (user?.sub.split('|')[0] === 'github') {
       try {
         const dataUser = await Axios.post(
@@ -415,9 +416,13 @@ const About = ({ showCont, setShowCont }) => {
         await addAboutMe({
           variables: {
             // userId: '6206b58f284d4e1f15002d39',
-            firstName: dataUser.data.data.user.name,
+            firstName: dataUser.data.data.user.name
+              ? dataUser.data.data.user.name
+              : 'Agrega tu Nombre',
             profession: 'Agrega tu ocupación',
-            aboutMeText: dataUser.data.data.user.bio,
+            aboutMeText: dataUser.data.data.user.bio
+              ? dataUser.data.data.user.bio
+              : 'Hablanos sobre tí',
             interests: 'Agrega tus intereses',
             socialNetworks: [
               {
@@ -430,7 +435,7 @@ const About = ({ showCont, setShowCont }) => {
         })
         // console.log(data)
       } catch (e) {
-        // console.log('errores', e)
+        console.log('errores', e)
       }
     }
   }, [user])
