@@ -394,7 +394,7 @@ const About = ({ showCont, setShowCont }) => {
     }
   }
   useEffect(async () => {
-    console.log(user?.sub)
+    // console.log(user?.sub)
     if (user?.sub.split('|')[0] === 'github') {
       try {
         const dataUser = await Axios.post(
@@ -435,7 +435,7 @@ const About = ({ showCont, setShowCont }) => {
         })
         // console.log(data)
       } catch (e) {
-        console.log('errores', e)
+        // console.log('errores', e)
       }
     }
   }, [user])
