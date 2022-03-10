@@ -1,6 +1,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-constant-condition */
 /* eslint-disable react/jsx-no-useless-fragment */
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import Header from './Header'
@@ -13,6 +14,7 @@ import Footer from './Footer'
 import user from '../../../assets/user.gif'
 import error from '../../../assets/errorprof.png'
 import { useGetProfileUser } from './Data/customHooks'
+import loading from '../../../assets/loading.gif'
 
 const Container = styled.div`
   display: flex;
@@ -58,10 +60,24 @@ const Name = styled.h1`
 const Image = styled.img`
   width: 30rem;
 `
-
+const ImageLoading = styled.img`
+  width: 30rem;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  flex: 1;
+  @media screen and (min-width: 768px) {
+    width: 50rem;
+  }
+`
 const PortflTamplate = () => {
   const { userName } = useParams()
   const { data } = useGetProfileUser(userName)
+
+  useEffect(() => {
+    localStorage.clear()
+  }, [userName])
+
   if (userName === 'undefined') {
     return (
       <ContainerError>
@@ -96,22 +112,24 @@ const PortflTamplate = () => {
               </ContDestop>
             </div>
           ))}
+          <ContDestop>
+            {data?.getProfileUserProyect.length > 0 ? (
+              <Proyects proyects={data?.getProfileUserProyect} />
+            ) : null}
+            {data?.getProfileUserSkill.length > 0 ? (
+              <Skills skills={data?.getProfileUserSkill} />
+            ) : null}
+            {data?.getProfileUserLogros.length > 0 ? (
+              <Logros logros={data?.getProfileUserLogros} />
+            ) : null}
+          </ContDestop>
+          {data?.getProfileUserAbout.length > 0 ? (
+            <Footer dataUser={data?.getProfileUserAbout} />
+          ) : null}
         </>
-      ) : null}
-      <ContDestop>
-        {data?.getProfileUserProyect.length > 0 ? (
-          <Proyects proyects={data?.getProfileUserProyect} />
-        ) : null}
-        {data?.getProfileUserSkill.length > 0 ? (
-          <Skills skills={data?.getProfileUserSkill} />
-        ) : null}
-        {data?.getProfileUserLogros.length > 0 ? (
-          <Logros logros={data?.getProfileUserLogros} />
-        ) : null}
-      </ContDestop>
-      {data?.getProfileUserAbout.length > 0 ? (
-        <Footer dataUser={data?.getProfileUserAbout} />
-      ) : null}
+      ) : (
+        <ImageLoading src={loading} alt="loading" />
+      )}
 
       <TextLink href="https://iamp.netlify.app/">
         Desarrollado por © 2022 Nayruth Calla - i-Am
