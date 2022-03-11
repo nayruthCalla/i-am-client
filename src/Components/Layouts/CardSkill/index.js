@@ -19,7 +19,7 @@ const Container = styled('article')(
     gap: 1rem;
     color: ${colorBtn === 'dasboard' ? '#797770' : 'rgba(204, 204, 204, 0.77)'};
     .card-icon {
-      color: ${colorBtn === 'dasboard' ? '#c54646' : '#EFEFEF'};
+      color: ${colorBtn === 'dasboard' ? '#c54646' : 'var(--color-prtfolio)'};
       :hover {
         color: ${colorBtn === 'dasboard'
           ? 'var(--hover-dasb)'

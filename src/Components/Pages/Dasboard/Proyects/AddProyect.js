@@ -275,7 +275,7 @@ const AddProyectC = ({ setStateForm, stateForm, setAddCard, addCard }) => {
       setStateForm([
         ...stateForm,
         {
-          userId: '620db8375913666d02a1f5ba',
+          // userId: '620db8375913666d02a1f5ba',
           proyectName: nameProyect,
           description: descriptionProyc,
           techFirst,

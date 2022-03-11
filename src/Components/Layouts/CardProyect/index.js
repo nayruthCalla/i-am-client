@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import {
   FaFolderOpen,
@@ -110,6 +110,7 @@ const Description = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
   margin-top: 10px;
+  height: ${({ showMore }) => (showMore ? 'auto' : '7rem')};
 `
 const FooterCard = styled('div')(
   ({ colorBtn }) => css`
@@ -159,6 +160,17 @@ const TextFooter = styled.p`
   text-transform: capitalize;
   /* width: 100%; */
 `
+const MoreText = styled.button`
+  background: transparent;
+  border: none;
+  font-family: var(--font-Saira);
+  font-size: 1.7rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: ${({ colorBtn }) =>
+    colorBtn === 'dasboard' ? '#c54646' : 'var(--color-prtfolio)'};
+`
+
 const ContHeaderIcon = styled.div`
   display: flex;
   gap: 1rem;
@@ -173,8 +185,19 @@ const CardProyect = ({
   level,
   links,
 }) => {
+  const [showText, setShowText] = useState(false)
+  const [showMore, setShowMore] = useState(false)
   const value = useMemo(() => ({ className: 'card-icon' }))
+  // console.log(description.length, '117')
+  useEffect(() => {
+    if (description.length > 117) {
+      setShowText(true)
+    }
+  }, [description])
 
+  const handleMore = () => {
+    setShowMore(!showMore)
+  }
   return (
     <Container colorBtn={colorBtn}>
       <HeaderCard colorBtn={colorBtn}>
@@ -206,7 +229,14 @@ const CardProyect = ({
       </HeaderCard>
       <BodyCard colorBtn={colorBtn}>
         <Title>{title}</Title>
-        <Description>{description}</Description>
+        <Description showMore={showMore}>{description}</Description>
+        {showText ? (
+          <MoreText colorBtn={colorBtn} onClick={handleMore}>
+            {showMore ? 'ver menos' : 'ver más'}
+          </MoreText>
+        ) : (
+          <p>.</p>
+        )}
       </BodyCard>
       <FooterCard colorBtn={colorBtn}>
         <ContText>

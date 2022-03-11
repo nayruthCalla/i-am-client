@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa'
 import CardProyect from '../../Layouts/CardProyect'
 
 const Container = styled.section`
@@ -79,9 +80,19 @@ const ContSectionTitleMenu = styled.div`
   margin-top: 20px;
   flex-wrap: wrap;
 `
+const ButtonPagination = styled(TitleFilter)`
+  border: none;
+  font-size: 3.5rem;
+`
 
 const Proyects = ({ proyects }) => {
   const [typeFilter, setTypeFilter] = useState(proyects)
+  const [TwoProyects, setTowProyects] = useState(typeFilter)
+  const [showButtonNextandBack, setShowButtonNextandBack] = useState(false)
+  const [numberPagination, setNumberPagination] = useState({
+    ini: 0,
+    fin: 2,
+  })
 
   const filterProyects = (arr, text) => {
     if (text === 'complejo') {
@@ -103,8 +114,37 @@ const Proyects = ({ proyects }) => {
       setTypeFilter(proyects)
     }
   }
-  useEffect(() => {}, [])
-  // console.log(typeFilter)
+  useEffect(() => {
+    if (typeFilter.length > 2) {
+      const arr = typeFilter.slice(numberPagination.ini, numberPagination.fin)
+      setTowProyects(arr)
+      setShowButtonNextandBack(true)
+    } else {
+      setTowProyects(typeFilter)
+      setShowButtonNextandBack(false)
+    }
+  }, [typeFilter, numberPagination])
+  // console.log(typeFilter) handleBack
+  const handleNext = () => {
+    // console.log(numberPagination, numberPagination.ini)
+    setNumberPagination({
+      ini: numberPagination.ini + 2,
+      fin: numberPagination.fin + 2,
+    })
+    const arr = typeFilter.slice(numberPagination.ini, numberPagination.fin)
+    setTowProyects(arr)
+  }
+  const handleBack = () => {
+    // console.log(numberPagination, numberPagination.ini)
+    setNumberPagination({
+      ini: numberPagination.ini - 2,
+      fin: numberPagination.fin - 2,
+    })
+    const arr = typeFilter.slice(numberPagination.ini, numberPagination.fin)
+    setTowProyects(arr)
+  }
+  console.log(typeFilter)
+
   return (
     <Container id="proyects">
       <ContSectionTitle>
@@ -145,7 +185,7 @@ const Proyects = ({ proyects }) => {
       </ContSectionTitleMenu>
 
       <ContainerProyects>
-        {typeFilter?.map((e, i) => (
+        {TwoProyects?.map((e, i) => (
           <CardProyect
             key={i}
             colorBtn="template"
@@ -158,6 +198,28 @@ const Proyects = ({ proyects }) => {
           />
         ))}
       </ContainerProyects>
+      {showButtonNextandBack ? (
+        <ContainerProyects>
+          <ButtonPagination
+            type="button"
+            onClick={handleBack}
+            disabled={numberPagination.ini === 0}
+          >
+            <FaAngleDoubleLeft />
+          </ButtonPagination>
+          <p>
+            {numberPagination.fin} de {typeFilter.length}{' '}
+          </p>
+
+          <ButtonPagination
+            type="button"
+            onClick={handleNext}
+            disabled={numberPagination.fin >= typeFilter.length}
+          >
+            <FaAngleDoubleRight />
+          </ButtonPagination>
+        </ContainerProyects>
+      ) : null}
     </Container>
   )
 }
