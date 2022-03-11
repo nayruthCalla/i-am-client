@@ -45,23 +45,19 @@ const ContDestop = styled.div`
   flex-direction: column;
   width: 100%;
 `
-const Name = styled.h1`
-  font-family: var(--font-SpaceM);
-  color: #ffffff;
-  font-size: 2.5rem;
-  white-space: normal;
-  text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  @media screen and (min-width: 768px) {
-  }
-`
+
 const Image = styled.img`
   width: 30rem;
 `
+const Text = styled.p`
+  font-family: var(--font-SpaceM);
+  color: #ffffff61;
+  font-size: 2rem;
+  padding: 2rem;
+`
+
 const ImageLoading = styled.img`
-  width: 30rem;
+  width: 35rem;
   display: flex;
   align-self: center;
   justify-self: center;
@@ -82,9 +78,9 @@ const PortflTamplate = () => {
     return (
       <ContainerError>
         <Image src={error} alt="error" />
-        <Name>
+        <Text>
           Necesitas crear tu nombre de usuario para obtener tu portafolio web :)
-        </Name>
+        </Text>
       </ContainerError>
     )
   }
