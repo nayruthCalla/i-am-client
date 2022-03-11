@@ -124,7 +124,7 @@ const Description = styled(Welcome)`
   font-size: 1.8rem;
   color: rgb(163, 168, 195);
 `
-const ButtonContc = styled.button`
+const ButtonContc = styled.a`
   background: #120e26;
   border: 2px solid #2bb8da;
   box-sizing: border-box;
@@ -137,6 +137,7 @@ const ButtonContc = styled.button`
   padding: 0 1rem;
   color: #2bb8da;
   cursor: pointer;
+  text-decoration: none;
   :hover {
     background: #2bb8da45;
   }
@@ -218,7 +219,7 @@ const Hero = ({ photo, links, userName, description }) => {
         <Welcome>Bienvenid@ soy</Welcome>
         <Name>{userName}</Name>
         <Description>{description}</Description>
-        <ButtonContc>Contáctame</ButtonContc>
+        <ButtonContc href="#contact">Contáctame</ButtonContc>
       </ContWlcomeSecond>
     </Container>
   )
