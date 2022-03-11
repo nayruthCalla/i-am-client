@@ -84,6 +84,11 @@ const ButtonPagination = styled(TitleFilter)`
   border: none;
   font-size: 3.5rem;
 `
+const TextFooter = styled.p`
+  font-family: var(--font-SpaceM);
+  font-size: 2rem;
+  color: #2bb8da;
+`
 
 const Proyects = ({ proyects }) => {
   const [typeFilter, setTypeFilter] = useState(proyects)
@@ -99,21 +104,38 @@ const Proyects = ({ proyects }) => {
       const difficultProyect = arr.filter((e) => e.level === 'complejo')
       // console.log(difficultProyect)
       setTypeFilter(difficultProyect)
+      setNumberPagination({
+        ini: 0,
+        fin: 2,
+      })
     }
     if (text === 'facil') {
       const difficultProyect = arr.filter((e) => e.level === 'facil')
       // console.log(difficultProyect)
       setTypeFilter(difficultProyect)
+      setNumberPagination({
+        ini: 0,
+        fin: 2,
+      })
     }
     if (text === 'intermedio') {
       const difficultProyect = arr.filter((e) => e.level === 'intermedio')
       // console.log(difficultProyect)
       setTypeFilter(difficultProyect)
+      setNumberPagination({
+        ini: 0,
+        fin: 2,
+      })
     }
     if (text === 'todos') {
       setTypeFilter(proyects)
+      setNumberPagination({
+        ini: 0,
+        fin: 2,
+      })
     }
   }
+
   useEffect(() => {
     if (typeFilter.length > 2) {
       const arr = typeFilter.slice(numberPagination.ini, numberPagination.fin)
@@ -124,6 +146,7 @@ const Proyects = ({ proyects }) => {
       setShowButtonNextandBack(false)
     }
   }, [typeFilter, numberPagination])
+
   // console.log(typeFilter) handleBack
   const handleNext = () => {
     // console.log(numberPagination, numberPagination.ini)
@@ -143,7 +166,7 @@ const Proyects = ({ proyects }) => {
     const arr = typeFilter.slice(numberPagination.ini, numberPagination.fin)
     setTowProyects(arr)
   }
-  console.log(typeFilter)
+  // console.log(typeFilter)
 
   return (
     <Container id="proyects">
@@ -207,9 +230,12 @@ const Proyects = ({ proyects }) => {
           >
             <FaAngleDoubleLeft />
           </ButtonPagination>
-          <p>
-            {numberPagination.fin} de {typeFilter.length}{' '}
-          </p>
+          <TextFooter>
+            {numberPagination.fin > typeFilter.length
+              ? numberPagination.fin - 1
+              : numberPagination.fin}{' '}
+            de {typeFilter.length}{' '}
+          </TextFooter>
 
           <ButtonPagination
             type="button"
