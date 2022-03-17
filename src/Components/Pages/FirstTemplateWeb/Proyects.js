@@ -73,6 +73,10 @@ const ContainerProyects = styled.div`
   @media screen and (min-width: 1024px) {
   }
 `
+const ContainerPag = styled(ContainerProyects)`
+  flex-direction: row;
+`
+
 const ContSectionTitleMenu = styled.div`
   display: flex;
   gap: 2rem;
@@ -147,9 +151,7 @@ const Proyects = ({ proyects }) => {
     }
   }, [typeFilter, numberPagination])
 
-  // console.log(typeFilter) handleBack
   const handleNext = () => {
-    // console.log(numberPagination, numberPagination.ini)
     setNumberPagination({
       ini: numberPagination.ini + 2,
       fin: numberPagination.fin + 2,
@@ -158,7 +160,6 @@ const Proyects = ({ proyects }) => {
     setTowProyects(arr)
   }
   const handleBack = () => {
-    // console.log(numberPagination, numberPagination.ini)
     setNumberPagination({
       ini: numberPagination.ini - 2,
       fin: numberPagination.fin - 2,
@@ -166,7 +167,6 @@ const Proyects = ({ proyects }) => {
     const arr = typeFilter.slice(numberPagination.ini, numberPagination.fin)
     setTowProyects(arr)
   }
-  // console.log(typeFilter)
 
   return (
     <Container id="proyects">
@@ -222,7 +222,7 @@ const Proyects = ({ proyects }) => {
         ))}
       </ContainerProyects>
       {showButtonNextandBack ? (
-        <ContainerProyects>
+        <ContainerPag>
           <ButtonPagination
             type="button"
             onClick={handleBack}
@@ -244,7 +244,7 @@ const Proyects = ({ proyects }) => {
           >
             <FaAngleDoubleRight />
           </ButtonPagination>
-        </ContainerProyects>
+        </ContainerPag>
       ) : null}
     </Container>
   )
